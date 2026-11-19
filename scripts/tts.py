@@ -32,7 +32,8 @@ def pause_form(text: str) -> str:
     words = []
     for w in text.split():
         w = re.sub(f'ة([{VOWELS}]*)$', 'ه', w)
-        w = re.sub(f'[{VOWELS}]*$', '', w)  # retire toute voyelle finale (désinence)
+        # Retire la voyelle finale (désinence), mais jamais la chadda ّ (U+0651) : زِرّ doit rester « zirr ».
+        w = re.sub('[\u064B-\u0650\u0652]+$', '', w)
         if w and w[-1] not in 'اىو' and not w.endswith('ّ'):
             w += 'ْ'
         words.append(w)
@@ -51,6 +52,7 @@ def tail_ratio(wav_bytes: bytes) -> float:
 problems = []
 for pair in pairs:
     wid, text = pair.split('=', 1)
+    text = text.replace('_', ' ')  # les expressions de plusieurs mots arrivent avec _ à la place des espaces
     # La voix varie un peu à chaque génération : jusqu'à 5 essais, on garde la fin la plus nette.
     best = None
     for _ in range(5):

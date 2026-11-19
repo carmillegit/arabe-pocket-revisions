@@ -69,6 +69,9 @@ export function Home() {
   return (
     <main class="screen">
       <header class="hello">
+        <button type="button" class="icon-btn hello-settings" onClick={() => go('/reglages')} aria-label="Réglages">
+          <Icon name="gear" />
+        </button>
         <Ar text="مَرْحَبًا" size="l" />
         <p class="muted">{app.userName ? `Bonjour ${app.userName}` : "Bonjour"}</p>
       </header>

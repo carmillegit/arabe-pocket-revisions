@@ -1,0 +1,880 @@
+{
+ "version": 1,
+ "sessions": [
+  {
+   "id": "s1",
+   "date": "2026-10-07",
+   "title": "Histoire de la langue et alphabet",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "Histoire de la langue arabe",
+     "items": [
+      "Le plus ancien manuscrit en arabe date du IIIe siècle. Auparavant, l’arabe était surtout une langue véhiculaire : la langue des poètes.",
+      "Au VIIe siècle, avec le Coran, l’arabe devient une langue écrite et une langue liturgique.",
+      "L’arabe fait partie de la famille des langues afro-asiatiques (ou chamito-sémitiques). Avec l’hébreu, c’est l’une des principales langues sémitiques encore vivantes.",
+      "Plus de 300 millions de personnes le parlent. Depuis 1974, c’est l’une des six langues officielles des Nations unies, avec l’anglais, le chinois, l’espagnol, le français et le russe.",
+      "L’arabe est la langue officielle de 22 pays arabes. Il est aussi parlé dans 13 autres pays sans y être langue officielle.",
+      "Le « monde arabe » se dit العَالَم العَرَبِيّ (al-ʿālam al-ʿarabī) ou الوَطَن العَرَبِيّ (al-waṭan al-ʿarabī, « la patrie arabe »)."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "Les cinq grands espaces du monde arabe",
+     "items": [
+      "Grand Maghreb : Mauritanie, Maroc, Algérie, Tunisie, Libye.",
+      "Vallée du Nil : Égypte, Soudan.",
+      "Corne de l’Afrique : Djibouti, Somalie, Comores.",
+      "Croissant fertile : Palestine, Liban, Jordanie, Syrie, Irak.",
+      "Péninsule arabique (pays du Golfe) : Arabie saoudite, Yémen, Oman, Émirats arabes unis, Qatar, Bahreïn, Koweït.",
+      "Le Maghreb المَغْرِب (« le couchant ») désigne les pays de l’ouest et le Machrek المَشْرِق (« le levant », là où le soleil se lève) ceux de l’est."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Les 22 pays",
+     "rows": [
+      {
+       "ar": "الجَزَائِر",
+       "tr": "al-Jazāʾir",
+       "fr": "Algérie"
+      },
+      {
+       "ar": "البَحْرَيْن",
+       "tr": "al-Baḥrayn",
+       "fr": "Bahreïn"
+      },
+      {
+       "ar": "جُزُر القَمَر",
+       "tr": "Juzur al-Qamar",
+       "fr": "Comores"
+      },
+      {
+       "ar": "جِيبُوتِي",
+       "tr": "Jībūtī",
+       "fr": "Djibouti"
+      },
+      {
+       "ar": "مِصْر",
+       "tr": "Miṣr",
+       "fr": "Égypte"
+      },
+      {
+       "ar": "العِرَاق",
+       "tr": "al-ʿIrāq",
+       "fr": "Irak"
+      },
+      {
+       "ar": "الأُرْدُنّ",
+       "tr": "al-Urdunn",
+       "fr": "Jordanie"
+      },
+      {
+       "ar": "الكُوَيْت",
+       "tr": "al-Kuwayt",
+       "fr": "Koweït"
+      },
+      {
+       "ar": "لُبْنَان",
+       "tr": "Lubnān",
+       "fr": "Liban"
+      },
+      {
+       "ar": "لِيبْيَا",
+       "tr": "Lībyā",
+       "fr": "Libye"
+      },
+      {
+       "ar": "مُورِيتَانْيَا",
+       "tr": "Mūrītānyā",
+       "fr": "Mauritanie"
+      },
+      {
+       "ar": "المَغْرِب",
+       "tr": "al-Maghrib",
+       "fr": "Maroc"
+      },
+      {
+       "ar": "عُمَان",
+       "tr": "ʿUmān",
+       "fr": "Oman"
+      },
+      {
+       "ar": "فِلَسْطِين",
+       "tr": "Filasṭīn",
+       "fr": "Palestine"
+      },
+      {
+       "ar": "قَطَر",
+       "tr": "Qaṭar",
+       "fr": "Qatar"
+      },
+      {
+       "ar": "العَرَبِيَّة السَّعُودِيَّة",
+       "tr": "al-ʿArabiyya as-Saʿūdiyya",
+       "fr": "Arabie saoudite"
+      },
+      {
+       "ar": "الصُّومَال",
+       "tr": "al-Ṣūmāl",
+       "fr": "Somalie"
+      },
+      {
+       "ar": "السُّودَان",
+       "tr": "al-Sūdān",
+       "fr": "Soudan"
+      },
+      {
+       "ar": "سُورِيَا",
+       "tr": "Sūriyā",
+       "fr": "Syrie"
+      },
+      {
+       "ar": "تُونِس",
+       "tr": "Tūnis",
+       "fr": "Tunisie"
+      },
+      {
+       "ar": "الإِمَارَات",
+       "tr": "al-Imārāt",
+       "fr": "Émirats arabes unis"
+      },
+      {
+       "ar": "اليَمَن",
+       "tr": "al-Yaman",
+       "fr": "Yémen"
+      }
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "L’alphabet : 28 lettres",
+     "items": [
+      "Dans l’ordre, avec leur nom : ا alif, ب bāʾ, ت tāʾ, ث thāʾ, ج jīm, ح ḥāʾ, خ khāʾ, د dāl, ذ dhāl, ر rāʾ, ز zāy, س sīn, ش shīn, ص ṣād, ض ḍād, ط ṭāʾ, ظ ẓāʾ, ع ʿayn, غ ghayn, ف fāʾ, ق qāf, ك kāf, ل lām, م mīm, ن nūn, ه hāʾ, و wāw, ي yāʾ.",
+      "Pour les apprendre : Exercices → Lecture (lettre → nom et son, paires qui piègent) et Écriture (tracer les lettres)."
+     ]
+    }
+   ],
+   "homework": null
+  },
+  {
+   "id": "s2",
+   "date": "2026-10-14",
+   "title": "La vocalisation, l’alif et la hamza",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "Consonnes, voyelles longues, voyelles courtes",
+     "items": [
+      "L’arabe littéral compte 28 consonnes, 3 voyelles longues et 4 signes de voyelles courtes.",
+      "Les voyelles courtes ne sont en général pas écrites. On les marque par de petits signes au-dessus ou au-dessous de la consonne : c’est la vocalisation."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "Les voyelles courtes",
+     "items": [
+      "fatha  ـَ  : son « a », petite barre au-dessus. Pour s’en souvenir : « ouvrir », on ouvre la bouche.",
+      "damma  ـُ  : son « ou », petit wāw au-dessus. Pour s’en souvenir : « prendre dans les bras ».",
+      "kasra  ـِ  : son « i », petite barre au-dessous. Le nom évoque « casser ».",
+      "soukoun  ـْ  : petit rond au-dessus, la lettre est muette (« silence »)."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "Les voyelles longues",
+     "items": [
+      "Ce sont trois lettres : ا alif (ā), و wāw (ū), ي yāʾ (ī). Ce sont aussi des semi-voyelles : quand elles ne servent pas de voyelle, elles se comportent comme des consonnes et portent elles-mêmes des voyelles courtes.",
+      "Exemples : بَا bā (ب + ا), بُو bū (ب + و), وُو wū (و + و), بِي bī (ب + ي), يِي yī (ي + ي).",
+      "On met forcément une fatha sur la consonne qui précède l’alif. Un alif non vocalisé est forcément une voyelle longue.",
+      "Alif madda (« alif allongé ») : deux alifs à la suite s’écrivent آ.",
+      "Un mot ne peut jamais commencer par une voyelle longue."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "L’alif et ses particularités",
+     "items": [
+      "Six lettres ne s’attachent jamais à la lettre suivante (à gauche) : ا د ذ ر ز و.",
+      "Possessif « mon / ma » : on ajoute ي (ī) à la fin du mot. اِسْم (ism, le prénom) → اِسْمِي (ismī, mon prénom). اِسْمِي … : « je m’appelle … ».",
+      "La suite ل + ا s’écrit toujours avec la ligature لا (lā, « non ») ; il en existe aussi une version calligraphiée.",
+      "Alif maqṣūra ى (« alif raccourci ») : en fin de mot, il a la forme d’un yāʾ sans points et se prononce comme un alif (ā). Fréquent dans les prénoms féminins anciens."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Vocabulaire",
+     "rows": [
+      {
+       "ar": "اِسْم",
+       "tr": "ism",
+       "fr": "prénom, nom"
+      },
+      {
+       "ar": "أَرْنَب",
+       "tr": "arnab",
+       "fr": "lapin"
+      },
+      {
+       "ar": "أَسَد",
+       "tr": "asad",
+       "fr": "lion"
+      },
+      {
+       "ar": "أَنَا",
+       "tr": "anā",
+       "fr": "je, moi"
+      },
+      {
+       "ar": "أُمّ",
+       "tr": "umm",
+       "fr": "mère"
+      },
+      {
+       "ar": "أَخ",
+       "tr": "akh",
+       "fr": "frère"
+      },
+      {
+       "ar": "آمِين",
+       "tr": "āmīn",
+       "fr": "amen"
+      },
+      {
+       "ar": "حِمَار",
+       "tr": "ḥimār",
+       "fr": "âne"
+      },
+      {
+       "ar": "فَأْر",
+       "tr": "faʾr",
+       "fr": "souris"
+      },
+      {
+       "ar": "الآن",
+       "tr": "al-ʾān",
+       "fr": "maintenant"
+      },
+      {
+       "ar": "مَامَا",
+       "tr": "māmā",
+       "fr": "maman"
+      },
+      {
+       "ar": "أَشْيَاء",
+       "tr": "ashyāʾ",
+       "fr": "des choses, des objets"
+      },
+      {
+       "ar": "فَتًى",
+       "tr": "fatā",
+       "fr": "jeune garçon, adolescent"
+      },
+      {
+       "ar": "شَاطِئ",
+       "tr": "shāṭiʾ",
+       "fr": "plage"
+      }
+     ]
+    }
+   ],
+   "homework": null
+  },
+  {
+   "id": "s3",
+   "date": "2026-11-04",
+   "title": "ب ت ث, chadda, tāʾ marbūṭa, hamza",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "Les formes des lettres",
+     "items": [
+      "Chaque lettre a jusqu’à quatre formes : isolée, liée en début de mot (initiale), au milieu (médiane), en fin de mot (finale).",
+      "Vocabulaire de la fiche : حَرْف (ḥarf, lettre), كَلِمَة (kalima, mot), مِثَال (mithāl, exemple), مُتَّصِل (muttaṣil, attaché, lié).",
+      "Les six lettres qui ne s’attachent qu’à droite : ا alif, د dāl, ذ dhāl, ر rāʾ, ز zāy, و wāw."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "La hamza ء",
+     "items": [
+      "C’est un coup de glotte, comme un « eu » court et soufflé.",
+      "Elle peut se poser sur les trois voyelles longues (أ ؤ ئ) ou se trouver seule, en fin de mot (ء).",
+      "98 % des mots qui commencent par ا ont une hamza (أ ou إ).",
+      "Selon les écoles, la hamza est considérée comme une 29e lettre, mais pas en arabe classique."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "La chadda ـّ",
+     "items": [
+      "La chadda (« le lien ») double le son de la consonne.",
+      "On ne la trouve jamais au début d’un mot, toujours au milieu ou à la fin.",
+      "Avec fatha et damma, la voyelle s’écrit au-dessus de la chadda (بَّ, بُّ) ; avec kasra, elle s’écrit au-dessous (بِّ)."
+     ]
+    },
+    {
+     "type": "rules",
+     "title": "La tāʾ marbūṭa ة",
+     "items": [
+      "C’est une forme finale du tāʾ, qui marque le féminin singulier.",
+      "Attachée ـة après une lettre qui se lie, non attachée ة sinon.",
+      "La lettre qui la précède porte toujours une fatha : terminaison en « -at », prononcée « -a » en fin de phrase."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Vocabulaire",
+     "rows": [
+      {
+       "ar": "بَاب",
+       "tr": "bāb",
+       "fr": "porte"
+      },
+      {
+       "ar": "بَابَا",
+       "tr": "bābā",
+       "fr": "papa"
+      },
+      {
+       "ar": "حَبِيب",
+       "tr": "ḥabīb",
+       "fr": "bien-aimé"
+      },
+      {
+       "ar": "كَلْب",
+       "tr": "kalb",
+       "fr": "chien"
+      },
+      {
+       "ar": "أَرْنَب",
+       "tr": "arnab",
+       "fr": "lapin"
+      },
+      {
+       "ar": "دُبّ",
+       "tr": "dubb",
+       "fr": "ours"
+      },
+      {
+       "ar": "أَب",
+       "tr": "ab",
+       "fr": "père"
+      },
+      {
+       "ar": "كِتَاب",
+       "tr": "kitāb",
+       "fr": "livre"
+      },
+      {
+       "ar": "تُفَّاحَة",
+       "tr": "tuffāḥa",
+       "fr": "une pomme"
+      },
+      {
+       "ar": "تِمْسَاح",
+       "tr": "timsāḥ",
+       "fr": "crocodile"
+      },
+      {
+       "ar": "مِفْتَاح",
+       "tr": "miftāḥ",
+       "fr": "clé"
+      },
+      {
+       "ar": "دَفْتَر",
+       "tr": "daftar",
+       "fr": "cahier"
+      },
+      {
+       "ar": "رَتَّبَ",
+       "tr": "rattaba",
+       "fr": "ranger (litt. « il a rangé »)"
+      },
+      {
+       "ar": "بَيْت",
+       "tr": "bayt",
+       "fr": "maison"
+      },
+      {
+       "ar": "أُخْت",
+       "tr": "ukht",
+       "fr": "sœur"
+      },
+      {
+       "ar": "أَنْتَ",
+       "tr": "anta",
+       "fr": "tu (à un garçon)"
+      },
+      {
+       "ar": "أَنْتِ",
+       "tr": "anti",
+       "fr": "tu (à une fille)"
+      },
+      {
+       "ar": "أَنَا",
+       "tr": "anā",
+       "fr": "je"
+      },
+      {
+       "ar": "سَيَّارَة",
+       "tr": "sayyāra",
+       "fr": "une voiture"
+      },
+      {
+       "ar": "سَيَّارَات",
+       "tr": "sayyārāt",
+       "fr": "des voitures"
+      },
+      {
+       "ar": "نَخْلَة",
+       "tr": "nakhla",
+       "fr": "palmier, dattier"
+      },
+      {
+       "ar": "نَمْلَة",
+       "tr": "namla",
+       "fr": "fourmi"
+      },
+      {
+       "ar": "ثَلْج",
+       "tr": "thalj",
+       "fr": "neige"
+      },
+      {
+       "ar": "ثَوْر",
+       "tr": "thawr",
+       "fr": "taureau"
+      },
+      {
+       "ar": "مِثَال",
+       "tr": "mithāl",
+       "fr": "exemple"
+      },
+      {
+       "ar": "وَثَبَ",
+       "tr": "wathaba",
+       "fr": "sauter (litt. « il a sauté »)"
+      },
+      {
+       "ar": "مُثَلَّث",
+       "tr": "muthallath",
+       "fr": "triangle"
+      },
+      {
+       "ar": "مِحْرَاث",
+       "tr": "miḥrāth",
+       "fr": "charrue, soc"
+      }
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Exercice 1 p. 19",
+     "rows": [
+      {
+       "ar": "دَار",
+       "tr": "dār",
+       "fr": "maison (la maison familiale)"
+      },
+      {
+       "ar": "زَارَ",
+       "tr": "zāra",
+       "fr": "rendre visite (litt. « il a rendu visite »)"
+      },
+      {
+       "ar": "وَلَد",
+       "tr": "walad",
+       "fr": "enfant, garçon"
+      },
+      {
+       "ar": "لِيزَا",
+       "tr": "Līzā",
+       "fr": "Lisa (prénom)"
+      },
+      {
+       "ar": "يَزُورُ",
+       "tr": "yazūru",
+       "fr": "il rend visite"
+      },
+      {
+       "ar": "وَادِي",
+       "tr": "wādī",
+       "fr": "vallée"
+      },
+      {
+       "ar": "وَ",
+       "tr": "wa",
+       "fr": "et"
+      },
+      {
+       "ar": "لَوْز",
+       "tr": "lawz",
+       "fr": "amandes"
+      },
+      {
+       "ar": "وَزِير",
+       "tr": "wazīr",
+       "fr": "ministre"
+      },
+      {
+       "ar": "رُزّ",
+       "tr": "ruzz",
+       "fr": "riz"
+      },
+      {
+       "ar": "زَيْت",
+       "tr": "zayt",
+       "fr": "huile"
+      },
+      {
+       "ar": "بَلَد",
+       "tr": "balad",
+       "fr": "pays"
+      },
+      {
+       "ar": "تُوت",
+       "tr": "tūt",
+       "fr": "mûres"
+      },
+      {
+       "ar": "ثِيَاب",
+       "tr": "thiyāb",
+       "fr": "vêtements"
+      },
+      {
+       "ar": "بَرْد",
+       "tr": "bard",
+       "fr": "froid"
+      }
+     ]
+    }
+   ],
+   "homework": null
+  },
+  {
+   "id": "s4",
+   "date": "2026-11-13",
+   "title": "ج ح خ د ذ, fruits et légumes",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "Fruits et légumes",
+     "items": [
+      "Les noms de fruits et de légumes sont des collectifs : ils désignent le fruit en général (« des prunes »).",
+      "Pour parler d’un seul fruit, on ajoute la tāʾ marbūṭa : خَوْخ (khawkh, des prunes) → خَوْخَة (khawkha, une prune). Cela ne marche que pour les fruits et les légumes."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Vocabulaire",
+     "rows": [
+      {
+       "ar": "جَبَل",
+       "tr": "jabal",
+       "fr": "montagne"
+      },
+      {
+       "ar": "شَجَرَة",
+       "tr": "shajara",
+       "fr": "arbre"
+      },
+      {
+       "ar": "دَجَاجَة",
+       "tr": "dajāja",
+       "fr": "une poule"
+      },
+      {
+       "ar": "دَجَاج",
+       "tr": "dajāj",
+       "fr": "des poules (collectif)"
+      },
+      {
+       "ar": "ثَلْج",
+       "tr": "thalj",
+       "fr": "neige"
+      },
+      {
+       "ar": "حِمَار",
+       "tr": "ḥimār",
+       "fr": "âne"
+      },
+      {
+       "ar": "مِحْرَاث",
+       "tr": "miḥrāth",
+       "fr": "charrue (outil agricole)"
+      },
+      {
+       "ar": "تُفَّاحَة",
+       "tr": "tuffāḥa",
+       "fr": "une pomme"
+      },
+      {
+       "ar": "بَلَح",
+       "tr": "balaḥ",
+       "fr": "dattes (fraîches, jaunes)"
+      },
+      {
+       "ar": "قَمْح",
+       "tr": "qamḥ",
+       "fr": "blé"
+      },
+      {
+       "ar": "مِفْتَاح",
+       "tr": "miftāḥ",
+       "fr": "clé"
+      },
+      {
+       "ar": "خَرُوف",
+       "tr": "kharūf",
+       "fr": "mouton"
+      },
+      {
+       "ar": "نَخْلَة",
+       "tr": "nakhla",
+       "fr": "palmier, dattier"
+      },
+      {
+       "ar": "أُخْت",
+       "tr": "ukht",
+       "fr": "sœur"
+      },
+      {
+       "ar": "بَطِّيخ",
+       "tr": "baṭṭīkh",
+       "fr": "pastèques"
+      },
+      {
+       "ar": "خَوْخ",
+       "tr": "khawkh",
+       "fr": "prunes"
+      },
+      {
+       "ar": "دُبّ",
+       "tr": "dubb",
+       "fr": "ours"
+      },
+      {
+       "ar": "حَدِيقَة",
+       "tr": "ḥadīqa",
+       "fr": "jardin"
+      },
+      {
+       "ar": "وَرْدَة",
+       "tr": "warda",
+       "fr": "une rose"
+      },
+      {
+       "ar": "وَرْد",
+       "tr": "ward",
+       "fr": "des roses (collectif)"
+      },
+      {
+       "ar": "يَد",
+       "tr": "yad",
+       "fr": "main"
+      },
+      {
+       "ar": "أَسْوَد",
+       "tr": "aswad",
+       "fr": "noir"
+      },
+      {
+       "ar": "ذَيْل",
+       "tr": "dhayl",
+       "fr": "queue (d’un animal)"
+      },
+      {
+       "ar": "أُذُن",
+       "tr": "udhun",
+       "fr": "oreille"
+      },
+      {
+       "ar": "أُسْتَاذ",
+       "tr": "ustādh",
+       "fr": "enseignant"
+      },
+      {
+       "ar": "أُسْتَاذَة",
+       "tr": "ustādha",
+       "fr": "enseignante ; aussi « Maître » pour une avocate"
+      },
+      {
+       "ar": "تِلْمِيذ",
+       "tr": "tilmīdh",
+       "fr": "élève, étudiant"
+      },
+      {
+       "ar": "تِلْمِيذَة",
+       "tr": "tilmīdha",
+       "fr": "élève, étudiante"
+      },
+      {
+       "ar": "فَخِذ",
+       "tr": "fakhidh",
+       "fr": "cuisse"
+      }
+     ]
+    }
+   ],
+   "homework": "p. 22 G et p. 23"
+  },
+  {
+   "id": "s5",
+   "date": "2026-11-18",
+   "title": "L’article ال, ر ز س ش",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "L’article défini",
+     "items": [
+      "L’arabe n’a qu’un seul article défini, pour « le », « la » et « les » : ال (al).",
+      "Il se colle au début du mot : بَيْت (bayt, une maison) → البَيْت (al-bayt, la maison)."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Vocabulaire",
+     "rows": [
+      {
+       "ar": "رَجُل",
+       "tr": "rajul",
+       "fr": "un homme"
+      },
+      {
+       "ar": "رِجَال",
+       "tr": "rijāl",
+       "fr": "des hommes"
+      },
+      {
+       "ar": "سَيَّارَة",
+       "tr": "sayyāra",
+       "fr": "une voiture"
+      },
+      {
+       "ar": "اِمْرَأَة",
+       "tr": "imraʾa",
+       "fr": "une femme"
+      },
+      {
+       "ar": "شَجَر",
+       "tr": "shajar",
+       "fr": "des arbres (collectif)"
+      },
+      {
+       "ar": "أَشْجَار",
+       "tr": "ashjār",
+       "fr": "des arbres (pluriel)"
+      },
+      {
+       "ar": "أَحْمَر",
+       "tr": "aḥmar",
+       "fr": "rouge"
+      },
+      {
+       "ar": "أَخْضَر",
+       "tr": "akhḍar",
+       "fr": "vert"
+      },
+      {
+       "ar": "أَصْفَر",
+       "tr": "aṣfar",
+       "fr": "jaune"
+      },
+      {
+       "ar": "ثَوْر",
+       "tr": "thawr",
+       "fr": "taureau"
+      },
+      {
+       "ar": "زِرّ",
+       "tr": "zirr",
+       "fr": "bouton (de chemise, de vêtement)"
+      },
+      {
+       "ar": "غَزَال",
+       "tr": "ghazāl",
+       "fr": "gazelle"
+      },
+      {
+       "ar": "أَزْرَق",
+       "tr": "azraq",
+       "fr": "bleu"
+      },
+      {
+       "ar": "جَزَر",
+       "tr": "jazar",
+       "fr": "carottes"
+      },
+      {
+       "ar": "مَوْز",
+       "tr": "mawz",
+       "fr": "bananes"
+      },
+      {
+       "ar": "خُبْز",
+       "tr": "khubz",
+       "fr": "pain"
+      },
+      {
+       "ar": "سَمَكَة",
+       "tr": "samaka",
+       "fr": "poisson"
+      },
+      {
+       "ar": "مَسْجِد",
+       "tr": "masjid",
+       "fr": "mosquée"
+      },
+      {
+       "ar": "كَنِيسَة",
+       "tr": "kanīsa",
+       "fr": "église"
+      },
+      {
+       "ar": "أُسْتَاذ",
+       "tr": "ustādh",
+       "fr": "enseignant"
+      },
+      {
+       "ar": "رَأْس",
+       "tr": "raʾs",
+       "fr": "tête"
+      },
+      {
+       "ar": "شَمْس",
+       "tr": "shams",
+       "fr": "soleil"
+      },
+      {
+       "ar": "شَجَرَة",
+       "tr": "shajara",
+       "fr": "arbre"
+      },
+      {
+       "ar": "حَشِيش",
+       "tr": "ḥashīsh",
+       "fr": "herbe"
+      },
+      {
+       "ar": "فَرَاشَة",
+       "tr": "farāsha",
+       "fr": "papillon"
+      },
+      {
+       "ar": "عُشّ",
+       "tr": "ʿushsh",
+       "fr": "nid"
+      },
+      {
+       "ar": "قُمَاش",
+       "tr": "qumāsh",
+       "fr": "tissu"
+      }
+     ]
+    }
+   ],
+   "homework": "p. 18 à 24"
+  }
+ ]
+}

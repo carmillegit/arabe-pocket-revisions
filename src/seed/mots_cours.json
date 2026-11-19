@@ -1,0 +1,1145 @@
+{
+ "contentVersion": 2,
+ "replacements": [
+  {
+   "id": "w056",
+   "from": "بَرْقُوق",
+   "arabicVoweled": "خَوْخ",
+   "transliteration": "khawkh",
+   "french": "prunes",
+   "pronunciationHint": "kh jota, aw",
+   "status": "a_verifier",
+   "note": "Dans beaucoup de pays, خَوْخ désigne plutôt les pêches : à confirmer avec la professeure."
+  },
+  {
+   "id": "w044",
+   "from": "مُدَرِّس",
+   "arabicVoweled": "أُسْتَاذ",
+   "transliteration": "ustādh",
+   "french": "enseignant",
+   "pronunciationHint": "ā long, dh comme th de this",
+   "status": "valide"
+  }
+ ],
+ "words": [
+  {
+   "id": "c001",
+   "arabicVoweled": "الجَزَائِر",
+   "transliteration": "al-Jazāʾir",
+   "french": "Algérie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇩🇿"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c002",
+   "arabicVoweled": "البَحْرَيْن",
+   "transliteration": "al-Baḥrayn",
+   "french": "Bahreïn",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇧🇭"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c003",
+   "arabicVoweled": "جُزُر القَمَر",
+   "transliteration": "Juzur al-Qamar",
+   "french": "Comores",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇰🇲"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c004",
+   "arabicVoweled": "جِيبُوتِي",
+   "transliteration": "Jībūtī",
+   "french": "Djibouti",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇩🇯"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c005",
+   "arabicVoweled": "مِصْر",
+   "transliteration": "Miṣr",
+   "french": "Égypte",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇪🇬"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c006",
+   "arabicVoweled": "العِرَاق",
+   "transliteration": "al-ʿIrāq",
+   "french": "Irak",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇮🇶"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c007",
+   "arabicVoweled": "الأُرْدُنّ",
+   "transliteration": "al-Urdunn",
+   "french": "Jordanie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇯🇴"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c008",
+   "arabicVoweled": "الكُوَيْت",
+   "transliteration": "al-Kuwayt",
+   "french": "Koweït",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇰🇼"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c009",
+   "arabicVoweled": "لُبْنَان",
+   "transliteration": "Lubnān",
+   "french": "Liban",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇱🇧"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c010",
+   "arabicVoweled": "لِيبْيَا",
+   "transliteration": "Lībyā",
+   "french": "Libye",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇱🇾"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c011",
+   "arabicVoweled": "مُورِيتَانْيَا",
+   "transliteration": "Mūrītānyā",
+   "french": "Mauritanie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇲🇷"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c012",
+   "arabicVoweled": "المَغْرِب",
+   "transliteration": "al-Maghrib",
+   "french": "Maroc",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇲🇦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c013",
+   "arabicVoweled": "عُمَان",
+   "transliteration": "ʿUmān",
+   "french": "Oman",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇴🇲"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c014",
+   "arabicVoweled": "فِلَسْطِين",
+   "transliteration": "Filasṭīn",
+   "french": "Palestine",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇵🇸"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c015",
+   "arabicVoweled": "قَطَر",
+   "transliteration": "Qaṭar",
+   "french": "Qatar",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇶🇦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c016",
+   "arabicVoweled": "العَرَبِيَّة السَّعُودِيَّة",
+   "transliteration": "al-ʿArabiyya as-Saʿūdiyya",
+   "french": "Arabie saoudite",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇸🇦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c017",
+   "arabicVoweled": "الصُّومَال",
+   "transliteration": "al-Ṣūmāl",
+   "french": "Somalie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇸🇴"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c018",
+   "arabicVoweled": "السُّودَان",
+   "transliteration": "al-Sūdān",
+   "french": "Soudan",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇸🇩"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c019",
+   "arabicVoweled": "سُورِيَا",
+   "transliteration": "Sūriyā",
+   "french": "Syrie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇸🇾"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c020",
+   "arabicVoweled": "تُونِس",
+   "transliteration": "Tūnis",
+   "french": "Tunisie",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇹🇳"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c021",
+   "arabicVoweled": "الإِمَارَات",
+   "transliteration": "al-Imārāt",
+   "french": "Émirats arabes unis",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇦🇪"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c022",
+   "arabicVoweled": "اليَمَن",
+   "transliteration": "al-Yaman",
+   "french": "Yémen",
+   "category": "Pays",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🇾🇪"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c023",
+   "arabicVoweled": "اِسْم",
+   "transliteration": "ism",
+   "french": "prénom, nom",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🪪"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c024",
+   "arabicVoweled": "أَنَا",
+   "transliteration": "anā",
+   "french": "je, moi",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🙋"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c025",
+   "arabicVoweled": "أُمّ",
+   "transliteration": "umm",
+   "french": "mère",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👩"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c026",
+   "arabicVoweled": "أَخ",
+   "transliteration": "akh",
+   "french": "frère",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c027",
+   "arabicVoweled": "آمِين",
+   "transliteration": "āmīn",
+   "french": "amen",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c028",
+   "arabicVoweled": "الآن",
+   "transliteration": "al-ʾān",
+   "french": "maintenant",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "⏰"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c029",
+   "arabicVoweled": "مَامَا",
+   "transliteration": "māmā",
+   "french": "maman",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👩‍👧"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c030",
+   "arabicVoweled": "أَشْيَاء",
+   "transliteration": "ashyāʾ",
+   "french": "des choses, des objets",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "📦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c031",
+   "arabicVoweled": "فَتًى",
+   "transliteration": "fatā",
+   "french": "jeune garçon, adolescent",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧒"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c032",
+   "arabicVoweled": "شَاطِئ",
+   "transliteration": "shāṭiʾ",
+   "french": "plage",
+   "category": "Cours du 14/10",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏖️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c033",
+   "arabicVoweled": "بَابَا",
+   "transliteration": "bābā",
+   "french": "papa",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👨‍👧"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c034",
+   "arabicVoweled": "حَبِيب",
+   "transliteration": "ḥabīb",
+   "french": "bien-aimé",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "❤️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c035",
+   "arabicVoweled": "أَب",
+   "transliteration": "ab",
+   "french": "père",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👨"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c036",
+   "arabicVoweled": "تُفَّاحَة",
+   "transliteration": "tuffāḥa",
+   "french": "une pomme",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍎"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c037",
+   "arabicVoweled": "دَفْتَر",
+   "transliteration": "daftar",
+   "french": "cahier",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "📓"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c038",
+   "arabicVoweled": "رَتَّبَ",
+   "transliteration": "rattaba",
+   "french": "ranger (litt. « il a rangé »)",
+   "category": "Cours du 4/11",
+   "type": "verbe",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧹"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c039",
+   "arabicVoweled": "أُخْت",
+   "transliteration": "ukht",
+   "french": "sœur",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👧"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c040",
+   "arabicVoweled": "أَنْتَ",
+   "transliteration": "anta",
+   "french": "tu (à un garçon)",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👉"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c041",
+   "arabicVoweled": "أَنْتِ",
+   "transliteration": "anti",
+   "french": "tu (à une fille)",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👉"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c042",
+   "arabicVoweled": "سَيَّارَات",
+   "transliteration": "sayyārāt",
+   "french": "des voitures",
+   "category": "Cours du 4/11",
+   "type": "pluriel",
+   "visual": {
+    "kind": "emoji",
+    "value": "🚗"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": "w031"
+  },
+  {
+   "id": "c043",
+   "arabicVoweled": "مِثَال",
+   "transliteration": "mithāl",
+   "french": "exemple",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c044",
+   "arabicVoweled": "وَثَبَ",
+   "transliteration": "wathaba",
+   "french": "sauter (litt. « il a sauté »)",
+   "category": "Cours du 4/11",
+   "type": "verbe",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦘"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c045",
+   "arabicVoweled": "مُثَلَّث",
+   "transliteration": "muthallath",
+   "french": "triangle",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🔺"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c046",
+   "arabicVoweled": "مِحْرَاث",
+   "transliteration": "miḥrāth",
+   "french": "charrue, soc",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🚜"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c047",
+   "arabicVoweled": "دَار",
+   "transliteration": "dār",
+   "french": "maison (la maison familiale)",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏡"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c048",
+   "arabicVoweled": "زَارَ",
+   "transliteration": "zāra",
+   "french": "rendre visite (litt. « il a rendu visite »)",
+   "category": "Cours du 4/11",
+   "type": "verbe",
+   "visual": {
+    "kind": "emoji",
+    "value": "🚪"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c049",
+   "arabicVoweled": "وَلَد",
+   "transliteration": "walad",
+   "french": "enfant, garçon",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👦"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c050",
+   "arabicVoweled": "يَزُورُ",
+   "transliteration": "yazūru",
+   "french": "il rend visite",
+   "category": "Cours du 4/11",
+   "type": "verbe",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c051",
+   "arabicVoweled": "وَادِي",
+   "transliteration": "wādī",
+   "french": "vallée",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏞️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c052",
+   "arabicVoweled": "وَ",
+   "transliteration": "wa",
+   "french": "et",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c053",
+   "arabicVoweled": "وَزِير",
+   "transliteration": "wazīr",
+   "french": "ministre",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏛️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c054",
+   "arabicVoweled": "رُزّ",
+   "transliteration": "ruzz",
+   "french": "riz",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍚"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c055",
+   "arabicVoweled": "زَيْت",
+   "transliteration": "zayt",
+   "french": "huile",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🫒"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c056",
+   "arabicVoweled": "بَلَد",
+   "transliteration": "balad",
+   "french": "pays",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🗺️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c057",
+   "arabicVoweled": "ثِيَاب",
+   "transliteration": "thiyāb",
+   "french": "vêtements",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👕"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c058",
+   "arabicVoweled": "بَرْد",
+   "transliteration": "bard",
+   "french": "froid",
+   "category": "Cours du 4/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🥶"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c059",
+   "arabicVoweled": "دَجَاج",
+   "transliteration": "dajāj",
+   "french": "des poules (collectif)",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐔"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c060",
+   "arabicVoweled": "بَلَح",
+   "transliteration": "balaḥ",
+   "french": "dattes (fraîches, jaunes)",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c061",
+   "arabicVoweled": "قَمْح",
+   "transliteration": "qamḥ",
+   "french": "blé",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌾"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c062",
+   "arabicVoweled": "وَرْد",
+   "transliteration": "ward",
+   "french": "des roses (collectif)",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "💐"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c063",
+   "arabicVoweled": "ذَيْل",
+   "transliteration": "dhayl",
+   "french": "queue (d’un animal)",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c064",
+   "arabicVoweled": "أُسْتَاذَة",
+   "transliteration": "ustādha",
+   "french": "enseignante ; aussi « Maître » pour une avocate",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👩‍🏫"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c065",
+   "arabicVoweled": "تِلْمِيذَة",
+   "transliteration": "tilmīdha",
+   "french": "élève, étudiante",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👩‍🎓"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c066",
+   "arabicVoweled": "فَخِذ",
+   "transliteration": "fakhidh",
+   "french": "cuisse",
+   "category": "Cours du 13/11",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c067",
+   "arabicVoweled": "شَجَر",
+   "transliteration": "shajar",
+   "french": "des arbres (collectif)",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌳"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c068",
+   "arabicVoweled": "أَشْجَار",
+   "transliteration": "ashjār",
+   "french": "des arbres (pluriel)",
+   "category": "Cours du 18/11",
+   "type": "pluriel",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌲"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": "w034"
+  },
+  {
+   "id": "c069",
+   "arabicVoweled": "زِرّ",
+   "transliteration": "zirr",
+   "french": "bouton (de chemise, de vêtement)",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🔘"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c070",
+   "arabicVoweled": "مَسْجِد",
+   "transliteration": "masjid",
+   "french": "mosquée",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🕌"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c071",
+   "arabicVoweled": "كَنِيسَة",
+   "transliteration": "kanīsa",
+   "french": "église",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "⛪"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c072",
+   "arabicVoweled": "رَأْس",
+   "transliteration": "raʾs",
+   "french": "tête",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c073",
+   "arabicVoweled": "حَشِيش",
+   "transliteration": "ḥashīsh",
+   "french": "herbe",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌿"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c074",
+   "arabicVoweled": "فَرَاشَة",
+   "transliteration": "farāsha",
+   "french": "papillon",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦋"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c075",
+   "arabicVoweled": "عُشّ",
+   "transliteration": "ʿushsh",
+   "french": "nid",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🪺"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c076",
+   "arabicVoweled": "قُمَاش",
+   "transliteration": "qumāsh",
+   "french": "tissu",
+   "category": "Cours du 18/11",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧵"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  }
+ ]
+}

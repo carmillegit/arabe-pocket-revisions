@@ -1124,3 +1124,37 @@ input[type='color'] {
   .confetti { display: none; }
   .celebrate, .celebrate-card { animation: none; }
 }
+
+/* ---------- Onglet Cours ---------- */
+.hello { position: relative; }
+.hello-settings { position: absolute; top: 0; right: -8px; color: var(--ink-2); }
+.ar-inline { font-family: var(--font-ar); font-size: 1.25em; line-height: 1.5; }
+.cours-date { color: var(--muted); font-size: 13px; }
+.cours-date::first-letter { text-transform: uppercase; }
+.cours-head { display: flex; flex-direction: column; gap: 2px; }
+.cours-title { font-size: 22px; font-weight: 750; }
+.cours-actions { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.rules { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.rules li { line-height: 1.55; }
+.rules li::marker { color: var(--accent); }
+.vocab { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.vocab li { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--line); }
+.vocab li:first-child { border-top: 0; }
+.vocab-row {
+  flex: 1;
+  min-width: 0;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+.vocab-row:disabled { cursor: default; }
+.vocab-row:active:not(:disabled) { background: var(--surface-2); }
+.vocab-fr { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.vocab-ar { flex: none; line-height: 1.6; }
+.vocab-speak { color: var(--accent); flex: none; }
+.vocab-open { flex: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; border: 0; background: transparent; }

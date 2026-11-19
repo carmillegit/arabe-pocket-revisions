@@ -10,6 +10,7 @@ import { DexieRepository } from './data/dexieRepository';
 import type { Repository } from './data/repository';
 import { parseBackup } from './data/backup';
 import seed from './seed/mots_depart.json';
+import { applyCourseContent } from './data/courseContent';
 
 export type VowelMode = 'always' | 'onDemand';
 
@@ -65,6 +66,8 @@ export function AppProvider({ children }: { children: preact.ComponentChildren }
 
   const load = useCallback(async () => {
     const firstLaunchAt = await firstLaunch();
+    // Contenu des cours validé (mots nouveaux, remplacements) : appliqué une fois par version.
+    await applyCourseContent(repo);
     const [words, categories, progressList, answers, vowelMode, lastExportAt] = await Promise.all([
       repo.getWords(),
       repo.getCategories(),

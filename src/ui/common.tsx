@@ -122,6 +122,7 @@ const PATHS: Record<string, string> = {
   download: 'M12 3v12M7 10l5 5 5-5M4 21h16',
   upload: 'M12 21V9M7 14l5-5 5 5M4 3h16',
   filter: 'M3 5h18M6 12h12M10 19h4',
+  school: 'M2 9.5 12 4.5l10 5-10 5-10-5zM6 11.5V16c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.5M22 9.5V15',
   speaker: 'M4 9v6h4l5 4V5L8 9H4zM16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12',
 };
 

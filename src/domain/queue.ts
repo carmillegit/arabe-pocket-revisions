@@ -20,6 +20,8 @@ export interface QueueFilters {
   letter?: string;
   /** Identifiants des éléments ratés cette semaine. */
   missedIds?: Set<string>;
+  /** Seulement ces éléments (par exemple les mots d'une séance de cours). */
+  onlyIds?: Set<string>;
 }
 
 export interface QueueItem {
@@ -46,12 +48,13 @@ export function filterWords(words: Word[], f: QueueFilters): Word[] {
     (w) =>
       (!f.category || w.category === f.category) &&
       (!f.letter || w.letters.includes(f.letter)) &&
-      (!f.missedIds || f.missedIds.has(w.id)),
+      (!f.missedIds || f.missedIds.has(w.id)) &&
+      (!f.onlyIds || f.onlyIds.has(w.id)),
   );
 }
 
 export function filterLetters(f: QueueFilters): string[] {
-  if (f.category) return [];
+  if (f.category || f.onlyIds) return [];
   return ALPHABET.filter(
     (l) => (!f.letter || l === f.letter) && (!f.missedIds || f.missedIds.has(letterItemId(l))),
   );

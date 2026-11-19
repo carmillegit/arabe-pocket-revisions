@@ -2,6 +2,7 @@ import { useRef, useState } from 'preact/hooks';
 import { BackupError, parseBackup, summarize, type Backup } from '../data/backup';
 import { useApp } from '../store';
 import { Icon, TopBar, formatDate, plural } from './common';
+import { go } from '../router';
 
 async function saveFile(name: string, text: string): Promise<boolean> {
   const blob = new Blob([text], { type: 'application/json' });
@@ -74,7 +75,7 @@ export function Settings() {
 
   return (
     <main class="screen">
-      <TopBar title="Réglages" />
+      <TopBar title="Réglages" onBack={() => go('/')} />
 
       <section class="card">
         <h2 class="card-title">Sauvegarde</h2>

@@ -19,6 +19,12 @@ import { missedSince } from '../domain/stats';
 import { unlockProgress } from '../domain/reading';
 import type { Answer, ExerciseId, LetterPositionStat, Session as SessionT, Word } from '../domain/types';
 import { applyLetterResults } from '../domain/dictation';
+import { coursById, sessionWordIds } from '../domain/cours';
+
+const sessionIdsFor = (id: string, words: Word[]) => {
+  const s = coursById(id);
+  return s ? sessionWordIds(s, words) : new Set<string>();
+};
 import { Dictation, type LetterResult } from './exercises/Dictation';
 import { newId } from '../domain/words';
 import { go } from '../router';
@@ -44,6 +50,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
       category: params.get('cat') || undefined,
       letter: params.get('lettre') || undefined,
       missedIds: params.get('rates') ? missedSince(app.answers, Date.now() - 7 * 86_400_000) : undefined,
+      onlyIds: params.get('seance') ? sessionIdsFor(params.get('seance')!, app.words) : undefined,
     }),
     [params.toString()],
   );

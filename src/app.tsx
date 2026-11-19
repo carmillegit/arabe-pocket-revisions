@@ -7,13 +7,14 @@ import { WordForm } from './ui/WordForm';
 import { ProgressScreen } from './ui/ProgressScreen';
 import { Settings } from './ui/Settings';
 import { SessionScreen } from './ui/Session';
+import { CoursList, CoursSessionScreen } from './ui/Cours';
 
 const TABS = [
   { path: '/', label: 'Accueil', icon: 'home' },
   { path: '/exercices', label: 'Exercices', icon: 'play' },
   { path: '/mots', label: 'Mots', icon: 'book' },
   { path: '/progression', label: 'Progression', icon: 'chart' },
-  { path: '/reglages', label: 'Réglages', icon: 'gear' },
+  { path: '/cours', label: 'Cours', icon: 'school' },
 ];
 
 export function App() {
@@ -34,6 +35,8 @@ export function App() {
   else if (path === '/mots') screen = <Words />;
   else if (path === '/progression') screen = <ProgressScreen />;
   else if (path === '/reglages') screen = <Settings />;
+  else if (path === '/cours') screen = <CoursList />;
+  else if (path.startsWith('/cours/')) screen = <CoursSessionScreen key={path} id={decodeURIComponent(path.slice('/cours/'.length))} />;
   else screen = <Home />;
 
   const active = TABS.find((t) => t.path !== '/' && path.startsWith(t.path))?.path ?? '/';

@@ -2,6 +2,16 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Onglet Cours (relecture des fiches du 19/11/2026)
+
+- Les fiches sont **validées par Camille dans un fichier Word** avant d'entrer dans l'app. Ce fichier n'est pas publié (dépôt public) ; seules les données validées le sont (`scripts/cours_data.py` → `src/content/cours.json`).
+- La séance sans date est la suite du 14/10 : **5 séances** au total (7/10, 14/10, 4/11, 13/11, 18/11).
+- **76 mots nouveaux** ajoutés automatiquement (une fois, sans écraser les modifications de l'utilisatrice), classés dans des catégories par séance (« Cours du 4/11 »…) et « Pays » (avec drapeaux).
+- Remplacements : « prunes » = خَوْخ (le cours fait référence, mais reste « à vérifier ») ; « enseignant » = أُسْتَاذ (remplace مُدَرِّس).
+- Translittérations retenues pour les pays : al-Ṣūmāl, al-Sūdān (sans assimilation), Arabie saoudite = al-ʿArabiyya as-Saʿūdiyya.
+- Navigation : **Cours** prend la place de Réglages dans la barre du bas ; Réglages est accessible par l'icône ⚙️ de l'accueil.
+- Audio : correction d'un défaut du script (la chadda finale était retirée : زِرّ lu « zir ») ; 8 mots régénérés.
+
 ## Lot 3 : retour de test
 
 - **Fin de séance** : pop-up « أَحْسَنْت (aḥsant) — Bravo, séance terminée ! », ou « مَبْرُوك (mabrūk) — Félicitations, sans faute ! » si tout est juste. Les deux formules sont écrites sans marque de genre (forme de pause), pour toute la classe. Confettis désactivés si l'iPhone est réglé pour réduire les animations.
