@@ -1,3 +1,6 @@
 node_modules
 dist
 dev-dist
+
+# Fiches de cours en cours de validation : pas publiées tant qu'elles ne sont pas relues
+docs/cours/
