@@ -6,6 +6,7 @@ Complète le cahier des charges V0. Les décisions sont classées de la plus ré
 
 - **Piper** (logiciel libre, voix `ar_JO-kareem`), sans compte ni GAFAM. Génération unique, fichiers livrés avec l'app (5 à 8 Ko par mot).
 - Diagnostic : voyelles respectées ; ع ح ق corrects ; ص ط ض distinguées de س ت د. ظ est proche de ذ. Le ة final était lu « t » : corrigé (forme de pause).
+- Retour d'écoute : trop rapide, fins de mots coupées. Mesure : le modèle s'arrêtait en pleine consonne finale. Corrigé avec une forme de pause explicite (soukoun) + un « ! » final (fin qui s'éteint naturellement), un débit ralenti (×1,7) et 350 ms de silence final. Le script signale toute fin encore trop forte.
 - L'app est présentée comme une **version bêta** à la professeure et aux élèves.
 
 ## Lot 2 : retours de test (2)
