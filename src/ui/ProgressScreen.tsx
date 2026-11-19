@@ -6,11 +6,11 @@ import type { Session } from '../domain/types';
 import { addDays, parseDay } from '../domain/dates';
 import { go } from '../router';
 import { useApp } from '../store';
-import { Ar, TopBar, VisualBadge, plural } from './common';
+import { Ar, MASTERY_MARK, TopBar, VisualBadge, plural } from './common';
 import { useEffect } from 'preact/hooks';
 
 const M_KEYS = ['nouveau', 'en_cours', 'acquis'] as const;
-const M_LABELS = { nouveau: 'nouveaux', en_cours: 'en cours', acquis: 'acquis' };
+const M_LABELS = { nouveau: 'à apprendre', en_cours: 'en cours', acquis: 'acquis' };
 
 export function ProgressScreen() {
   const { words, progress, progressList, answers, repo } = useApp();
@@ -50,7 +50,7 @@ export function ProgressScreen() {
         <h2 class="card-title">Par catégorie</h2>
         <ul class="legend">
           {M_KEYS.map((k) => (
-            <li key={k}><span class={`mdot m-${k}`} /> {M_LABELS[k]}</li>
+            <li key={k}><span class={`mdot m-${k}`} /> <span aria-hidden="true">{MASTERY_MARK[k]}</span> {M_LABELS[k]}</li>
           ))}
         </ul>
         <ul class="cat-bars">
@@ -63,7 +63,7 @@ export function ProgressScreen() {
                     <span>{name}</span>
                     <span class="muted small">{c.acquis} / {total} acquis</span>
                   </span>
-                  <span class="stack" role="img" aria-label={`${c.nouveau} nouveaux, ${c.en_cours} en cours, ${c.acquis} acquis`}>
+                  <span class="stack" role="img" aria-label={`${c.nouveau} à apprendre, ${c.en_cours} en cours, ${c.acquis} acquis`}>
                     {M_KEYS.map((k) => c[k] > 0 && <span key={k} class={`seg m-${k}`} style={{ flexGrow: c[k] / total }} />)}
                   </span>
                 </button>
@@ -77,7 +77,7 @@ export function ProgressScreen() {
         <h2 class="card-title">Alphabet</h2>
         <ul class="legend">
           {M_KEYS.map((k) => (
-            <li key={k}><span class={`mdot m-${k}`} /> {M_LABELS[k]}</li>
+            <li key={k}><span class={`mdot m-${k}`} /> <span aria-hidden="true">{MASTERY_MARK[k]}</span> {M_LABELS[k]}</li>
           ))}
         </ul>
         <ul class="alphabet">
@@ -85,6 +85,7 @@ export function ProgressScreen() {
             <li key={letter}>
               <button type="button" class={`abc m-bg-${m}`} onClick={() => go('/seance', { mode: 'revision', lettre: letter })} aria-label={`${letter} : ${M_LABELS[m]}`}>
                 <bdi class="ar" lang="ar" dir="rtl">{letter}</bdi>
+                <span class="abc-mark" aria-hidden="true">{MASTERY_MARK[m]}</span>
               </button>
             </li>
           ))}

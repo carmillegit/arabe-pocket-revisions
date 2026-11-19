@@ -19,10 +19,17 @@
   --bad-soft: #fbe3e1;
   --warn: #7a4d00;
   --warn-soft: #fff3c4;
-  /* Maîtrise : une seule teinte violette, du clair (nouveau) au foncé (acquis). Toujours avec une légende. */
-  --m-nouveau: #e3d9ff;
-  --m-en_cours: #9b7bea;
-  --m-acquis: #5b2fc9;
+  /* Maîtrise : rouge (à apprendre), orange (en cours), vert (acquis).
+     Jamais la couleur seule : toujours un libellé ou un symbole (lisible par les daltoniens). */
+  --m-nouveau: #d32f2f;
+  --m-en_cours: #d9650a;
+  --m-acquis: #18793a;
+  --m-nouveau-soft: #fde7e5;
+  --m-en_cours-soft: #ffedd5;
+  --m-acquis-soft: #dcf1e3;
+  --m-nouveau-ink: #b3261e;
+  --m-en_cours-ink: #8a4300;
+  --m-acquis-ink: #17692f;
   /* Tracé */
   --model: #e4def0;
   --arrow-1: #5b2fc9;
@@ -56,9 +63,15 @@
     --bad-soft: #3d1c1a;
     --warn: #ffd23f;
     --warn-soft: #3d3313;
-    --m-nouveau: #3a3156;
-    --m-en_cours: #7e62d6;
-    --m-acquis: #c7b3ff;
+    --m-nouveau: #ff8a80;
+    --m-en_cours: #ffb74d;
+    --m-acquis: #5fd38a;
+    --m-nouveau-soft: #3d1c1a;
+    --m-en_cours-soft: #3d2a12;
+    --m-acquis-soft: #17341f;
+    --m-nouveau-ink: #ff8a80;
+    --m-en_cours-ink: #ffb74d;
+    --m-acquis-ink: #5fd38a;
     --model: #3a3350;
     --arrow-1: #ffd23f;
     --arrow-2: #ff9a5c;
@@ -876,11 +889,12 @@ input[type='color'] {
   font-size: 24px;
 }
 .abc .ar { line-height: 1; }
-.m-bg-nouveau { background: var(--surface); color: var(--ink); }
+.abc { position: relative; }
+.m-bg-nouveau { background: var(--m-nouveau-soft); color: var(--m-nouveau-ink); border-color: color-mix(in srgb, var(--m-nouveau) 40%, transparent); }
 .m-bg-en_cours { background: var(--m-en_cours); color: #1d1a26; border-color: transparent; }
-.m-bg-acquis { background: var(--m-acquis); color: var(--accent-ink); border-color: transparent; }
+.m-bg-acquis { background: var(--m-acquis); color: #ffffff; border-color: transparent; }
+.abc-mark { position: absolute; bottom: 3px; left: 5px; font-size: 11px; font-weight: 700; line-height: 1; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .m-bg-en_cours { color: #ffffff; }
   :root:not([data-theme='light']) .m-bg-acquis { color: #1a1033; }
 }
 
@@ -965,3 +979,22 @@ input[type='color'] {
 /* Alphabet : 7 colonnes qui tiennent toujours dans la largeur, lecture de droite à gauche */
 .alphabet { grid-template-columns: repeat(7, minmax(0, 1fr)); }
 .abc { font-size: clamp(18px, 5.5vw, 24px); padding: 0; min-width: 0; }
+
+/* Étiquette de maîtrise : couleur + libellé */
+.mtag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 650;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.mtag-nouveau { background: var(--m-nouveau-soft); color: var(--m-nouveau-ink); }
+.mtag-en_cours { background: var(--m-en_cours-soft); color: var(--m-en_cours-ink); }
+.mtag-acquis { background: var(--m-acquis-soft); color: var(--m-acquis-ink); }
+.list-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.list-tools select { min-height: 44px; font-size: 15px; }
+.hero-done { font-weight: 650; color: var(--good); }

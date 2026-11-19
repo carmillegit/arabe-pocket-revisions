@@ -64,13 +64,25 @@ export function VisualBadge({ visual, size = 40 }: { visual: Visual; size?: numb
 }
 
 export const MASTERY_LABEL: Record<Mastery, string> = {
-  nouveau: 'Nouveau',
+  nouveau: 'À apprendre',
   en_cours: 'En cours',
   acquis: 'Acquis',
 };
 
 export function MasteryDot({ m }: { m: Mastery }) {
   return <span class={`mdot m-${m}`} title={MASTERY_LABEL[m]} aria-label={MASTERY_LABEL[m]} />;
+}
+
+/** Symbole qui double la couleur (lisible sans distinguer rouge et vert). */
+export const MASTERY_MARK: Record<Mastery, string> = { nouveau: '!', en_cours: '◐', acquis: '✓' };
+
+export function MasteryTag({ m }: { m: Mastery }) {
+  return (
+    <span class={`mtag mtag-${m}`}>
+      <span aria-hidden="true">{MASTERY_MARK[m]}</span>
+      {MASTERY_LABEL[m]}
+    </span>
+  );
 }
 
 export function ToVerify({ w }: { w: Word }) {

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
-import { SESSION_SIZE, dueItems } from '../domain/queue';
+import { EXTRA_SIZE, SESSION_SIZE, dueItems } from '../domain/queue';
 import { answerDays, letterKnownCounts, missedSince, streak, topMissedLetters, wordKnownCounts } from '../domain/stats';
 import { go } from '../router';
 import { useApp } from '../store';
@@ -18,7 +18,10 @@ export function Home() {
   const [missed, setMissed] = useState(false);
 
   const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress, today]);
-  const today20 = Math.min(due, SESSION_SIZE);
+  // Objectif du jour : 20 questions. Le compteur descend à chaque réponse donnée aujourd'hui.
+  const seenToday = useMemo(() => answers.filter((a) => dayKey(a.at) === today).length, [answers, today]);
+  const remaining = Math.min(due, Math.max(0, SESSION_SIZE - seenToday));
+  const goalReached = remaining === 0 && seenToday > 0;
   const vocab = useMemo(() => wordKnownCounts(words, progress, repo.userId, today), [words, progress, today]);
   const abc = useMemo(() => letterKnownCounts(progress, repo.userId, today, app.lettersSince), [progress, today]);
   const days = streak(answerDays(answers), today);
@@ -52,18 +55,37 @@ export function Home() {
       )}
 
       <section class="card hero">
-        <p class="hero-label hero-kicker">À réviser aujourd’hui</p>
-        <p class="hero-num">{today20}</p>
-        <p class="hero-label">{today20 > 1 ? 'questions dans ta séance du jour' : 'question dans ta séance du jour'}</p>
+        {goalReached ? (
+          <>
+            <p class="hero-label hero-kicker hero-done">✓ Séance du jour terminée</p>
+            <p class="hero-num">{seenToday}</p>
+            <p class="hero-label">{seenToday > 1 ? 'questions vues aujourd’hui' : 'question vue aujourd’hui'}</p>
+          </>
+        ) : (
+          <>
+            <p class="hero-label hero-kicker">À réviser aujourd’hui</p>
+            <p class="hero-num">{remaining}</p>
+            <p class="hero-label">
+              {due === 0 ? 'rien à réviser' : remaining > 1 ? 'questions restantes' : 'question restante'}
+              {seenToday > 0 && ` · ${seenToday} vue${seenToday > 1 ? 's' : ''} aujourd’hui`}
+            </p>
+          </>
+        )}
         {due > 0 ? (
           <button
             type="button"
-            class="btn btn-primary btn-block"
+            class={`btn btn-block ${goalReached ? 'btn-secondary' : 'btn-primary'}`}
             onClick={() =>
-              go('/seance', { mode: 'revision', cat, lettre: letter, rates: missed ? '1' : undefined })
+              go('/seance', {
+                mode: 'revision',
+                n: String(goalReached ? EXTRA_SIZE : remaining),
+                cat,
+                lettre: letter,
+                rates: missed ? '1' : undefined,
+              })
             }
           >
-            {filtered ? 'Réviser (filtré)' : 'Réviser'}
+            {goalReached ? `Encore ${Math.min(EXTRA_SIZE, due)}` : filtered ? 'Réviser (filtré)' : 'Réviser'}
           </button>
         ) : (
           <>

@@ -2,6 +2,12 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Lot 2 : retours de test (2)
+
+- Accueil : le compteur du jour **descend** à chaque réponse (objectif : 20). Une fois atteint : « ✓ Séance du jour terminée » + « N questions vues aujourd'hui » + bouton « Encore 10 ».
+- Niveaux de maîtrise : **rouge** (à apprendre), **orange** (en cours), **vert** (acquis), toujours doublés d'un libellé ou d'un symbole (! ◐ ✓), pour les personnes daltoniennes. On évite « … », qui ressemble aux points des lettres.
+- Liste des mots : tri (A→Z, à apprendre d'abord, acquis d'abord) et filtre par niveau.
+
 ## Lot 2 : retours de test
 
 - Accueil : « À réviser aujourd'hui » affiche la taille de la séance du jour (20 au maximum), plus jamais tout le stock en attente.

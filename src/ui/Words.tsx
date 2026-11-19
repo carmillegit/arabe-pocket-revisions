@@ -4,26 +4,41 @@ import { dayKey } from '../domain/dates';
 import { wordMastery } from '../domain/stats';
 import { go } from '../router';
 import { useApp } from '../store';
-import { Ar, Icon, MasteryDot, TopBar, VisualBadge, plural } from './common';
+import { Ar, Icon, MASTERY_LABEL, MasteryTag, TopBar, VisualBadge, plural } from './common';
+import type { Mastery } from '../domain/srs';
+
+type Sort = 'alpha' | 'apprendre' | 'acquis';
+const RANK: Record<Mastery, number> = { nouveau: 0, en_cours: 1, acquis: 2 };
 
 export function Words() {
   const { words, categories, progress, repo } = useApp();
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('');
+  const [sort, setSort] = useState<Sort>('alpha');
+  const [state, setState] = useState<Mastery | ''>('');
   const today = dayKey();
+
+  const mastery = useMemo(() => new Map(words.map((w) => [w.id, wordMastery(w, progress, repo.userId, today)])), [words, progress]);
 
   const list = useMemo(() => {
     const query = q.trim();
     const ar = containsArabic(query);
     const key = ar ? arabicSearchKey(query) : latinSearchKey(query);
-    return words.filter((w) => {
+    const out = words.filter((w) => {
       if (cat && w.category !== cat) return false;
+      if (state && mastery.get(w.id) !== state) return false;
       if (!key) return true;
       return ar
         ? arabicSearchKey(w.arabicVoweled).includes(key)
         : latinSearchKey(w.french).includes(key) || latinSearchKey(w.transliteration).includes(key);
     });
-  }, [words, q, cat]);
+    if (sort !== 'alpha') {
+      const dir = sort === 'apprendre' ? 1 : -1;
+      // Tri stable : à niveau égal, l'ordre alphabétique est conservé.
+      out.sort((a, b) => dir * (RANK[mastery.get(a.id)!] - RANK[mastery.get(b.id)!]));
+    }
+    return out;
+  }, [words, q, cat, sort, state, mastery]);
 
   return (
     <main class="screen">
@@ -61,6 +76,25 @@ export function Words() {
           </button>
         ))}
       </div>
+      <div class="list-tools">
+        <label class="field">
+          <span class="small">Trier</span>
+          <select value={sort} onChange={(e) => setSort(e.currentTarget.value as Sort)}>
+            <option value="alpha">De A à Z</option>
+            <option value="apprendre">À apprendre d’abord</option>
+            <option value="acquis">Acquis d’abord</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="small">Niveau</span>
+          <select value={state} onChange={(e) => setState(e.currentTarget.value as Mastery | '')}>
+            <option value="">Tous</option>
+            {(['nouveau', 'en_cours', 'acquis'] as const).map((m) => (
+              <option key={m} value={m}>{MASTERY_LABEL[m]}</option>
+            ))}
+          </select>
+        </label>
+      </div>
       <p class="muted small count">{plural(list.length, 'mot', 'mots')}</p>
       {list.length === 0 ? (
         <div class="empty">
@@ -84,7 +118,7 @@ export function Words() {
                   </span>
                 </span>
                 <Ar text={w.arabicVoweled} size="m" class="row-ar" />
-                <MasteryDot m={wordMastery(w, progress, repo.userId, today)} />
+                <MasteryTag m={mastery.get(w.id)!} />
               </button>
             </li>
           ))}

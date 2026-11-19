@@ -58,7 +58,9 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
       ? buildReviewQueue(ctx(), { filters, limit, exclude: answeredRef.current })
       : buildPracticeQueue(ctx(), mode, { filters, limit, target });
 
-  const [queue, setQueue] = useState<QueueItem[]>(() => makeQueue(SESSION_SIZE));
+  // Taille demandée par l'accueil (questions restantes du jour, ou « encore 10 »).
+  const firstSize = Math.max(1, Math.min(50, Number(params.get('n')) || SESSION_SIZE));
+  const [queue, setQueue] = useState<QueueItem[]>(() => makeQueue(firstSize));
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState({ ok: 0, total: 0 });
 
