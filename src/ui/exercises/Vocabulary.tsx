@@ -2,11 +2,12 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { buildChoices, type Choice, type Direction } from '../../domain/quiz';
 import type { Word } from '../../domain/types';
-import { Ar, ToVerify, VisualBadge } from '../common';
+import { Ar, SpeakButton, ToVerify, VisualBadge } from '../common';
 
 export function WordDetails({ word }: { word: Word }) {
   return (
     <div class="details">
+      <SpeakButton word={word} />
       <p class="translit">{word.transliteration}</p>
       <p class="french">{word.french}</p>
       {word.pronunciationHint && <p class="hint">{word.pronunciationHint}</p>}
@@ -26,11 +27,19 @@ export function Card({ word, onAnswer }: { word: Word; onAnswer: (ok: boolean) =
   return (
     <div class="exercise">
       <p class="prompt-label">Tu connais ce mot ?</p>
-      <button type="button" class={`flashcard ${flipped ? 'is-flipped' : ''}`} onClick={() => setFlipped(true)} aria-label={flipped ? undefined : 'Retourner la carte'}>
+      {/* Une div (et non un bouton) : le verso contient le bouton « écouter ». */}
+      <div
+        class={`flashcard ${flipped ? 'is-flipped' : ''}`}
+        role={flipped ? undefined : 'button'}
+        tabIndex={flipped ? undefined : 0}
+        onClick={() => setFlipped(true)}
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setFlipped(true)}
+        aria-label={flipped ? undefined : 'Retourner la carte'}
+      >
         <VisualBadge visual={word.visual} size={72} />
         <Ar text={word.arabicVoweled} size="xl" forceVowels={flipped} />
         {flipped ? <WordDetails word={word} /> : <span class="muted small">Touche pour retourner</span>}
-      </button>
+      </div>
       <div class="actions">
         {flipped ? (
           <>

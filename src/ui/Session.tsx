@@ -16,7 +16,9 @@ import {
 import { applyAnswer } from '../domain/srs';
 import { missedSince } from '../domain/stats';
 import { unlockProgress } from '../domain/reading';
-import type { Answer, ExerciseId, Session as SessionT, Word } from '../domain/types';
+import type { Answer, ExerciseId, LetterPositionStat, Session as SessionT, Word } from '../domain/types';
+import { applyLetterResults } from '../domain/dictation';
+import { Dictation, type LetterResult } from './exercises/Dictation';
 import { newId } from '../domain/words';
 import { go } from '../router';
 import { useApp } from '../store';
@@ -27,7 +29,7 @@ import { Trace } from './exercises/Trace';
 import type { Position } from '../domain/letters';
 
 type Mode = 'revision' | PracticeExercise;
-const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar', 'lecture_v', 'lecture_nv', 'lettre', 'paires', 'trace', 'trace_memoire'];
+const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar', 'lecture_v', 'lecture_nv', 'lettre', 'paires', 'trace', 'trace_memoire', 'dictee'];
 const POSITIONS: Position[] = ['isolee', 'initiale', 'mediane', 'finale'];
 
 export function SessionScreen({ params }: { params: URLSearchParams }) {
@@ -50,6 +52,11 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   const sessionRef = useRef<SessionT | null>(null);
   const answeredRef = useRef(new Set<string>());
   const lectureAnswers = useRef<Answer[]>(app.answers.filter((a) => a.exercise === 'lecture_v'));
+  // Table lettre × position, chargée au début de la séance (dictée tracée).
+  const letterStatsRef = useRef(new Map<string, LetterPositionStat>());
+  useEffect(() => {
+    repo.getLetterStats().then((xs) => xs.forEach((x) => letterStatsRef.current.set(x.id, x)));
+  }, []);
   const [unlockedNow, setUnlockedNow] = useState(false);
 
   const ctx = () => ({ ...app.queueContext(), progress: progressRef.current });
@@ -67,7 +74,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   // À la sortie, on recharge l'état global (accueil, progression à jour).
   useEffect(() => () => void app.reload(), []);
 
-  async function record(item: QueueItem, correct: boolean) {
+  async function record(item: QueueItem, correct: boolean, letterResults: LetterResult[] = []) {
     const now = Date.now();
     const exercise: ExerciseId = mode === 'revision' ? 'revision' : mode;
     if (!sessionRef.current) {
@@ -95,7 +102,9 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
       letters: word ? word.letters : [letterOfItem(item.itemId)],
     };
     // Enregistré tout de suite : fermer l'appli ne fait perdre aucune réponse.
-    await repo.recordAnswer(answer, after, { ...s });
+    const stats = applyLetterResults(letterStatsRef.current, repo.userId, letterResults, now);
+    stats.forEach((x) => letterStatsRef.current.set(x.id, x));
+    await repo.recordAnswer(answer, after, { ...s }, stats);
     if (item.exercise === 'lecture_v' && !app.noVowelsUnlocked && !unlockedNow) {
       lectureAnswers.current.push(answer);
       if (unlockProgress(lectureAnswers.current).unlocked) {
@@ -116,6 +125,8 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
         ? 'Aucun élément à échéance avec ces filtres.'
         : mode === 'trace' && target === 'mots'
           ? 'Aucun mot n’est marqué « à apprendre à écrire ». Coche la case dans la fiche d’un mot.'
+          : mode === 'dictee'
+            ? 'Aucun mot de cette sélection n’a encore d’audio.'
           : 'Aucun élément ne correspond à ce choix.';
     return (
       <Shell onClose={() => go('/')}>
@@ -209,10 +220,13 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
         />
       );
       break;
+    case 'dictee':
+      body = <Dictation key={key} word={word!} onAnswer={(ok, results) => record(item, ok, results).then(next)} />;
+      break;
   }
 
   return (
-    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace' || item.exercise === 'trace_memoire'}>
+    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace' || item.exercise === 'trace_memoire' || item.exercise === 'dictee'}>
       {body}
     </Shell>
   );

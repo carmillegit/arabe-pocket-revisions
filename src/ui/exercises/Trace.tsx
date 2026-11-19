@@ -130,6 +130,7 @@ export function Trace({
   letter,
   showArrows: arrowsDefault,
   memory,
+  dictation,
   onAnswer,
 }: {
   word?: Word;
@@ -137,8 +138,11 @@ export function Trace({
   showArrows: boolean;
   /** Niveau « de mémoire » : écrire la lettre dans cette position, sans modèle, puis révéler. */
   memory?: Position;
+  /** Dictée tracée : en-tête (écoute) et correction lettre par lettre fournis par l'exercice. */
+  dictation?: { head: preact.ComponentChildren; afterReveal: () => preact.ComponentChildren };
   onAnswer: (ok: boolean) => void;
 }) {
+  const blind = !!memory || !!dictation;
   const full = letter && memory ? letterForm(letter, memory) : (letter ?? word!.arabicVoweled);
   const skel = skeleton(full);
   const info = letter ? LETTER_BY_CHAR.get(letter) : undefined;
@@ -151,8 +155,8 @@ export function Trace({
   const current = useRef<Pt[] | null>(null);
 
   const [count, setCount] = useState(0);
-  const [pass, setPass] = useState<Pass>(memory ? 'complet' : 'forme');
-  const [modelVisible, setModelVisible] = useState(!memory);
+  const [pass, setPass] = useState<Pass>(blind ? 'complet' : 'forme');
+  const [modelVisible, setModelVisible] = useState(!blind);
   const [revealed, setRevealed] = useState(false);
   const [compare, setCompare] = useState(false);
   const [arrows, setArrows] = useState(arrowsDefault);
@@ -175,10 +179,16 @@ export function Trace({
     for (const s of strokes.current) drawStroke(ctx, s);
   };
 
+  // État courant lu par une référence : le redimensionnement (ResizeObserver) appelle ce dessin
+  // depuis une ancienne fermeture, qui sinon effacerait la correction affichée.
+  const viewRef = useRef({ pass, modelVisible, compare, arrows });
+  viewRef.current = { pass, modelVisible, compare, arrows };
+
   const redrawModel = () => {
     const c = modelRef.current;
     const l = layoutRef.current;
     if (!c || !l) return;
+    const { pass, modelVisible, compare, arrows } = viewRef.current;
     const ctx = c.getContext('2d')!;
     ctx.clearRect(0, 0, l.w, l.h);
     if (!modelVisible && !compare) return;
@@ -323,7 +333,9 @@ export function Trace({
   return (
     <div class="exercise trace">
       <div class="trace-head">
-        {memory && info ? (
+        {dictation ? (
+          dictation.head
+        ) : memory && info ? (
           <div class="memory-prompt">
             <p class="prompt-label">Écris de mémoire</p>
             <p class="memory-name">
@@ -343,7 +355,7 @@ export function Trace({
             </span>
           </div>
         )}
-        {!memory && (
+        {!blind && (
         <div class="seg-ctl" role="group" aria-label="Étape">
           <button type="button" aria-pressed={pass === 'forme'} onClick={() => setPass('forme')}>1. Forme</button>
           <button type="button" aria-pressed={pass === 'complet'} onClick={() => setPass('complet')}>
@@ -361,23 +373,23 @@ export function Trace({
             {info.dots.count} point{info.dots.count > 1 ? 's' : ''} {info.dots.position}
           </p>
         )}
-        {!memory && !modelVisible && !compare && <p class="trace-tip">De mémoire</p>}
-        {memory && revealed && <p class="trace-tip">Modèle en violet : compare et note-toi</p>}
+        {!blind && !modelVisible && !compare && <p class="trace-tip">De mémoire</p>}
+        {blind && revealed && compare && <p class="trace-tip">Correction en violet, par-dessus ton tracé</p>}
       </div>
 
       <div class="trace-tools">
         <button type="button" class="tool" onClick={undo} disabled={count === 0}>Annuler</button>
         <button type="button" class="tool" onClick={clear} disabled={count === 0}>Effacer</button>
-        {memory ? (
+        {blind ? (
           <button type="button" class="tool tool-primary" aria-pressed={compare} onClick={() => { setRevealed(true); setCompare(!compare); }} disabled={count === 0}>
-            {compare ? 'Masquer la correction' : 'Révéler'}
+            {compare ? 'Masquer la correction' : revealed ? 'Revoir la correction' : dictation ? 'Vérifier' : 'Révéler'}
           </button>
         ) : (
         <button type="button" class="tool" aria-pressed={!modelVisible} onClick={() => { setModelVisible(!modelVisible); setCompare(false); }}>
           {modelVisible ? 'Masquer le modèle' : 'Montrer le modèle'}
         </button>
         )}
-        {!memory && !modelVisible && (
+        {!blind && !modelVisible && (
           <button type="button" class="tool" aria-pressed={compare} onClick={() => setCompare(!compare)} disabled={count === 0}>
             Comparer
           </button>
@@ -389,10 +401,14 @@ export function Trace({
         )}
       </div>
 
+      {dictation ? (
+        revealed && dictation.afterReveal()
+      ) : (
       <div class="actions">
         <button type="button" class="btn btn-bad" onClick={() => answer(false)} disabled={count === 0 || (!!memory && !revealed)}>À refaire</button>
         <button type="button" class="btn btn-good" onClick={() => answer(true)} disabled={count === 0 || (!!memory && !revealed)}>Réussi</button>
       </div>
+      )}
     </div>
   );
 }

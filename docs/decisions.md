@@ -2,6 +2,16 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Lot 3 : audio et dictée tracée
+
+- **Audio** des 57 mots (Piper), livré avec l'app et disponible hors connexion. Le lien se fait par le texte vocalisé : un mot ajouté avec la même écriture retrouve son audio.
+- Bouton 🔊 au verso des cartes, dans les corrections et dans la fiche du mot, avec la mention « voix de synthèse ». Statut audio modifiable dans la fiche : à valider / validé / voix humaine.
+- **Dictée tracée** : lecture automatique (le bouton reste disponible si l'iPhone la refuse), tracé sans modèle, « Vérifier » qui superpose la correction, puis auto-évaluation **lettre par lettre**, avec la position de chaque lettre (forme liée affichée). Le mot est réussi si toutes ses lettres sont justes. Points et voyelles : seconde passe non notée.
+- En révision, l'écriture d'un mot passe du tracé guidé à la dictée dès la boîte 2, s'il a un audio.
+- **Table lettre × position** : réussites, échecs, date. Stockage en version 2, avec **migration automatique**. Les sauvegardes v1 s'importent toujours.
+- Progression : les 5 combinaisons lettre-position les plus ratées (« ع en milieu de mot »).
+- Un mot ajouté plus tard n'a pas d'audio tant qu'on ne l'a pas généré (script `scripts/tts.py`). D'ici là, il est simplement exclu de la dictée.
+
 ## Audio (lot 3)
 
 - **Piper** (logiciel libre, voix `ar_JO-kareem`), sans compte ni GAFAM. Génération unique, fichiers livrés avec l'app (5 à 8 Ko par mot).

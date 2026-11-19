@@ -5,7 +5,8 @@ import type { ContentType, Source, Visual, Word } from '../domain/types';
 import { createWithPlural, createWord, withDerived } from '../domain/words';
 import { back, go } from '../router';
 import { useApp } from '../store';
-import { Ar, TopBar, VisualBadge } from './common';
+import { Ar, SpeakButton, TopBar, VisualBadge } from './common';
+import { AUDIO_STATUS_LABEL, hasAudio } from '../domain/audio';
 
 const TRANSLIT_KEYS = ['ā', 'ī', 'ū', 'ḥ', 'ṣ', 'ḍ', 'ṭ', 'ẓ', 'ʿ', 'ʾ'];
 const NEW_CAT = '__new__';
@@ -108,6 +109,7 @@ export function WordForm({ id }: { id: string | null }) {
   const [source, setSource] = useState<Source>(existing?.source ?? 'cours');
   const [root, setRoot] = useState(existing?.root ?? '');
   const [more, setMore] = useState(false);
+  const [audioStatus, setAudioStatus] = useState<Word['audio']['status']>(existing?.audio.status ?? 'synthese_a_valider');
 
   const canAddPlural = !linked && type === 'mot';
   const [withPlural, setWithPlural] = useState(false);
@@ -155,7 +157,7 @@ export function WordForm({ id }: { id: string | null }) {
     };
     let toSave: Word[];
     if (existing) {
-      toSave = [withDerived({ ...existing, ...fields, transliteration: translit.trim(), french: french.trim(), pronunciationHint: hint.trim(), root: root.trim() || null, updatedAt: now })];
+      toSave = [withDerived({ ...existing, ...fields, audio: { ...existing.audio, status: audioStatus }, transliteration: translit.trim(), french: french.trim(), pronunciationHint: hint.trim(), root: root.trim() || null, updatedAt: now })];
     } else if (withPlural && canAddPlural) {
       toSave = createWithPlural(fields, { arabicVoweled: plAr, transliteration: plTr, french: plFr }, repo.userId, now);
     } else {
@@ -276,6 +278,23 @@ export function WordForm({ id }: { id: string | null }) {
               )}
             </div>
           )
+        )}
+
+        {existing && hasAudio(existing) && (
+          <div class="field">
+            <span class="label">Audio</span>
+            <div class="audio-row">
+              <SpeakButton word={{ ...existing, audio: { ...existing.audio, status: audioStatus } }} note={false} />
+              <select value={audioStatus} onChange={(e) => setAudioStatus(e.currentTarget.value as Word['audio']['status'])} aria-label="Statut de l’audio">
+                {(Object.keys(AUDIO_STATUS_LABEL) as Word['audio']['status'][]).map((k) => (
+                  <option key={k} value={k}>{AUDIO_STATUS_LABEL[k]}</option>
+                ))}
+              </select>
+            </div>
+            {normalizeArabic(arabic) !== normalizeArabic(existing.arabicVoweled) && (
+              <p class="msg msg-warn">Tu as modifié le mot arabe : l’audio actuel ne correspondra plus et sera retiré. Il faudra en générer un nouveau.</p>
+            )}
+          </div>
         )}
 
         <label class="check">

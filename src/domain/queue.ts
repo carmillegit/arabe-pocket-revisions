@@ -5,6 +5,9 @@ import { ALPHABET } from './arabic';
 import { letterItemId, letterOfItem, isLetterItem } from './letters';
 import { activeSkills, isDue, newProgress, LETTER_SKILLS } from './srs';
 import { shuffle, type Rng } from './quiz';
+import { hasAudio } from './audio';
+
+const hasWordAudio = (w?: Word) => !!w && hasAudio(w);
 import type { ExerciseId, Progress, Skill, Word } from './types';
 
 export const SESSION_SIZE = 20;
@@ -84,8 +87,21 @@ const VOCAB_ROTATION: PracticeExercise[] = ['cartes', 'qcm_ar_fr', 'qcm_fr_ar'];
 /** À partir de la boîte 3, une lettre s'écrit de mémoire (sans modèle ni flèches). */
 export const MEMORY_TRACE_BOX = 3;
 
-export function exerciseFor(itemId: string, skill: Skill, n: number, noVowelsUnlocked: boolean, box = 1): PracticeExercise {
-  if (skill === 'ecriture') return isLetterItem(itemId) && box >= MEMORY_TRACE_BOX ? 'trace_memoire' : 'trace';
+/** À partir de la boîte 2, un mot qui a son audio s'écrit en dictée (entendre, tracer, vérifier). */
+export const DICTATION_BOX = 2;
+
+export function exerciseFor(
+  itemId: string,
+  skill: Skill,
+  n: number,
+  noVowelsUnlocked: boolean,
+  box = 1,
+  withAudio = false,
+): PracticeExercise {
+  if (skill === 'ecriture') {
+    if (isLetterItem(itemId)) return box >= MEMORY_TRACE_BOX ? 'trace_memoire' : 'trace';
+    return withAudio && box >= DICTATION_BOX ? 'dictee' : 'trace';
+  }
   if (isLetterItem(itemId)) return n % 2 === 0 ? 'lettre' : 'paires';
   if (skill === 'lecture') return noVowelsUnlocked && n % 2 === 1 ? 'lecture_nv' : 'lecture_v';
   return VOCAB_ROTATION[n % VOCAB_ROTATION.length];
@@ -127,10 +143,11 @@ export function buildReviewQueue(
     .filter((x) => !opts.exclude?.has(`${x.itemId}|${x.skill}`))
     .slice(0, opts.limit ?? SESSION_SIZE);
   const offset = Math.floor(rng() * 6);
+  const byId = new Map(ctx.words.map((w) => [w.id, w]));
   return shuffle(items, rng).map((x, i) => ({
     itemId: x.itemId,
     skill: x.skill,
-    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked, x.p.box),
+    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked, x.p.box, hasWordAudio(byId.get(x.itemId))),
   }));
 }
 
@@ -144,6 +161,7 @@ const PRACTICE_SKILL: Record<PracticeExercise, Skill> = {
   paires: 'lecture',
   trace: 'ecriture',
   trace_memoire: 'ecriture',
+  dictee: 'ecriture',
 };
 
 /**
@@ -165,6 +183,7 @@ export function buildPracticeQueue(
   else {
     let ws = filterWords(ctx.words, f);
     if (exercise === 'trace') ws = ws.filter((w) => w.writingEnabled);
+    if (exercise === 'dictee') ws = ws.filter((w) => hasWordAudio(w));
     ids = ws.map((w) => w.id);
   }
   const box = (id: string) => ctx.progress.get(`${ctx.userId}|${id}|${skill}`)?.box ?? 1;

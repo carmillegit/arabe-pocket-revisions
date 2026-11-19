@@ -1,6 +1,6 @@
 // Implémentation locale (IndexedDB via Dexie).
 import Dexie, { type Table } from 'dexie';
-import type { Answer, Category, Progress, Session, User, Word } from '../domain/types';
+import type { Answer, Category, LetterPositionStat, Progress, Session, User, Word } from '../domain/types';
 import { APP_ID, SCHEMA_VERSION, mergeBackups, type Backup } from './backup';
 import type { Repository } from './repository';
 
@@ -17,6 +17,7 @@ class AppDB extends Dexie {
   answers!: Table<Answer, string>;
   sessions!: Table<Session, string>;
   meta!: Table<Meta, string>;
+  letterStats!: Table<LetterPositionStat, string>;
 
   constructor(name: string) {
     super(name);
@@ -30,6 +31,10 @@ class AppDB extends Dexie {
       answers: 'id, userId, at, itemId',
       sessions: 'id, userId, date',
       meta: 'key',
+    });
+    // Version 2 (lot 3) : table lettre × position pour la dictée tracée. Migration automatique : la table est créée vide.
+    this.version(2).stores({
+      letterStats: 'id, userId',
     });
   }
 }
@@ -117,12 +122,18 @@ export class DexieRepository implements Repository {
     await this.db.sessions.put(session);
   }
 
-  async recordAnswer(answer: Answer, progress: Progress, session: Session) {
-    await this.db.transaction('rw', this.db.answers, this.db.progress, this.db.sessions, async () => {
-      await this.db.answers.put(answer);
-      await this.db.progress.put(progress);
-      await this.db.sessions.put(session);
+  async recordAnswer(answer: Answer, progress: Progress, session: Session, letterStats: LetterPositionStat[] = []) {
+    const db = this.db;
+    await db.transaction('rw', [db.answers, db.progress, db.sessions, db.letterStats], async () => {
+      await db.answers.put(answer);
+      await db.progress.put(progress);
+      await db.sessions.put(session);
+      if (letterStats.length) await db.letterStats.bulkPut(letterStats);
     });
+  }
+
+  getLetterStats() {
+    return this.db.letterStats.where('userId').equals(this.userId).toArray();
   }
 
   async getMeta<T>(key: string) {
@@ -134,15 +145,16 @@ export class DexieRepository implements Repository {
   }
 
   async exportAll(): Promise<Backup> {
-    const [users, categories, words, progress, sessions, answers] = await Promise.all([
+    const [users, categories, words, progress, sessions, answers, letterStats] = await Promise.all([
       this.db.users.where('id').equals(this.userId).toArray(),
       this.getCategories(),
       this.getWords(),
       this.getProgress(),
       this.getSessions(),
       this.getAnswers(),
+      this.getLetterStats(),
     ]);
-    return { app: APP_ID, schemaVersion: SCHEMA_VERSION, exportedAt: Date.now(), users, categories, words, progress, sessions, answers };
+    return { app: APP_ID, schemaVersion: SCHEMA_VERSION, exportedAt: Date.now(), users, categories, words, progress, sessions, answers, letterStats };
   }
 
   async importAll(incoming: Backup, mode: 'merge' | 'replace') {
@@ -154,22 +166,25 @@ export class DexieRepository implements Repository {
       progress: own(incoming.progress).map((p) => ({ ...p, id: `${this.userId}|${p.itemId}|${p.skill}` })),
       sessions: own(incoming.sessions),
       answers: own(incoming.answers),
+      letterStats: own(incoming.letterStats).map((s) => ({ ...s, id: `${this.userId}|${s.letter}|${s.position}` })),
     };
     const data = mode === 'merge' ? mergeBackups(await this.exportAll(), inc) : inc;
     const db = this.db;
-    await db.transaction('rw', [db.words, db.categories, db.progress, db.sessions, db.answers], async () => {
+    await db.transaction('rw', [db.words, db.categories, db.progress, db.sessions, db.answers, db.letterStats], async () => {
       if (mode === 'replace') {
         await db.words.where('userId').equals(this.userId).delete();
         await db.categories.where('userId').equals(this.userId).delete();
         await db.progress.where('userId').equals(this.userId).delete();
         await db.sessions.where('userId').equals(this.userId).delete();
         await db.answers.filter((a) => a.userId === this.userId).delete();
+        await db.letterStats.where('userId').equals(this.userId).delete();
       }
       await db.words.bulkPut(data.words);
       await db.categories.bulkPut(data.categories);
       await db.progress.bulkPut(data.progress);
       await db.sessions.bulkPut(data.sessions);
       await db.answers.bulkPut(data.answers);
+      await db.letterStats.bulkPut(data.letterStats);
     });
   }
 

@@ -2,7 +2,9 @@ import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
 import { SESSION_SIZE, dueItems } from '../domain/queue';
 import { answerDays, byCategory, history, letterMastery, masteryCounts, streak, topMissedLetters, topMissedWords } from '../domain/stats';
-import type { Session } from '../domain/types';
+import type { LetterPositionStat, Session } from '../domain/types';
+import { topMissedLetterPositions } from '../domain/dictation';
+import { letterForm } from '../domain/letters';
 import { addDays, parseDay } from '../domain/dates';
 import { go } from '../router';
 import { useApp } from '../store';
@@ -18,9 +20,12 @@ export function ProgressScreen() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [hover, setHover] = useState<number | null>(null);
 
+  const [letterStats, setLetterStats] = useState<LetterPositionStat[]>([]);
   useEffect(() => {
     repo.getSessions(addDays(today, -29)).then(setSessions);
+    repo.getLetterStats().then(setLetterStats);
   }, []);
+  const missedPositions = useMemo(() => topMissedLetterPositions(letterStats, 5), [letterStats]);
 
   const app = useApp();
   const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress]);
@@ -110,6 +115,30 @@ export function ProgressScreen() {
           </ul>
         )}
         <p class="small muted">Touche une lettre pour réviser les mots qui la contiennent.</p>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Lettres selon leur position</h2>
+        {missedPositions.length === 0 ? (
+          <p class="muted">Pas encore d’erreur en dictée tracée.</p>
+        ) : (
+          <ul class="list list-compact">
+            {missedPositions.map((x) => (
+              <li key={x.id} class="pos-row">
+                <bdi class="ar ar-l" lang="ar" dir="rtl">{letterForm(x.letter, x.position)}</bdi>
+                <span class="row-main">
+                  <span class="row-title">
+                    <bdi lang="ar" dir="rtl" class="ar">{x.letter}</bdi> {x.label}
+                  </span>
+                  <span class="row-sub">
+                    {plural(x.failures, 'erreur', 'erreurs')} · {plural(x.successes, 'réussite', 'réussites')}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p class="small muted">Les 5 combinaisons les plus ratées en dictée tracée.</p>
       </section>
 
       <section class="card">

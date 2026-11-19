@@ -4,6 +4,7 @@ import { stripVowels } from '../domain/arabic';
 import type { Mastery } from '../domain/srs';
 import type { Visual, Word } from '../domain/types';
 import { useApp } from '../store';
+import { audioUrl } from '../domain/audio';
 
 /** Texte arabe : sens droite-gauche, police intégrée, voyelles selon le réglage. */
 export function Ar({
@@ -121,6 +122,7 @@ const PATHS: Record<string, string> = {
   download: 'M12 3v12M7 10l5 5 5-5M4 21h16',
   upload: 'M12 21V9M7 14l5-5 5 5M4 3h16',
   filter: 'M3 5h18M6 12h12M10 19h4',
+  speaker: 'M4 9v6h4l5 4V5L8 9H4zM16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12',
 };
 
 export function Icon({ name, size = 24 }: { name: keyof typeof PATHS | string; size?: number }) {
@@ -137,4 +139,51 @@ export function formatDate(t: number): string {
 
 export function plural(n: number, one: string, many: string) {
   return `${n} ${n > 1 ? many : one}`;
+}
+
+// ---------- Audio ----------
+
+let current: HTMLAudioElement | null = null;
+
+/** Joue un fichier audio (un seul à la fois). Renvoie false si la lecture a été refusée. */
+export async function playAudio(url: string): Promise<boolean> {
+  try {
+    current?.pause();
+    current = new Audio(url);
+    await current.play();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function SpeakButton({
+  word,
+  big = false,
+  note = true,
+}: {
+  word: Pick<Word, 'arabicVoweled' | 'audio'>;
+  big?: boolean;
+  /** Mention « voix de synthèse » sous le bouton. */
+  note?: boolean;
+}) {
+  const url = audioUrl(word);
+  if (!url) return null;
+  const synthetic = word.audio?.status !== 'voix_humaine';
+  return (
+    <span class="speak">
+      <button
+        type="button"
+        class={`speak-btn ${big ? 'speak-big' : ''}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          playAudio(url);
+        }}
+        aria-label="Écouter le mot"
+      >
+        <Icon name="speaker" size={big ? 32 : 22} />
+      </button>
+      {note && synthetic && <span class="speak-note">voix de synthèse</span>}
+    </span>
+  );
 }

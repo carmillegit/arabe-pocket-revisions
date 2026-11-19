@@ -1,8 +1,9 @@
 // Format de sauvegarde (export / import), versionné, avec migration.
-import type { Answer, Category, Progress, Session, User, Visual, Word } from '../domain/types';
+import type { Answer, Category, LetterPositionStat, Progress, Session, User, Visual, Word } from '../domain/types';
 import { withDerived } from '../domain/words';
 
-export const SCHEMA_VERSION = 1;
+/** v1 : lots 1 et 2. v2 : ajout de la table lettre × position (lot 3). */
+export const SCHEMA_VERSION = 2;
 export const APP_ID = 'arabe-revision';
 
 export interface Backup {
@@ -15,6 +16,7 @@ export interface Backup {
   progress: Progress[];
   sessions: Session[];
   answers: Answer[];
+  letterStats: LetterPositionStat[];
 }
 
 export class BackupError extends Error {}
@@ -47,12 +49,14 @@ export function parseBackup(raw: unknown, userId: string): Backup {
     progress: isApp && Array.isArray(o.progress) ? (o.progress as Progress[]) : [],
     sessions: isApp && Array.isArray(o.sessions) ? (o.sessions as Session[]) : [],
     answers: isApp && Array.isArray(o.answers) ? (o.answers as Answer[]) : [],
+    letterStats: isApp && Array.isArray(o.letterStats) ? (o.letterStats as LetterPositionStat[]) : [],
   });
 }
 
 /** Migrations successives du format. Aujourd'hui une seule version. */
 function migrate(b: Backup): Backup {
-  // if (b.schemaVersion < 2) { ...; b.schemaVersion = 2 }
+  // v1 → v2 : la table lettre × position n'existait pas, elle commence vide.
+  if (b.schemaVersion < 2) b = { ...b, letterStats: b.letterStats ?? [] };
   return { ...b, schemaVersion: SCHEMA_VERSION };
 }
 
@@ -122,6 +126,7 @@ export function mergeBackups(current: Backup, incoming: Backup): Backup {
     progress: byId(current.progress, incoming.progress, (p) => p.id, (y, x) => (y.lastAnsweredAt ?? 0) > (x.lastAnsweredAt ?? 0)),
     sessions: byId(current.sessions, incoming.sessions, (s) => s.id, (y, x) => y.questions > x.questions),
     answers: byId(current.answers, incoming.answers, (a) => a.id, () => false),
+    letterStats: byId(current.letterStats, incoming.letterStats, (s) => s.id, (y, x) => (y.lastAnsweredAt ?? 0) > (x.lastAnsweredAt ?? 0)),
   };
 }
 

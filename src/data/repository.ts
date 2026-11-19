@@ -1,6 +1,6 @@
 // Interface unique d'accès aux données. Les écrans ne connaissent que cette interface :
 // en V1, on remplacera l'implémentation IndexedDB par un service hébergé sans toucher aux écrans.
-import type { Answer, Category, Progress, Session, Word } from '../domain/types';
+import type { Answer, Category, LetterPositionStat, Progress, Session, Word } from '../domain/types';
 import type { Backup } from './backup';
 
 export interface Repository {
@@ -22,8 +22,11 @@ export interface Repository {
   getSessions(sinceDay?: string): Promise<Session[]>;
 
   startSession(session: Session): Promise<void>;
-  /** Enregistre une réponse, la progression et le compteur de séance en une seule transaction. */
-  recordAnswer(answer: Answer, progress: Progress, session: Session): Promise<void>;
+  /** Enregistre une réponse, la progression, le compteur de séance (et les lettres de la dictée) en une seule transaction. */
+  recordAnswer(answer: Answer, progress: Progress, session: Session, letterStats?: LetterPositionStat[]): Promise<void>;
+
+  /** Table lettre × position (dictée tracée). */
+  getLetterStats(): Promise<LetterPositionStat[]>;
 
   getMeta<T>(key: string): Promise<T | undefined>;
   setMeta<T>(key: string, value: T): Promise<void>;

@@ -76,7 +76,8 @@ export type ExerciseId =
   | 'lettre'
   | 'paires'
   | 'trace'
-  | 'trace_memoire';
+  | 'trace_memoire'
+  | 'dictee';
 
 export interface Answer {
   id: string;
@@ -98,6 +99,17 @@ export interface Session {
   exercise: ExerciseId;
   questions: number;
   successes: number;
+}
+
+/** Réussites et échecs par lettre et par position (dictée tracée). */
+export interface LetterPositionStat {
+  id: string; // `${userId}|${letter}|${position}`
+  userId: string;
+  letter: string;
+  position: 'isolee' | 'initiale' | 'mediane' | 'finale';
+  successes: number;
+  failures: number;
+  lastAnsweredAt: number | null;
 }
 
 export const LOCAL_USER_ID = 'local';

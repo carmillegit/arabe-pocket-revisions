@@ -1,6 +1,6 @@
 // Découpage d'un mot en lettres, avec leur position (initiale, médiane, finale, isolée).
 // Calcul par règles, sans IA. Les voyelles sont ignorées.
-import { stripVowels } from './arabic';
+import { baseLetter, stripVowels } from './arabic';
 import type { Position } from './letters';
 
 /** Lettres qui ne se lient pas à la suivante. */
@@ -71,4 +71,33 @@ export function skeleton(text: string): string {
         .join(''),
     )
     .join(' ');
+}
+
+const ZWJ = '‍';
+
+/** Forme affichée d'une unité selon sa position (liant invisible pour forcer la forme liée). */
+export function unitForm(text: string, position: Position): string {
+  const joinsNext = text.length === 1 && !NO_JOIN_NEXT.has(text);
+  switch (position) {
+    case 'isolee':
+      return text;
+    case 'initiale':
+      return joinsNext ? text + ZWJ : text;
+    case 'mediane':
+      return ZWJ + text + (joinsNext ? ZWJ : '');
+    case 'finale':
+      return ZWJ + text;
+  }
+}
+
+/** Lettres de base à compter pour une unité (la ligature lam-alif compte ل puis ا final). */
+export function unitLetters(u: Unit): { letter: string; position: Position }[] {
+  const base = (ch: string) => baseLetter(ch);
+  if (u.text.length > 1) {
+    return [
+      { letter: base(u.text[0]), position: u.position },
+      { letter: base(u.text[1]), position: 'finale' },
+    ];
+  }
+  return [{ letter: base(u.text), position: u.position }];
 }

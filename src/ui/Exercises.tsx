@@ -59,7 +59,7 @@ export function Exercises() {
             ? `${toWrite} mot${toWrite > 1 ? 's' : ''} à apprendre à écrire.`
             : 'Coche « À apprendre à écrire » dans la fiche d’un mot pour l’ajouter ici.',
         },
-        { mode: 'dictee', title: 'Dictée tracée', desc: 'Écouter, tracer, vérifier lettre par lettre.', soon: 'Lot 3' },
+        { mode: 'dictee', title: 'Dictée tracée', desc: 'Écouter le mot, l’écrire de mémoire, puis vérifier lettre par lettre, selon sa position.' },
       ],
     },
   ];

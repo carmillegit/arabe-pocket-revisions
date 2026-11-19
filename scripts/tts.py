@@ -51,11 +51,18 @@ def tail_ratio(wav_bytes: bytes) -> float:
 problems = []
 for pair in pairs:
     wid, text = pair.split('=', 1)
-    buf = io.BytesIO()
-    with wave.open(buf, 'wb') as wf:
-        voice.synthesize_wav(pause_form(text), wf, syn_config=config)
-    data = buf.getvalue()
-    ratio = tail_ratio(data)
+    # La voix varie un peu à chaque génération : jusqu'à 5 essais, on garde la fin la plus nette.
+    best = None
+    for _ in range(5):
+        buf = io.BytesIO()
+        with wave.open(buf, 'wb') as wf:
+            voice.synthesize_wav(pause_form(text), wf, syn_config=config)
+        candidate = (tail_ratio(buf.getvalue()), buf.getvalue())
+        if best is None or candidate[0] < best[0]:
+            best = candidate
+        if best[0] <= 0.05:
+            break
+    ratio, data = best
     if ratio > 0.15:
         problems.append(f'{wid} {text} (fin à {ratio:.0%})')
     wav_path = out / f'{wid}.wav'
@@ -63,7 +70,7 @@ for pair in pairs:
     mp3 = out / f'{wid}.mp3'
     subprocess.run(
         ['ffmpeg', '-y', '-loglevel', 'error', '-i', str(wav_path),
-         '-af', 'adelay=150,apad=pad_dur=0.35', '-ac', '1', '-b:a', '48k', str(mp3)],
+         '-af', 'areverse,afade=t=in:d=0.025,areverse,adelay=150,apad=pad_dur=0.35', '-ac', '1', '-b:a', '48k', str(mp3)],
         check=True,
     )
     wav_path.unlink()
