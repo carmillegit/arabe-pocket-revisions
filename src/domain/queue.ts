@@ -90,6 +90,41 @@ export const MEMORY_TRACE_BOX = 3;
 /** À partir de la boîte 2, un mot qui a son audio s'écrit en dictée (entendre, tracer, vérifier). */
 export const DICTATION_BOX = 2;
 
+/**
+ * Exercices possibles pour un élément et une compétence.
+ * `rotate` : on alterne entre eux ; sinon, le premier est le préféré (selon le niveau),
+ * les suivants servent quand le filtre d'activités écarte le préféré.
+ */
+export function exerciseOptions(
+  itemId: string,
+  skill: Skill,
+  noVowelsUnlocked: boolean,
+  box = 1,
+  withAudio = false,
+): { options: PracticeExercise[]; rotate: boolean } {
+  if (skill === 'ecriture') {
+    if (isLetterItem(itemId)) {
+      return { options: box >= MEMORY_TRACE_BOX ? ['trace_memoire', 'trace'] : ['trace', 'trace_memoire'], rotate: false };
+    }
+    if (!withAudio) return { options: ['trace'], rotate: false };
+    return { options: box >= DICTATION_BOX ? ['dictee', 'trace'] : ['trace', 'dictee'], rotate: false };
+  }
+  if (isLetterItem(itemId)) return { options: ['lettre', 'paires'], rotate: true };
+  if (skill === 'lecture') return { options: noVowelsUnlocked ? ['lecture_v', 'lecture_nv'] : ['lecture_v'], rotate: true };
+  return { options: VOCAB_ROTATION, rotate: true };
+}
+
+/** Choisit l'exercice parmi ceux autorisés (tous si `allowed` est absent). Null : élément écarté par le filtre. */
+export function pickExercise(
+  o: { options: PracticeExercise[]; rotate: boolean },
+  n: number,
+  allowed?: Set<PracticeExercise>,
+): PracticeExercise | null {
+  const ok = allowed ? o.options.filter((e) => allowed.has(e)) : o.options;
+  if (ok.length === 0) return null;
+  return o.rotate ? ok[n % ok.length] : ok[0];
+}
+
 export function exerciseFor(
   itemId: string,
   skill: Skill,
@@ -98,13 +133,23 @@ export function exerciseFor(
   box = 1,
   withAudio = false,
 ): PracticeExercise {
-  if (skill === 'ecriture') {
-    if (isLetterItem(itemId)) return box >= MEMORY_TRACE_BOX ? 'trace_memoire' : 'trace';
-    return withAudio && box >= DICTATION_BOX ? 'dictee' : 'trace';
-  }
-  if (isLetterItem(itemId)) return n % 2 === 0 ? 'lettre' : 'paires';
-  if (skill === 'lecture') return noVowelsUnlocked && n % 2 === 1 ? 'lecture_nv' : 'lecture_v';
-  return VOCAB_ROTATION[n % VOCAB_ROTATION.length];
+  return pickExercise(exerciseOptions(itemId, skill, noVowelsUnlocked, box, withAudio), n)!;
+}
+
+/** Activités proposées dans le filtre de révision (choix multiple). */
+export const ACTIVITIES: { id: string; label: string; exercises: PracticeExercise[] }[] = [
+  { id: 'cartes', label: 'Cartes', exercises: ['cartes'] },
+  { id: 'qcm', label: 'QCM de sens', exercises: ['qcm_ar_fr', 'qcm_fr_ar'] },
+  { id: 'lecture', label: 'Lecture de mots', exercises: ['lecture_v', 'lecture_nv'] },
+  { id: 'lettres', label: 'Lettres : nom, son, paires', exercises: ['lettre', 'paires'] },
+  { id: 'trace', label: 'Tracé', exercises: ['trace', 'trace_memoire'] },
+  { id: 'dictee', label: 'Dictée', exercises: ['dictee'] },
+];
+
+/** Exercices autorisés pour une liste d'activités (vide = toutes). */
+export function allowedExercises(activityIds: string[]): Set<PracticeExercise> | undefined {
+  const picked = ACTIVITIES.filter((a) => activityIds.includes(a.id));
+  return picked.length ? new Set(picked.flatMap((a) => a.exercises)) : undefined;
 }
 
 interface DueEntry {
@@ -136,19 +181,21 @@ export function dueItems(ctx: QueueContext, filters: QueueFilters = {}): DueEntr
 
 export function buildReviewQueue(
   ctx: QueueContext,
-  opts: { filters?: QueueFilters; limit?: number; exclude?: Set<string> } = {},
+  opts: { filters?: QueueFilters; limit?: number; exclude?: Set<string>; activities?: Set<PracticeExercise> } = {},
 ): QueueItem[] {
   const rng = ctx.rng ?? Math.random;
-  const items = dueItems(ctx, opts.filters)
-    .filter((x) => !opts.exclude?.has(`${x.itemId}|${x.skill}`))
-    .slice(0, opts.limit ?? SESSION_SIZE);
   const offset = Math.floor(rng() * 6);
   const byId = new Map(ctx.words.map((w) => [w.id, w]));
-  return shuffle(items, rng).map((x, i) => ({
-    itemId: x.itemId,
-    skill: x.skill,
-    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked, x.p.box, hasWordAudio(byId.get(x.itemId))),
-  }));
+  const out: QueueItem[] = [];
+  // Les plus en retard d'abord ; un élément sans exercice autorisé par le filtre est écarté.
+  for (const x of dueItems(ctx, opts.filters)) {
+    if (out.length >= (opts.limit ?? SESSION_SIZE)) break;
+    if (opts.exclude?.has(`${x.itemId}|${x.skill}`)) continue;
+    const o = exerciseOptions(x.itemId, x.skill, ctx.noVowelsUnlocked, x.p.box, hasWordAudio(byId.get(x.itemId)));
+    const exercise = pickExercise(o, out.length + offset, opts.activities);
+    if (exercise) out.push({ itemId: x.itemId, skill: x.skill, exercise });
+  }
+  return shuffle(out, rng);
 }
 
 const PRACTICE_SKILL: Record<PracticeExercise, Skill> = {

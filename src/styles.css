@@ -1059,3 +1059,8 @@ input[type='color'] {
 
 .pos-row { display: flex; align-items: center; gap: 14px; padding: 6px 0; }
 .pos-row > .ar { width: 56px; text-align: center; line-height: 1.6; }
+
+/* Filtre des activités (choix multiple) */
+.acts { border: 0; padding: 0; margin: 0; }
+.acts legend { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; padding: 0; }
+.chips-wrap { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
-import { EXTRA_SIZE, SESSION_SIZE, dueItems } from '../domain/queue';
+import { ACTIVITIES, EXTRA_SIZE, SESSION_SIZE, allowedExercises, buildReviewQueue, dueItems } from '../domain/queue';
 import { answerDays, letterKnownCounts, missedSince, streak, topMissedLetters, wordKnownCounts } from '../domain/stats';
 import { go } from '../router';
 import { useApp } from '../store';
@@ -16,6 +16,23 @@ export function Home() {
   const [cat, setCat] = useState('');
   const [letter, setLetter] = useState('');
   const [missed, setMissed] = useState(false);
+  // Activités cochées : mémorisées sur ce téléphone (simple confort, sans conséquence si perdu).
+  const [acts, setActs] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('revision-activities') ?? '[]');
+    } catch {
+      return [];
+    }
+  });
+  const toggleAct = (id: string) => {
+    const next = acts.includes(id) ? acts.filter((a) => a !== id) : [...acts, id];
+    setActs(next);
+    try {
+      localStorage.setItem('revision-activities', JSON.stringify(next));
+    } catch {
+      /* stockage indisponible : le choix vaut pour cette visite */
+    }
+  };
 
   const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress, today]);
   // Objectif du jour : 20 questions. Le compteur descend à chaque réponse donnée aujourd'hui.
@@ -35,7 +52,19 @@ export function Home() {
   const lastSave = app.lastExportAt ?? app.firstLaunchAt;
   const needsBackup = Date.now() - lastSave > WEEK;
   const total = words.length || 1;
-  const filtered = Boolean(cat || letter || missed);
+  const filtered = Boolean(cat || letter || missed || acts.length);
+  // Nombre d'éléments à échéance qui correspondent aux filtres choisis.
+  const matching = useMemo(
+    () =>
+      filtered
+        ? buildReviewQueue(app.queueContext(), {
+            filters: { category: cat || undefined, letter: letter || undefined, missedIds: missed ? missedIds : undefined },
+            activities: allowedExercises(acts),
+            limit: 100000,
+          }).length
+        : due,
+    [filtered, cat, letter, missed, acts, words, progress, due],
+  );
 
   return (
     <main class="screen">
@@ -82,6 +111,7 @@ export function Home() {
                 cat,
                 lettre: letter,
                 rates: missed ? '1' : undefined,
+                act: acts.length ? acts.join(',') : undefined,
               })
             }
           >
@@ -125,6 +155,30 @@ export function Home() {
               <input type="checkbox" checked={missed} onChange={(e) => setMissed(e.currentTarget.checked)} />
               <span>Seulement les mots ratés cette semaine ({missedIds.size})</span>
             </label>
+            <fieldset class="field acts">
+              <legend>Activités <span class="muted">(aucune cochée = toutes)</span></legend>
+              <div class="chips chips-wrap">
+                {ACTIVITIES.map((a) => (
+                  <button
+                    key={a.id}
+                    type="button"
+                    class={`chip ${acts.includes(a.id) ? 'is-on' : ''}`}
+                    aria-pressed={acts.includes(a.id)}
+                    onClick={() => toggleAct(a.id)}
+                  >
+                    {acts.includes(a.id) ? '✓ ' : ''}
+                    {a.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+            {filtered && (
+              <p class={`msg ${matching ? 'msg-ok' : 'msg-warn'}`} role="status">
+                {matching
+                  ? `Ces filtres correspondent à ${matching} élément${matching > 1 ? 's' : ''} en attente. Ta séance en reprend ${Math.min(matching, goalReached ? EXTRA_SIZE : remaining || EXTRA_SIZE)}.`
+                  : 'Rien à réviser avec ces filtres aujourd’hui.'}
+              </p>
+            )}
           </div>
         )}
       </section>

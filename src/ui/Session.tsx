@@ -7,6 +7,7 @@ import {
   buildPracticeQueue,
   buildReviewQueue,
   progressFor,
+  allowedExercises,
   isLetterItem,
   letterOfItem,
   type PracticeExercise,
@@ -46,6 +47,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
     [params.toString()],
   );
 
+  const activities = useMemo(() => allowedExercises((params.get('act') ?? '').split(',').filter(Boolean)), [params.toString()]);
   const byId = useMemo(() => new Map(words.map((w) => [w.id, w])), [words]);
   // Copie locale de la progression, mise à jour à chaque réponse.
   const progressRef = useRef(new Map(app.progress));
@@ -62,7 +64,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   const ctx = () => ({ ...app.queueContext(), progress: progressRef.current });
   const makeQueue = (limit: number): QueueItem[] =>
     mode === 'revision'
-      ? buildReviewQueue(ctx(), { filters, limit, exclude: answeredRef.current })
+      ? buildReviewQueue(ctx(), { filters, limit, exclude: answeredRef.current, activities })
       : buildPracticeQueue(ctx(), mode, { filters, limit, target });
 
   // Taille demandée par l'accueil (questions restantes du jour, ou « encore 10 »).
@@ -122,7 +124,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   if (queue.length === 0) {
     const why =
       mode === 'revision'
-        ? 'Aucun élément à échéance avec ces filtres.'
+        ? 'Aucun élément à échéance avec ces filtres (catégorie, lettre ou activités).'
         : mode === 'trace' && target === 'mots'
           ? 'Aucun mot n’est marqué « à apprendre à écrire ». Coche la case dans la fiche d’un mot.'
           : mode === 'dictee'
