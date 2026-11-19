@@ -983,14 +983,14 @@ input[type='color'] {
 /* Étiquette de maîtrise : couleur + libellé */
 .mtag {
   flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 650;
-  padding: 3px 8px;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 15px;
+  font-weight: 700;
   border-radius: 999px;
-  white-space: nowrap;
+  line-height: 1;
 }
 .mtag-nouveau { background: var(--m-nouveau-soft); color: var(--m-nouveau-ink); }
 .mtag-en_cours { background: var(--m-en_cours-soft); color: var(--m-en_cours-ink); }

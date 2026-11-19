@@ -74,13 +74,12 @@ export function MasteryDot({ m }: { m: Mastery }) {
 }
 
 /** Symbole qui double la couleur (lisible sans distinguer rouge et vert). */
-export const MASTERY_MARK: Record<Mastery, string> = { nouveau: '!', en_cours: '◐', acquis: '✓' };
+export const MASTERY_MARK: Record<Mastery, string> = { nouveau: '✕', en_cours: '◐', acquis: '✓' };
 
 export function MasteryTag({ m }: { m: Mastery }) {
   return (
-    <span class={`mtag mtag-${m}`}>
-      <span aria-hidden="true">{MASTERY_MARK[m]}</span>
-      {MASTERY_LABEL[m]}
+    <span class={`mtag mtag-${m}`} role="img" aria-label={MASTERY_LABEL[m]} title={MASTERY_LABEL[m]}>
+      {MASTERY_MARK[m]}
     </span>
   );
 }
