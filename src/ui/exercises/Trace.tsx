@@ -27,28 +27,49 @@ interface Layout {
 }
 
 /** Taille et position du modèle : calées sur le texte complet, pour que squelette et flèches s'alignent. */
+/** Lettres de référence : la plus haute (ل), les plus basses (ع ي ح), les plus larges (ض ش). */
+const REF_TALL_DEEP = 'لعيح';
+const REF_WIDE = ['ض', 'ش', 'ص'];
+
+/**
+ * Taille et position du modèle.
+ * Toutes les lettres partagent la même taille et la même ligne d'écriture : c'est ce qui rend
+ * visible qu'un ل monte haut, qu'un د reste sur la ligne et qu'un ر passe dessous.
+ * La ligne est calée sur les lettres de référence, pas sur la lettre affichée.
+ */
 function computeLayout(ctx: CanvasRenderingContext2D, text: string, w: number, h: number, isLetter: boolean): Layout {
   ctx.font = `100px ${FONT_FAMILY}`;
   ctx.direction = 'rtl';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
+  const width = (s: string) => {
+    const m = ctx.measureText(s);
+    return m.actualBoundingBoxLeft + m.actualBoundingBoxRight || m.width;
+  };
   const m = ctx.measureText(text);
-  const tw = m.actualBoundingBoxLeft + m.actualBoundingBoxRight || m.width;
-  const th = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent || 100;
-  const scale = Math.min((w * (isLetter ? 0.62 : 0.86)) / tw, (h * (isLetter ? 0.72 : 0.6)) / th);
+  const ref = ctx.measureText(REF_TALL_DEEP);
+  // Hauteur commune : du haut du ل au bas du ع, plus la place des points et des voyelles.
+  const refAsc = Math.max(ref.actualBoundingBoxAscent, m.actualBoundingBoxAscent) * 1.08;
+  const refDesc = Math.max(ref.actualBoundingBoxDescent, m.actualBoundingBoxDescent) * 1.08;
+  const tw = isLetter ? Math.max(...REF_WIDE.map(width), width(text)) : width(text);
+  const scale = Math.min((w * (isLetter ? 0.62 : 0.86)) / tw, (h * 0.84) / (refAsc + refDesc));
   const size = Math.max(40, Math.min(isLetter ? 420 : 260, 100 * scale));
   const k = size / 100;
-  const asc = m.actualBoundingBoxAscent * k;
-  const desc = m.actualBoundingBoxDescent * k;
   const x = w / 2;
-  const y = h / 2 + (asc - desc) / 2;
+  // Ligne d'écriture fixe : même hauteur pour toutes les lettres.
+  const y = h / 2 + ((refAsc - refDesc) * k) / 2;
   return {
     w,
     h,
     size,
     x,
     y,
-    box: { l: x - m.actualBoundingBoxLeft * k, r: x + m.actualBoundingBoxRight * k, t: y - asc, b: y + desc },
+    box: {
+      l: x - m.actualBoundingBoxLeft * k,
+      r: x + m.actualBoundingBoxRight * k,
+      t: y - m.actualBoundingBoxAscent * k,
+      b: y + m.actualBoundingBoxDescent * k,
+    },
   };
 }
 
@@ -91,6 +112,22 @@ function drawArrow(ctx: CanvasRenderingContext2D, pts: Pt[], color: string, n: n
   ctx.textBaseline = 'middle';
   ctx.direction = 'ltr';
   ctx.fillText(String(n), pts[0].x, pts[0].y + 1);
+  ctx.restore();
+}
+
+/**
+ * Ligne d'écriture, toujours visible (même sans modèle) : c'est elle qui distingue
+ * د (posé sur la ligne), ر ز (qui plongent dessous) et ل (haut au-dessus, boucle dessous).
+ * Calée sur la ligne de base de la police, donc alignée avec le modèle et la correction.
+ */
+function drawBaseline(ctx: CanvasRenderingContext2D, l: Layout) {
+  ctx.save();
+  ctx.strokeStyle = cssVar('--baseline');
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(16, l.y);
+  ctx.lineTo(l.w - 16, l.y);
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -191,6 +228,7 @@ export function Trace({
     const { pass, modelVisible, compare, arrows } = viewRef.current;
     const ctx = c.getContext('2d')!;
     ctx.clearRect(0, 0, l.w, l.h);
+    drawBaseline(ctx, l);
     if (!modelVisible && !compare) return;
     ctx.font = `${l.size}px ${FONT_FAMILY}`;
     ctx.direction = 'rtl';

@@ -2,6 +2,10 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Lot 3 : retour de test
+
+- **Ligne d'écriture** sur la zone de tracé, toujours visible (y compris en mémoire et en dictée). Toutes les lettres partagent la **même taille et la même ligne**, calées sur les lettres de référence (ل pour le haut, ع ي ح pour le bas) : on voit que د reste sur la ligne, que ر passe dessous, et que ل monte haut puis descend.
+
 ## Lot 3 : audio et dictée tracée
 
 - **Audio** des 57 mots (Piper), livré avec l'app et disponible hors connexion. Le lien se fait par le texte vocalisé : un mot ajouté avec la même écriture retrouve son audio.

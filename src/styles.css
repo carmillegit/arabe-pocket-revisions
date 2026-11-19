@@ -34,6 +34,7 @@
   --model: #e4def0;
   --arrow-1: #5b2fc9;
   --arrow-2: #c2410c;
+  --baseline: #8f84b8; /* ligne d'écriture : 3,4:1 sur la carte */
   --radius: 16px;
   --shadow: 0 1px 2px rgb(60 30 110 / 6%), 0 4px 14px rgb(60 30 110 / 6%);
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -75,6 +76,7 @@
     --model: #3a3350;
     --arrow-1: #ffd23f;
     --arrow-2: #ff9a5c;
+    --baseline: #6f6690;
     --shadow: none;
     color-scheme: dark;
   }
