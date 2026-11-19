@@ -208,8 +208,10 @@ export function Trace({
     if (!c || !l) return;
     const ctx = c.getContext('2d')!;
     ctx.clearRect(0, 0, l.w, l.h);
-    ctx.strokeStyle = cssVar('--ink');
-    ctx.fillStyle = cssVar('--ink');
+    // Pendant la comparaison, ton tracé passe en gris clair : la correction se lit par-dessus.
+    const color = cssVar(viewRef.current.compare ? '--ink-dim' : '--ink');
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
     ctx.lineWidth = lineWidth();
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
@@ -291,6 +293,7 @@ export function Trace({
   }, [fontReady]);
 
   useEffect(redrawModel, [pass, modelVisible, compare, arrows, fontReady]);
+  useEffect(redrawInk, [compare]);
 
   // Saisie au doigt ou au stylet.
   useEffect(() => {

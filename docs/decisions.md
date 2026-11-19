@@ -4,6 +4,9 @@ Complète le cahier des charges V0. Les décisions sont classées de la plus ré
 
 ## Lot 3 : retour de test
 
+- **Fin de séance** : pop-up « أَحْسَنْت (aḥsant) — Bravo, séance terminée ! », ou « مَبْرُوك (mabrūk) — Félicitations, sans faute ! » si tout est juste. Les deux formules sont écrites sans marque de genre (forme de pause), pour toute la classe. Confettis désactivés si l'iPhone est réglé pour réduire les animations.
+- **Comparaison en dictée et en écriture de mémoire** : ton tracé passe en gris clair, la correction est affichée en violet franc par-dessus.
+
 - **Filtre par activités** (choix multiple) dans « Filtrer la révision » : Cartes, QCM de sens, Lecture de mots, Lettres (nom, son, paires), Tracé, Dictée. Aucune cochée = toutes. Si l'activité habituelle d'un élément est écartée, on prend une autre activité autorisée (ex. « Cartes » seule : tout le vocabulaire passe en cartes) ; sinon l'élément est écarté. Le choix est mémorisé sur le téléphone.
 
 - **Ligne d'écriture** sur la zone de tracé, toujours visible (y compris en mémoire et en dictée). Toutes les lettres partagent la **même taille et la même ligne**, calées sur les lettres de référence (ل pour le haut, ع ي ح pour le bas) : on voit que د reste sur la ligne, que ر passe dessous, et que ل monte haut puis descend.

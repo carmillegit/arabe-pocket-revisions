@@ -24,6 +24,7 @@ import { newId } from '../domain/words';
 import { go } from '../router';
 import { useApp } from '../store';
 import { Icon, plural } from './common';
+import { Celebration } from './Celebration';
 import { Card, Qcm } from './exercises/Vocabulary';
 import { LetterNameSound, Pairs, TranslitQcm } from './exercises/Reading';
 import { Trace } from './exercises/Trace';
@@ -72,6 +73,8 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   const [queue, setQueue] = useState<QueueItem[]>(() => makeQueue(firstSize));
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState({ ok: 0, total: 0 });
+  // Une seule célébration par fin de série (réinitialisée quand on enchaîne « Encore 10 »).
+  const [celebrated, setCelebrated] = useState(false);
 
   // À la sortie, on recharge l'état global (accueil, progression à jour).
   useEffect(() => () => void app.reload(), []);
@@ -147,6 +150,9 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
     const more = mode === 'revision' ? makeQueue(EXTRA_SIZE) : [];
     return (
       <Shell onClose={() => go('/')}>
+        {!celebrated && score.total > 0 && (
+          <Celebration ok={score.ok} total={score.total} onClose={() => setCelebrated(true)} />
+        )}
         <div class="end">
           <p class="end-title">Séance terminée</p>
           <p class="end-score">
@@ -159,12 +165,12 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
             </p>
           )}
           {more.length > 0 && (
-            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(more); setIndex(0); }}>
+            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(more); setIndex(0); setScore({ ok: 0, total: 0 }); setCelebrated(false); }}>
               Encore {plural(more.length, 'élément', 'éléments')}
             </button>
           )}
           {mode !== 'revision' && (
-            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(makeQueue(SESSION_SIZE)); setIndex(0); }}>
+            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(makeQueue(SESSION_SIZE)); setIndex(0); setScore({ ok: 0, total: 0 }); setCelebrated(false); }}>
               Recommencer
             </button>
           )}
