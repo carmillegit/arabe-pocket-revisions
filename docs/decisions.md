@@ -2,6 +2,14 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Lot 2 : retours de test
+
+- Accueil : « À réviser aujourd'hui » affiche la taille de la séance du jour (20 au maximum), plus jamais tout le stock en attente.
+- Deux compteurs séparés : Vocabulaire et Lettres (28), en « su / à apprendre ». « Su » = réussi au moins une fois à échéance sur toutes ses compétences actives (boîte 2 ou plus).
+- Écriture niveau 2, « de mémoire » : on donne le nom, le son et la position, on trace sans modèle, puis on révèle et on s'auto-note. Automatique en révision à partir de la boîte 3.
+- Les pièges de translittération sont difficiles, mais on les garde.
+- Grille de l'alphabet : ne déborde plus sur petit écran.
+
 ## Lot 2 : lettres, lecture, tracé
 
 - **Photo → mots** : pas de solution payante pour l'instant. À reconsidérer en V1 (elle a besoin du serveur).

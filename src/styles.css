@@ -938,3 +938,30 @@ input[type='color'] {
 .tool:disabled { opacity: 0.45; }
 
 .trace .actions { position: static; margin-top: 4px; }
+
+.memory-prompt { text-align: center; }
+.memory-name { font-size: 26px; font-weight: 700; }
+.memory-pos {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--sun);
+  color: #1d1a26;
+  font-weight: 650;
+}
+.tool-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.tool-primary[aria-pressed='true'] { background: var(--accent-soft); color: var(--accent); }
+
+.hero-kicker { font-weight: 650; color: var(--ink); text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px; }
+.tiles-2 { grid-template-columns: repeat(2, 1fr); }
+.known-tile { text-align: left; display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
+.known-title { font-weight: 650; }
+.known-total { font-size: 14px; font-weight: 500; color: var(--muted); }
+.known-bar { display: block; height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.known-bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.known-tile .tile-label { font-size: 13px; }
+
+/* Alphabet : 7 colonnes qui tiennent toujours dans la largeur, lecture de droite à gauche */
+.alphabet { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.abc { font-size: clamp(18px, 5.5vw, 24px); padding: 0; min-width: 0; }

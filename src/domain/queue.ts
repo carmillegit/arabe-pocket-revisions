@@ -81,8 +81,11 @@ export function wordProgress(map: Map<string, Progress>, userId: string, w: Word
 const VOCAB_ROTATION: PracticeExercise[] = ['cartes', 'qcm_ar_fr', 'qcm_fr_ar'];
 
 /** Exercice pour un élément et une compétence. `n` fait alterner les variantes. */
-export function exerciseFor(itemId: string, skill: Skill, n: number, noVowelsUnlocked: boolean): PracticeExercise {
-  if (skill === 'ecriture') return 'trace';
+/** À partir de la boîte 3, une lettre s'écrit de mémoire (sans modèle ni flèches). */
+export const MEMORY_TRACE_BOX = 3;
+
+export function exerciseFor(itemId: string, skill: Skill, n: number, noVowelsUnlocked: boolean, box = 1): PracticeExercise {
+  if (skill === 'ecriture') return isLetterItem(itemId) && box >= MEMORY_TRACE_BOX ? 'trace_memoire' : 'trace';
   if (isLetterItem(itemId)) return n % 2 === 0 ? 'lettre' : 'paires';
   if (skill === 'lecture') return noVowelsUnlocked && n % 2 === 1 ? 'lecture_nv' : 'lecture_v';
   return VOCAB_ROTATION[n % VOCAB_ROTATION.length];
@@ -127,7 +130,7 @@ export function buildReviewQueue(
   return shuffle(items, rng).map((x, i) => ({
     itemId: x.itemId,
     skill: x.skill,
-    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked),
+    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked, x.p.box),
   }));
 }
 
@@ -140,6 +143,7 @@ const PRACTICE_SKILL: Record<PracticeExercise, Skill> = {
   lettre: 'lecture',
   paires: 'lecture',
   trace: 'ecriture',
+  trace_memoire: 'ecriture',
 };
 
 /**
@@ -154,7 +158,8 @@ export function buildPracticeQueue(
   const rng = ctx.rng ?? Math.random;
   const skill = PRACTICE_SKILL[exercise];
   const f = opts.filters ?? {};
-  const onLetters = exercise === 'lettre' || exercise === 'paires' || (exercise === 'trace' && opts.target !== 'mots');
+  const onLetters =
+    exercise === 'lettre' || exercise === 'paires' || exercise === 'trace_memoire' || (exercise === 'trace' && opts.target !== 'mots');
   let ids: string[];
   if (onLetters) ids = filterLetters({ ...f, category: undefined }).map(letterItemId);
   else {

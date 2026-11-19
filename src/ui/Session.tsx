@@ -24,9 +24,11 @@ import { Icon, plural } from './common';
 import { Card, Qcm } from './exercises/Vocabulary';
 import { LetterNameSound, Pairs, TranslitQcm } from './exercises/Reading';
 import { Trace } from './exercises/Trace';
+import type { Position } from '../domain/letters';
 
 type Mode = 'revision' | PracticeExercise;
-const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar', 'lecture_v', 'lecture_nv', 'lettre', 'paires', 'trace'];
+const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar', 'lecture_v', 'lecture_nv', 'lettre', 'paires', 'trace', 'trace_memoire'];
+const POSITIONS: Position[] = ['isolee', 'initiale', 'mediane', 'finale'];
 
 export function SessionScreen({ params }: { params: URLSearchParams }) {
   const app = useApp();
@@ -194,10 +196,21 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
       body = <Trace key={key} word={word} letter={letter} showArrows={box <= 2} onAnswer={(ok) => record(item, ok).then(next)} />;
       break;
     }
+    case 'trace_memoire':
+      body = (
+        <Trace
+          key={key}
+          letter={letter}
+          showArrows={false}
+          memory={POSITIONS[(index + item.itemId.charCodeAt(2)) % 4]}
+          onAnswer={(ok) => record(item, ok).then(next)}
+        />
+      );
+      break;
   }
 
   return (
-    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace'}>
+    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace' || item.exercise === 'trace_memoire'}>
       {body}
     </Shell>
   );

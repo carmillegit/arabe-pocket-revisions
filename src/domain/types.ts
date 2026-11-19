@@ -75,7 +75,8 @@ export type ExerciseId =
   | 'lecture_nv'
   | 'lettre'
   | 'paires'
-  | 'trace';
+  | 'trace'
+  | 'trace_memoire';
 
 export interface Answer {
   id: string;

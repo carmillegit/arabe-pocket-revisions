@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
-import { dueItems } from '../domain/queue';
-import { answerDays, masteryCounts, missedSince, streak, topMissedLetters } from '../domain/stats';
+import { SESSION_SIZE, dueItems } from '../domain/queue';
+import { answerDays, letterKnownCounts, missedSince, streak, topMissedLetters, wordKnownCounts } from '../domain/stats';
 import { go } from '../router';
 import { useApp } from '../store';
 import { Ar, Icon, plural } from './common';
@@ -18,7 +18,9 @@ export function Home() {
   const [missed, setMissed] = useState(false);
 
   const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress, today]);
-  const counts = useMemo(() => masteryCounts(words, progress, repo.userId, today), [words, progress, today]);
+  const today20 = Math.min(due, SESSION_SIZE);
+  const vocab = useMemo(() => wordKnownCounts(words, progress, repo.userId, today), [words, progress, today]);
+  const abc = useMemo(() => letterKnownCounts(progress, repo.userId, today, app.lettersSince), [progress, today]);
   const days = streak(answerDays(answers), today);
   const missedIds = useMemo(() => missedSince(answers, Date.now() - WEEK), [answers]);
   const hardLetters = useMemo(() => topMissedLetters(answers, 28).map((x) => x.letter), [answers]);
@@ -50,8 +52,9 @@ export function Home() {
       )}
 
       <section class="card hero">
-        <p class="hero-num">{due}</p>
-        <p class="hero-label">{due > 1 ? 'éléments à réviser aujourd’hui' : 'élément à réviser aujourd’hui'}</p>
+        <p class="hero-label hero-kicker">À réviser aujourd’hui</p>
+        <p class="hero-num">{today20}</p>
+        <p class="hero-label">{today20 > 1 ? 'questions dans ta séance du jour' : 'question dans ta séance du jour'}</p>
         {due > 0 ? (
           <button
             type="button"
@@ -116,19 +119,38 @@ export function Home() {
         </div>
       </section>
 
-      <section class="card">
-        <h2 class="card-title">Mes {plural(words.length, 'mot', 'mots')}</h2>
-        <div class="stack" role="img" aria-label={`${counts.nouveau} nouveaux, ${counts.en_cours} en cours, ${counts.acquis} acquis`}>
-          {(['nouveau', 'en_cours', 'acquis'] as const).map(
-            (k) => counts[k] > 0 && <span key={k} class={`seg m-${k}`} style={{ flexGrow: counts[k] / total }} />,
-          )}
-        </div>
-        <ul class="legend">
-          <li><span class="mdot m-nouveau" /> {counts.nouveau} nouveaux</li>
-          <li><span class="mdot m-en_cours" /> {counts.en_cours} en cours</li>
-          <li><span class="mdot m-acquis" /> {counts.acquis} acquis</li>
-        </ul>
-      </section>
+      <div class="tiles tiles-2">
+        <KnownTile title="Vocabulaire" unit={['mot', 'mots']} c={vocab} onClick={() => go('/mots')} />
+        <KnownTile title="Lettres" unit={['lettre', 'lettres']} c={abc} onClick={() => go('/progression')} />
+      </div>
     </main>
+  );
+}
+
+function KnownTile({
+  title,
+  unit,
+  c,
+  onClick,
+}: {
+  title: string;
+  unit: [string, string];
+  c: { known: number; toLearn: number; total: number };
+  onClick: () => void;
+}) {
+  return (
+    <button type="button" class="tile known-tile" onClick={onClick}>
+      <p class="known-title">{title}</p>
+      <p class="tile-num">
+        {c.known}
+        <span class="known-total"> / {plural(c.total, unit[0], unit[1])}</span>
+      </p>
+      <span class="known-bar" role="img" aria-label={`${c.known} sus sur ${c.total}`}>
+        <span style={{ width: `${c.total ? (c.known / c.total) * 100 : 0}%` }} />
+      </span>
+      <p class="tile-label">
+        <strong>{c.known}</strong> su{c.known > 1 ? 's' : ''} · <strong>{c.toLearn}</strong> à apprendre
+      </p>
+    </button>
   );
 }

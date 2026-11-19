@@ -50,6 +50,7 @@ export function Exercises() {
       skill: 'Écriture',
       items: [
         { mode: 'trace', params: { cible: 'lettres' }, title: 'Tracer les lettres', desc: 'Sur le modèle, avec le sens du tracé, puis de mémoire.', letters: true },
+        { mode: 'trace_memoire', title: 'Écrire les lettres de mémoire', desc: 'Niveau 2 : le nom, le son et la position, sans modèle. Puis on révèle et tu te notes.', letters: true },
         {
           mode: 'trace',
           params: { cible: 'mots' },

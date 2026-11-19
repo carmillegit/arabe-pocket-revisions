@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
-import { dueItems } from '../domain/queue';
+import { SESSION_SIZE, dueItems } from '../domain/queue';
 import { answerDays, byCategory, history, letterMastery, masteryCounts, streak, topMissedLetters, topMissedWords } from '../domain/stats';
 import type { Session } from '../domain/types';
 import { addDays, parseDay } from '../domain/dates';
@@ -41,7 +41,7 @@ export function ProgressScreen() {
       <TopBar title="Progression" />
 
       <div class="tiles">
-        <div class="tile"><p class="tile-num">{due}</p><p class="tile-label">à réviser aujourd’hui</p></div>
+        <div class="tile"><p class="tile-num">{Math.min(due, SESSION_SIZE)}</p><p class="tile-label">à réviser aujourd’hui</p></div>
         <div class="tile"><p class="tile-num">{days}</p><p class="tile-label">{days > 1 ? 'jours d’affilée' : 'jour d’affilée'}</p></div>
         <div class="tile"><p class="tile-num">{counts.acquis}</p><p class="tile-label">{counts.acquis > 1 ? 'mots acquis' : 'mot acquis'}</p></div>
       </div>

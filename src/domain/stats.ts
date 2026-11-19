@@ -87,3 +87,23 @@ export function letterMastery(progress: Map<string, Progress>, userId: string, t
     m: mastery(LETTER_SKILLS.map((s) => progressFor(progress, userId, letterItemId(l), s, today, since).box)),
   }));
 }
+
+/**
+ * « Su » : réussi au moins une fois à échéance sur toutes ses compétences actives (boîte 2 ou plus).
+ * « À apprendre » : tout le reste. Le détail nouveau / en cours / acquis reste dans Progression.
+ */
+export function knownCounts(boxesPerItem: number[][]) {
+  let known = 0;
+  for (const boxes of boxesPerItem) if (boxes.length && boxes.every((b) => b >= 2)) known++;
+  return { known, toLearn: boxesPerItem.length - known, total: boxesPerItem.length };
+}
+
+export function wordKnownCounts(words: Word[], progress: Map<string, Progress>, userId: string, today: string) {
+  return knownCounts(words.map((w) => activeSkills(w).map((s) => wordProgress(progress, userId, w, s, today).box)));
+}
+
+export function letterKnownCounts(progress: Map<string, Progress>, userId: string, today: string, since: number) {
+  return knownCounts(
+    ALPHABET.map((l) => LETTER_SKILLS.map((s) => progressFor(progress, userId, letterItemId(l), s, today, since).box)),
+  );
+}
