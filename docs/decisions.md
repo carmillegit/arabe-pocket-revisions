@@ -9,6 +9,7 @@ Complète le cahier des charges V0. Les décisions sont classées de la plus ré
 - Écriture niveau 2, « de mémoire » : on donne le nom, le son et la position, on trace sans modèle, puis on révèle et on s'auto-note. Automatique en révision à partir de la boîte 3.
 - Les pièges de translittération sont difficiles, mais on les garde.
 - Grille de l'alphabet : ne déborde plus sur petit écran.
+- Icône : option B, ض violet sur fond jaune (« la langue du ḍād »).
 
 ## Lot 2 : lettres, lecture, tracé
 
