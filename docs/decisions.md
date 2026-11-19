@@ -2,6 +2,12 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Audio (lot 3)
+
+- **Piper** (logiciel libre, voix `ar_JO-kareem`), sans compte ni GAFAM. Génération unique, fichiers livrés avec l'app (5 à 8 Ko par mot).
+- Diagnostic : voyelles respectées ; ع ح ق corrects ; ص ط ض distinguées de س ت د. ظ est proche de ذ. Le ة final était lu « t » : corrigé (forme de pause).
+- L'app est présentée comme une **version bêta** à la professeure et aux élèves.
+
 ## Lot 2 : retours de test (2)
 
 - Accueil : le compteur du jour **descend** à chaque réponse (objectif : 20). Une fois atteint : « ✓ Séance du jour terminée » + « N questions vues aujourd'hui » + bouton « Encore 10 ».
