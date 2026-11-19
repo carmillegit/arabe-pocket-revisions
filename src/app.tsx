@@ -1,0 +1,61 @@
+import { useRoute, go } from './router';
+import { Icon } from './ui/common';
+import { Home } from './ui/Home';
+import { Exercises } from './ui/Exercises';
+import { Words } from './ui/Words';
+import { WordForm } from './ui/WordForm';
+import { ProgressScreen } from './ui/ProgressScreen';
+import { Settings } from './ui/Settings';
+import { SessionScreen } from './ui/Session';
+
+const TABS = [
+  { path: '/', label: 'Accueil', icon: 'home' },
+  { path: '/exercices', label: 'Exercices', icon: 'play' },
+  { path: '/mots', label: 'Mots', icon: 'book' },
+  { path: '/progression', label: 'Progression', icon: 'chart' },
+  { path: '/reglages', label: 'Réglages', icon: 'gear' },
+];
+
+export function App() {
+  const { path, params } = useRoute();
+  let screen;
+  let nav = true;
+  if (path === '/seance') {
+    screen = <SessionScreen key={location.hash} params={params} />;
+    nav = false;
+  } else if (path === '/mots/nouveau') {
+    screen = <WordForm key={location.hash} id={null} />;
+    nav = false;
+  } else if (path.startsWith('/mots/')) {
+    const id = decodeURIComponent(path.slice('/mots/'.length));
+    screen = <WordForm key={id} id={id} />;
+    nav = false;
+  } else if (path === '/exercices') screen = <Exercises />;
+  else if (path === '/mots') screen = <Words />;
+  else if (path === '/progression') screen = <ProgressScreen />;
+  else if (path === '/reglages') screen = <Settings />;
+  else screen = <Home />;
+
+  const active = TABS.find((t) => t.path !== '/' && path.startsWith(t.path))?.path ?? '/';
+  return (
+    <div class={`app ${nav ? 'has-nav' : ''}`}>
+      {screen}
+      {nav && (
+        <nav class="tabbar" aria-label="Navigation principale">
+          {TABS.map((t) => (
+            <button
+              key={t.path}
+              type="button"
+              class={`tab ${active === t.path ? 'is-active' : ''}`}
+              aria-current={active === t.path ? 'page' : undefined}
+              onClick={() => go(t.path)}
+            >
+              <Icon name={t.icon} />
+              <span>{t.label}</span>
+            </button>
+          ))}
+        </nav>
+      )}
+    </div>
+  );
+}

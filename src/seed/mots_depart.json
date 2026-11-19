@@ -1,0 +1,1447 @@
+{
+ "schemaVersion": 1,
+ "categories": [
+  {
+   "name": "Animaux"
+  },
+  {
+   "name": "Couleurs"
+  },
+  {
+   "name": "Mots de base"
+  },
+  {
+   "name": "Personnes"
+  },
+  {
+   "name": "Nature"
+  },
+  {
+   "name": "Aliments"
+  }
+ ],
+ "words": [
+  {
+   "id": "w001",
+   "userId": "local",
+   "french": "chat",
+   "arabicVoweled": "قِطَّة",
+   "transliteration": "qiṭṭa",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق grave, ط emphatique, doublée",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐱"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w002",
+   "userId": "local",
+   "french": "chien",
+   "arabicVoweled": "كَلْب",
+   "transliteration": "kalb",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "k net comme en français",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐶"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w003",
+   "userId": "local",
+   "french": "poisson",
+   "arabicVoweled": "سَمَكَة",
+   "transliteration": "samaka",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "trois a brefs, s léger",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐟"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w004",
+   "userId": "local",
+   "french": "oiseau",
+   "arabicVoweled": "عُصْفُور",
+   "transliteration": "ʿuṣfūr",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ع de gorge, ص emphatique, ou long",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐦"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w005",
+   "userId": "local",
+   "french": "cochon",
+   "arabicVoweled": "خِنْزِير",
+   "transliteration": "khinzīr",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "kh comme la jota espagnole, i long",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐷"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w006",
+   "userId": "local",
+   "french": "insecte",
+   "arabicVoweled": "حَشَرَة",
+   "transliteration": "ḥashara",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ح soufflé, sh comme ch",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐞"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w007",
+   "userId": "local",
+   "french": "taureau",
+   "arabicVoweled": "ثَوْر",
+   "transliteration": "thawr",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "th anglais de think, puis aw",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐂"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w008",
+   "userId": "local",
+   "french": "poule, poulet",
+   "arabicVoweled": "دَجَاجَة",
+   "transliteration": "dajāja",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "dj, deux ā longs",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐔"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w009",
+   "userId": "local",
+   "french": "lapin",
+   "arabicVoweled": "أَرْنَب",
+   "transliteration": "arnab",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "r roulé, b final net",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐰"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w010",
+   "userId": "local",
+   "french": "lion",
+   "arabicVoweled": "أَسَد",
+   "transliteration": "asad",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "s léger, d net",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦁"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w011",
+   "userId": "local",
+   "french": "âne",
+   "arabicVoweled": "حِمَار",
+   "transliteration": "ḥimār",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ح soufflé, ā long, r roulé",
+   "visual": {
+    "kind": "emoji",
+    "value": "🫏"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w012",
+   "userId": "local",
+   "french": "souris",
+   "arabicVoweled": "فَأْر",
+   "transliteration": "faʾr",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "f, puis coup de glotte (ء), puis r",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐭"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w013",
+   "userId": "local",
+   "french": "ours",
+   "arabicVoweled": "دُبّ",
+   "transliteration": "dubb",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "b doublé : insiste sur le b final",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐻"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w014",
+   "userId": "local",
+   "french": "crocodile",
+   "arabicVoweled": "تِمْسَاح",
+   "transliteration": "timsāḥ",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ā long, ح soufflé en fin de mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐊"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w015",
+   "userId": "local",
+   "french": "fourmi",
+   "arabicVoweled": "نَمْلَة",
+   "transliteration": "namla",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "n-am-la, trois sons brefs",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐜"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w016",
+   "userId": "local",
+   "french": "mouton",
+   "arabicVoweled": "خَرُوف",
+   "transliteration": "kharūf",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "kh jota, ū long",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐑"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w017",
+   "userId": "local",
+   "french": "gazelle",
+   "arabicVoweled": "غَزَال",
+   "transliteration": "ghazāl",
+   "category": "Animaux",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "gh : r grasseyé, ā long",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦌"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w018",
+   "userId": "local",
+   "french": "rouge",
+   "arabicVoweled": "أَحْمَر",
+   "transliteration": "aḥmar",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ح soufflé du fond de la gorge",
+   "visual": {
+    "kind": "color",
+    "value": "#E24B4A"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w019",
+   "userId": "local",
+   "french": "bleu",
+   "arabicVoweled": "أَزْرَق",
+   "transliteration": "azraq",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "z puis ق profond",
+   "visual": {
+    "kind": "color",
+    "value": "#378ADD"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w020",
+   "userId": "local",
+   "french": "vert",
+   "arabicVoweled": "أَخْضَر",
+   "transliteration": "akhḍar",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "kh jota, ض emphatique",
+   "visual": {
+    "kind": "color",
+    "value": "#639922"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w021",
+   "userId": "local",
+   "french": "jaune",
+   "arabicVoweled": "أَصْفَر",
+   "transliteration": "aṣfar",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ص emphatique",
+   "visual": {
+    "kind": "color",
+    "value": "#F2C037"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w022",
+   "userId": "local",
+   "french": "blanc",
+   "arabicVoweled": "أَبْيَض",
+   "transliteration": "abyaḍ",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ض emphatique en fin de mot",
+   "visual": {
+    "kind": "color",
+    "value": "#FFFFFF"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w023",
+   "userId": "local",
+   "french": "noir",
+   "arabicVoweled": "أَسْوَد",
+   "transliteration": "aswad",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "a-s-wad, w comme dans ouate",
+   "visual": {
+    "kind": "color",
+    "value": "#2C2C2A"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w024",
+   "userId": "local",
+   "french": "orange",
+   "arabicVoweled": "بُرْتُقَالِيّ",
+   "transliteration": "burtuqālī",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق profond, ā et ī longs",
+   "visual": {
+    "kind": "color",
+    "value": "#E8782A"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w025",
+   "userId": "local",
+   "french": "violet",
+   "arabicVoweled": "بَنَفْسَجِيّ",
+   "transliteration": "banafsajī",
+   "category": "Couleurs",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "dj pour ج, ī long",
+   "visual": {
+    "kind": "color",
+    "value": "#7F77DD"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w026",
+   "userId": "local",
+   "french": "maison",
+   "arabicVoweled": "بَيْت",
+   "transliteration": "bayt",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ay comme dans aïe",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏠"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w027",
+   "userId": "local",
+   "french": "livre",
+   "arabicVoweled": "كِتَاب",
+   "transliteration": "kitāb",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ā long au milieu",
+   "visual": {
+    "kind": "emoji",
+    "value": "📖"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w028",
+   "userId": "local",
+   "french": "eau",
+   "arabicVoweled": "مَاء",
+   "transliteration": "māʾ",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ā long puis coup de glotte",
+   "visual": {
+    "kind": "emoji",
+    "value": "💧"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w029",
+   "userId": "local",
+   "french": "soleil",
+   "arabicVoweled": "شَمْس",
+   "transliteration": "shams",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "sh comme ch",
+   "visual": {
+    "kind": "emoji",
+    "value": "☀️"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w030",
+   "userId": "local",
+   "french": "lune",
+   "arabicVoweled": "قَمَر",
+   "transliteration": "qamar",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق profond",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌙"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w031",
+   "userId": "local",
+   "french": "voiture",
+   "arabicVoweled": "سَيَّارَة",
+   "transliteration": "sayyāra",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "y doublé : say-yā-ra",
+   "visual": {
+    "kind": "emoji",
+    "value": "🚗"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w032",
+   "userId": "local",
+   "french": "stylo",
+   "arabicVoweled": "قَلَم",
+   "transliteration": "qalam",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق profond",
+   "visual": {
+    "kind": "emoji",
+    "value": "🖊️"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w033",
+   "userId": "local",
+   "french": "porte",
+   "arabicVoweled": "بَاب",
+   "transliteration": "bāb",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ā long",
+   "visual": {
+    "kind": "emoji",
+    "value": "🚪"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w034",
+   "userId": "local",
+   "french": "arbre",
+   "arabicVoweled": "شَجَرَة",
+   "transliteration": "shajara",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "sh puis dj",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌳"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w035",
+   "userId": "local",
+   "french": "café",
+   "arabicVoweled": "قَهْوَة",
+   "transliteration": "qahwa",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق profond, ه léger soufflé",
+   "visual": {
+    "kind": "emoji",
+    "value": "☕"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w036",
+   "userId": "local",
+   "french": "clef",
+   "arabicVoweled": "مِفْتَاح",
+   "transliteration": "miftāḥ",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ā long, ح soufflé en fin de mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🔑"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w037",
+   "userId": "local",
+   "french": "main",
+   "arabicVoweled": "يَد",
+   "transliteration": "yad",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "y comme dans yeux, d net",
+   "visual": {
+    "kind": "emoji",
+    "value": "✋"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w038",
+   "userId": "local",
+   "french": "oreille",
+   "arabicVoweled": "أُذُن",
+   "transliteration": "udhun",
+   "category": "Mots de base",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "dh comme le th anglais de this",
+   "visual": {
+    "kind": "emoji",
+    "value": "👂"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w039",
+   "userId": "local",
+   "french": "homme",
+   "arabicVoweled": "رَجُل",
+   "transliteration": "rajul",
+   "category": "Personnes",
+   "type": "mot",
+   "linkedWordId": "w040",
+   "pronunciationHint": "dj, ou bref",
+   "visual": {
+    "kind": "emoji",
+    "value": "👨"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w040",
+   "userId": "local",
+   "french": "hommes",
+   "arabicVoweled": "رِجَال",
+   "transliteration": "rijāl",
+   "category": "Personnes",
+   "type": "pluriel",
+   "linkedWordId": "w039",
+   "pronunciationHint": "pluriel irrégulier : i bref, ā long",
+   "visual": {
+    "kind": "emoji",
+    "value": "👬"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w041",
+   "userId": "local",
+   "french": "femme",
+   "arabicVoweled": "امْرَأَة",
+   "transliteration": "imraʾa",
+   "category": "Personnes",
+   "type": "mot",
+   "linkedWordId": "w042",
+   "pronunciationHint": "i, mra, puis coup de glotte avant le a final",
+   "visual": {
+    "kind": "emoji",
+    "value": "👩"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w042",
+   "userId": "local",
+   "french": "femmes",
+   "arabicVoweled": "نِسَاء",
+   "transliteration": "nisāʾ",
+   "category": "Personnes",
+   "type": "pluriel",
+   "linkedWordId": "w041",
+   "pronunciationHint": "pluriel de femme, ā long + glotte finale",
+   "visual": {
+    "kind": "emoji",
+    "value": "👭"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w043",
+   "userId": "local",
+   "french": "élève",
+   "arabicVoweled": "تِلْمِيذ",
+   "transliteration": "tilmīdh",
+   "category": "Personnes",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ī long, dh comme th de this",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍🎓"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w044",
+   "userId": "local",
+   "french": "enseignant",
+   "arabicVoweled": "مُدَرِّس",
+   "transliteration": "mudarris",
+   "category": "Personnes",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "r doublé : mu-dar-ris",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍🏫"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w045",
+   "userId": "local",
+   "french": "montagne",
+   "arabicVoweled": "جَبَل",
+   "transliteration": "jabal",
+   "category": "Nature",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "dj, trois a brefs",
+   "visual": {
+    "kind": "emoji",
+    "value": "⛰️"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w046",
+   "userId": "local",
+   "french": "neige",
+   "arabicVoweled": "ثَلْج",
+   "transliteration": "thalj",
+   "category": "Nature",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "th de think, dj final",
+   "visual": {
+    "kind": "emoji",
+    "value": "❄️"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w047",
+   "userId": "local",
+   "french": "palmier",
+   "arabicVoweled": "نَخْلَة",
+   "transliteration": "nakhla",
+   "category": "Nature",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "kh jota",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌴"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w048",
+   "userId": "local",
+   "french": "jardin",
+   "arabicVoweled": "حَدِيقَة",
+   "transliteration": "ḥadīqa",
+   "category": "Nature",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ح soufflé, ī long, ق profond",
+   "visual": {
+    "kind": "emoji",
+    "value": "🏡"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w049",
+   "userId": "local",
+   "french": "rose",
+   "arabicVoweled": "وَرْدَة",
+   "transliteration": "warda",
+   "category": "Nature",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "w comme dans ouate",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌹"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w050",
+   "userId": "local",
+   "french": "bananes",
+   "arabicVoweled": "مَوْز",
+   "transliteration": "mawz",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "aw : a puis w",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍌"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w051",
+   "userId": "local",
+   "french": "carottes",
+   "arabicVoweled": "جَزَر",
+   "transliteration": "jazar",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "dj, a brefs",
+   "visual": {
+    "kind": "emoji",
+    "value": "🥕"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w052",
+   "userId": "local",
+   "french": "amandes",
+   "arabicVoweled": "لَوْز",
+   "transliteration": "lawz",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "aw : a puis w",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌰"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w053",
+   "userId": "local",
+   "french": "mûres",
+   "arabicVoweled": "تُوت",
+   "transliteration": "tūt",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ū long, t final net",
+   "visual": {
+    "kind": "emoji",
+    "value": "🫐"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w054",
+   "userId": "local",
+   "french": "pommes",
+   "arabicVoweled": "تُفَّاح",
+   "transliteration": "tuffāḥ",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "f doublé, ā long, ح soufflé",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍎"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w055",
+   "userId": "local",
+   "french": "pastèques",
+   "arabicVoweled": "بَطِّيخ",
+   "transliteration": "baṭṭīkh",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ط emphatique doublé, ī long, kh jota",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍉"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w056",
+   "userId": "local",
+   "french": "prunes",
+   "arabicVoweled": "بَرْقُوق",
+   "transliteration": "barqūq",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "ق profond deux fois, ū long",
+   "visual": null,
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  },
+  {
+   "id": "w057",
+   "userId": "local",
+   "french": "pain",
+   "arabicVoweled": "خُبْز",
+   "transliteration": "khubz",
+   "category": "Aliments",
+   "type": "mot",
+   "linkedWordId": null,
+   "pronunciationHint": "kh jota, z final",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍞"
+   },
+   "level": "debutant",
+   "source": "cours",
+   "root": null,
+   "status": "a_verifier",
+   "audio": {
+    "file": null,
+    "status": "synthese_a_valider"
+   },
+   "createdAt": 0,
+   "updatedAt": 0
+  }
+ ]
+}
