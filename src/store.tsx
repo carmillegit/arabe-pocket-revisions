@@ -2,6 +2,9 @@
 import { createContext } from 'preact';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import type { Answer, Category, Progress, Word } from './domain/types';
+import type { QueueContext } from './domain/queue';
+import { dayKey } from './domain/dates';
+import { unlockProgress } from './domain/reading';
 import { LOCAL_USER_ID } from './domain/types';
 import { DexieRepository } from './data/dexieRepository';
 import type { Repository } from './data/repository';
@@ -22,6 +25,11 @@ export interface AppData {
   vowelMode: VowelMode;
   lastExportAt: number | null;
   firstLaunchAt: number;
+  /** Arrivée des 28 lettres dans l'appli (lot 2). */
+  lettersSince: number;
+  noVowelsUnlocked: boolean;
+  /** Contexte commun pour construire une séance. */
+  queueContext: () => QueueContext;
   reload: () => Promise<void>;
   setVowelMode: (m: VowelMode) => Promise<void>;
   setUserName: (n: string) => Promise<void>;
@@ -66,6 +74,17 @@ export function AppProvider({ children }: { children: preact.ComponentChildren }
       repo.getMeta<number>('lastExportAt'),
     ]);
     const userName = (await repo.getMeta<string>('userName')) ?? '';
+    let lettersSince = await repo.getMeta<number>('lettersSince');
+    if (!lettersSince) {
+      lettersSince = Date.now();
+      await repo.setMeta('lettersSince', lettersSince);
+    }
+    let noVowelsUnlocked = (await repo.getMeta<boolean>('noVowelsUnlocked')) ?? false;
+    if (!noVowelsUnlocked && unlockProgress(await repo.getAnswers(0)).unlocked) {
+      noVowelsUnlocked = true;
+      await repo.setMeta('noVowelsUnlocked', true);
+    }
+    const progress = new Map(progressList.map((p) => [p.id, p]));
     words.sort((a, b) => a.french.localeCompare(b.french, 'fr'));
     categories.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
     setData({
@@ -73,12 +92,15 @@ export function AppProvider({ children }: { children: preact.ComponentChildren }
       userName,
       words,
       categories,
-      progress: new Map(progressList.map((p) => [p.id, p])),
+      progress,
       progressList,
       answers,
       vowelMode: vowelMode ?? 'always',
       lastExportAt: lastExportAt ?? null,
       firstLaunchAt,
+      lettersSince,
+      noVowelsUnlocked,
+      queueContext: () => ({ words, progress, userId: repo.userId, today: dayKey(), lettersSince: lettersSince!, noVowelsUnlocked }),
       reload: load,
       setVowelMode: async (m) => {
         await repo.setMeta('vowelMode', m);

@@ -70,7 +70,12 @@ export type ExerciseId =
   | 'revision'
   | 'cartes'
   | 'qcm_ar_fr'
-  | 'qcm_fr_ar';
+  | 'qcm_fr_ar'
+  | 'lecture_v'
+  | 'lecture_nv'
+  | 'lettre'
+  | 'paires'
+  | 'trace';
 
 export interface Answer {
   id: string;

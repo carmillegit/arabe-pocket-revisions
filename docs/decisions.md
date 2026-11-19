@@ -2,6 +2,16 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Lot 2 : lettres, lecture, tracé
+
+- **Photo → mots** : pas de solution payante pour l'instant. À reconsidérer en V1 (elle a besoin du serveur).
+- **Thème** violet et jaune. Les contrastes sont vérifiés par le calcul (WCAG AA). Le jaune s'utilise toujours avec du texte foncé.
+- **Lettre → nom et son** : la lettre est montrée isolée tant qu'elle est nouvelle, puis sous ses 4 formes, pour être validée sous toutes ses formes.
+- **Lecture** : les pièges de translittération testent le vrai déchiffrage (ā/a, ḥ/h, ṣ/s, chadda…). Sans voyelles, pas de piège sur les voyelles.
+- **Tracé** en deux étapes : la forme (squelette sans points ni hamza), puis les points et les voyelles (facultatif). Les flèches de sens s'affichent pour les lettres en boîte 1 et 2.
+- Les données de tracé des 28 lettres (`src/domain/strokes.ts`) sont **à valider par la professeure**.
+- Le calcul de la position des lettres (base de la dictée tracée du lot 3) est déjà en place et testé sur 24 mots.
+
 ## V1 : comptes et partage (décidé le 19/11/2026)
 
 - **Sans compte** : l'app reste utilisable. On a accès à la liste commune validée, et la progression reste sur le téléphone.

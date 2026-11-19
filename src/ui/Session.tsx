@@ -1,4 +1,4 @@
-// Une séance : révision du jour (mots à échéance) ou entraînement libre sur un exercice.
+// Une séance : révision du jour (éléments à échéance) ou entraînement libre sur un exercice.
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
 import {
@@ -7,25 +7,32 @@ import {
   buildPracticeQueue,
   buildReviewQueue,
   progressFor,
+  isLetterItem,
+  letterOfItem,
+  type PracticeExercise,
   type QueueFilters,
   type QueueItem,
 } from '../domain/queue';
-import { buildChoices, type Choice, type Direction } from '../domain/quiz';
 import { applyAnswer } from '../domain/srs';
 import { missedSince } from '../domain/stats';
-import type { ExerciseId, Progress, Session as SessionT, Word } from '../domain/types';
+import { unlockProgress } from '../domain/reading';
+import type { Answer, ExerciseId, Session as SessionT, Word } from '../domain/types';
 import { newId } from '../domain/words';
 import { go } from '../router';
 import { useApp } from '../store';
-import { Ar, Icon, VisualBadge, ToVerify, plural } from './common';
+import { Icon, plural } from './common';
+import { Card, Qcm } from './exercises/Vocabulary';
+import { LetterNameSound, Pairs, TranslitQcm } from './exercises/Reading';
+import { Trace } from './exercises/Trace';
 
-type Mode = 'revision' | QueueItem['exercise'];
-const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar'];
+type Mode = 'revision' | PracticeExercise;
+const MODES: Mode[] = ['revision', 'cartes', 'qcm_ar_fr', 'qcm_fr_ar', 'lecture_v', 'lecture_nv', 'lettre', 'paires', 'trace'];
 
 export function SessionScreen({ params }: { params: URLSearchParams }) {
   const app = useApp();
   const { words, repo } = app;
   const mode = (MODES.includes(params.get('mode') as Mode) ? params.get('mode') : 'revision') as Mode;
+  const target = params.get('cible') === 'mots' ? 'mots' : 'lettres';
   const filters: QueueFilters = useMemo(
     () => ({
       category: params.get('cat') || undefined,
@@ -40,15 +47,14 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   const progressRef = useRef(new Map(app.progress));
   const sessionRef = useRef<SessionT | null>(null);
   const answeredRef = useRef(new Set<string>());
+  const lectureAnswers = useRef<Answer[]>(app.answers.filter((a) => a.exercise === 'lecture_v'));
+  const [unlockedNow, setUnlockedNow] = useState(false);
 
+  const ctx = () => ({ ...app.queueContext(), progress: progressRef.current });
   const makeQueue = (limit: number): QueueItem[] =>
     mode === 'revision'
-      ? buildReviewQueue(words, progressRef.current, repo.userId, dayKey(), {
-          filters,
-          limit,
-          exclude: answeredRef.current,
-        })
-      : buildPracticeQueue(words, progressRef.current, repo.userId, mode, { filters, limit });
+      ? buildReviewQueue(ctx(), { filters, limit, exclude: answeredRef.current })
+      : buildPracticeQueue(ctx(), mode, { filters, limit, target });
 
   const [queue, setQueue] = useState<QueueItem[]>(() => makeQueue(SESSION_SIZE));
   const [index, setIndex] = useState(0);
@@ -57,60 +63,61 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   // À la sortie, on recharge l'état global (accueil, progression à jour).
   useEffect(() => () => void app.reload(), []);
 
-  async function record(item: QueueItem, word: Word, correct: boolean) {
+  async function record(item: QueueItem, correct: boolean) {
     const now = Date.now();
     const exercise: ExerciseId = mode === 'revision' ? 'revision' : mode;
     if (!sessionRef.current) {
-      sessionRef.current = {
-        id: newId('s-'),
-        userId: repo.userId,
-        date: dayKey(now),
-        startedAt: now,
-        exercise,
-        questions: 0,
-        successes: 0,
-      };
+      sessionRef.current = { id: newId('s-'), userId: repo.userId, date: dayKey(now), startedAt: now, exercise, questions: 0, successes: 0 };
     }
     const s = sessionRef.current;
     s.questions += 1;
     if (correct) s.successes += 1;
-    const before: Progress = progressFor(progressRef.current, repo.userId, word, item.skill, dayKey(now));
+    const word = byId.get(item.itemId);
+    const createdAt = word ? word.createdAt : app.lettersSince;
+    const before = progressFor(progressRef.current, repo.userId, item.itemId, item.skill, dayKey(now), createdAt);
     const after = applyAnswer(before, correct, now);
     progressRef.current.set(after.id, after);
-    answeredRef.current.add(`${word.id}|${item.skill}`);
+    answeredRef.current.add(`${item.itemId}|${item.skill}`);
     setScore((x) => ({ ok: x.ok + (correct ? 1 : 0), total: x.total + 1 }));
+    const answer: Answer = {
+      id: newId('a-'),
+      userId: repo.userId,
+      sessionId: s.id,
+      itemId: item.itemId,
+      skill: item.skill,
+      exercise: item.exercise,
+      correct,
+      at: now,
+      letters: word ? word.letters : [letterOfItem(item.itemId)],
+    };
     // Enregistré tout de suite : fermer l'appli ne fait perdre aucune réponse.
-    await repo.recordAnswer(
-      {
-        id: newId('a-'),
-        userId: repo.userId,
-        sessionId: s.id,
-        itemId: word.id,
-        skill: item.skill,
-        exercise: item.exercise,
-        correct,
-        at: now,
-        letters: word.letters,
-      },
-      after,
-      { ...s },
-    );
+    await repo.recordAnswer(answer, after, { ...s });
+    if (item.exercise === 'lecture_v' && !app.noVowelsUnlocked && !unlockedNow) {
+      lectureAnswers.current.push(answer);
+      if (unlockProgress(lectureAnswers.current).unlocked) {
+        await repo.setMeta('noVowelsUnlocked', true);
+        setUnlockedNow(true);
+      }
+    }
   }
 
   const done = index >= queue.length;
   const item = queue[index];
-  const word = item && byId.get(item.wordId);
+  const word = item && !isLetterItem(item.itemId) ? byId.get(item.itemId) : undefined;
+  const letter = item && isLetterItem(item.itemId) ? letterOfItem(item.itemId) : undefined;
 
   if (queue.length === 0) {
+    const why =
+      mode === 'revision'
+        ? 'Aucun élément à échéance avec ces filtres.'
+        : mode === 'trace' && target === 'mots'
+          ? 'Aucun mot n’est marqué « à apprendre à écrire ». Coche la case dans la fiche d’un mot.'
+          : 'Aucun élément ne correspond à ce choix.';
     return (
       <Shell onClose={() => go('/')}>
         <div class="end">
           <p class="end-title">Rien à réviser ici</p>
-          <p class="muted">
-            {mode === 'revision'
-              ? 'Aucun mot à échéance avec ces filtres.'
-              : 'Aucun mot ne correspond à cette catégorie.'}
-          </p>
+          <p class="muted">{why}</p>
           <button type="button" class="btn btn-primary btn-block" onClick={() => go('/')}>
             Retour à l’accueil
           </button>
@@ -119,7 +126,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
     );
   }
 
-  if (done || !word) {
+  if (done || (!word && !letter)) {
     const more = mode === 'revision' ? makeQueue(EXTRA_SIZE) : [];
     return (
       <Shell onClose={() => go('/')}>
@@ -129,27 +136,18 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
             {score.ok} / {score.total}
           </p>
           <p class="muted">bonnes réponses</p>
+          {unlockedNow && (
+            <p class="msg msg-ok">
+              Bravo ! Plus de 80 % de réussite : la lecture <strong>sans voyelles</strong> est débloquée.
+            </p>
+          )}
           {more.length > 0 && (
-            <button
-              type="button"
-              class="btn btn-primary btn-block"
-              onClick={() => {
-                setQueue(more);
-                setIndex(0);
-              }}
-            >
+            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(more); setIndex(0); }}>
               Encore {plural(more.length, 'élément', 'éléments')}
             </button>
           )}
           {mode !== 'revision' && (
-            <button
-              type="button"
-              class="btn btn-primary btn-block"
-              onClick={() => {
-                setQueue(makeQueue(SESSION_SIZE));
-                setIndex(0);
-              }}
-            >
+            <button type="button" class="btn btn-primary btn-block" onClick={() => { setQueue(makeQueue(SESSION_SIZE)); setIndex(0); }}>
               Recommencer
             </button>
           )}
@@ -162,21 +160,45 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   }
 
   const next = () => setIndex((i) => i + 1);
-
-  return (
-    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`}>
-      {item.exercise === 'cartes' ? (
-        <Card key={`${index}-${word.id}`} word={word} onAnswer={(ok) => record(item, word, ok).then(next)} />
-      ) : (
-        <Qcm
-          key={`${index}-${word.id}`}
-          word={word}
-          pool={words}
-          dir={item.exercise === 'qcm_ar_fr' ? 'ar_fr' : 'fr_ar'}
-          onAnswer={(ok) => record(item, word, ok)}
+  const key = `${index}-${item.itemId}-${item.exercise}`;
+  const onAnswer = (ok: boolean) => record(item, ok);
+  let body: preact.ComponentChildren;
+  switch (item.exercise) {
+    case 'cartes':
+      body = <Card key={key} word={word!} onAnswer={(ok) => record(item, ok).then(next)} />;
+      break;
+    case 'qcm_ar_fr':
+    case 'qcm_fr_ar':
+      body = <Qcm key={key} word={word!} pool={words} dir={item.exercise === 'qcm_ar_fr' ? 'ar_fr' : 'fr_ar'} onAnswer={onAnswer} onNext={next} />;
+      break;
+    case 'lecture_v':
+    case 'lecture_nv':
+      body = <TranslitQcm key={key} word={word!} pool={words} withVowels={item.exercise === 'lecture_v'} onAnswer={onAnswer} onNext={next} />;
+      break;
+    case 'lettre':
+      body = (
+        <LetterNameSound
+          key={key}
+          letter={letter!}
+          varied={(progressRef.current.get(`${repo.userId}|${item.itemId}|lecture`)?.box ?? 1) > 1}
+          onAnswer={onAnswer}
           onNext={next}
         />
-      )}
+      );
+      break;
+    case 'paires':
+      body = <Pairs key={key} letter={letter!} onAnswer={onAnswer} onNext={next} />;
+      break;
+    case 'trace': {
+      const box = progressRef.current.get(`${repo.userId}|${item.itemId}|ecriture`)?.box ?? 1;
+      body = <Trace key={key} word={word} letter={letter} showArrows={box <= 2} onAnswer={(ok) => record(item, ok).then(next)} />;
+      break;
+    }
+  }
+
+  return (
+    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace'}>
+      {body}
     </Shell>
   );
 }
@@ -186,14 +208,16 @@ function Shell({
   onClose,
   progress,
   counter,
+  wide,
 }: {
   children: preact.ComponentChildren;
   onClose: () => void;
   progress?: number;
   counter?: string;
+  wide?: boolean;
 }) {
   return (
-    <main class="screen session">
+    <main class={`screen session ${wide ? 'session-wide' : ''}`}>
       <header class="session-bar">
         <button type="button" class="icon-btn" onClick={onClose} aria-label="Quitter la séance (tes réponses sont enregistrées)">
           <Icon name="close" />
@@ -210,115 +234,4 @@ function Shell({
   );
 }
 
-function WordDetails({ word }: { word: Word }) {
-  return (
-    <div class="details">
-      <p class="translit">{word.transliteration}</p>
-      <p class="french">{word.french}</p>
-      {word.pronunciationHint && <p class="hint">{word.pronunciationHint}</p>}
-      <ToVerify w={word} />
-    </div>
-  );
-}
-
-function Card({ word, onAnswer }: { word: Word; onAnswer: (ok: boolean) => void }) {
-  const [flipped, setFlipped] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const answer = (ok: boolean) => {
-    if (busy) return;
-    setBusy(true);
-    onAnswer(ok);
-  };
-  return (
-    <div class="exercise">
-      <p class="prompt-label">Tu connais ce mot ?</p>
-      <button
-        type="button"
-        class={`flashcard ${flipped ? 'is-flipped' : ''}`}
-        onClick={() => setFlipped(true)}
-        aria-label={flipped ? undefined : 'Retourner la carte'}
-      >
-        <VisualBadge visual={word.visual} size={72} />
-        <Ar text={word.arabicVoweled} size="xl" forceVowels={flipped} />
-        {flipped ? <WordDetails word={word} /> : <span class="muted small">Touche pour retourner</span>}
-      </button>
-      <div class="actions">
-        {flipped ? (
-          <>
-            <button type="button" class="btn btn-bad" onClick={() => answer(false)}>
-              À revoir
-            </button>
-            <button type="button" class="btn btn-good" onClick={() => answer(true)}>
-              Su
-            </button>
-          </>
-        ) : (
-          <button type="button" class="btn btn-primary btn-block" onClick={() => setFlipped(true)}>
-            Retourner
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Qcm({
-  word,
-  pool,
-  dir,
-  onAnswer,
-  onNext,
-}: {
-  word: Word;
-  pool: Word[];
-  dir: Direction;
-  onAnswer: (ok: boolean) => void;
-  onNext: () => void;
-}) {
-  const choices = useMemo<Choice[]>(() => buildChoices(word, pool, dir), [word.id, dir]);
-  const [picked, setPicked] = useState<string | null>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
-  const pick = (c: Choice) => {
-    if (picked) return;
-    setPicked(c.wordId);
-    onAnswer(c.correct);
-  };
-  useEffect(() => {
-    if (picked) nextRef.current?.focus();
-  }, [picked]);
-  const ok = picked === word.id;
-
-  return (
-    <div class="exercise">
-      <p class="prompt-label">{dir === 'ar_fr' ? 'Que veut dire ce mot ?' : 'Comment dit-on en arabe…'}</p>
-      <div class="prompt">
-        {dir === 'ar_fr' ? <Ar text={word.arabicVoweled} size="xl" toggle /> : <p class="prompt-fr">{word.french}</p>}
-      </div>
-      <ul class={`choices ${dir === 'fr_ar' ? 'choices-ar' : ''}`}>
-        {choices.map((c) => {
-          const state = !picked ? '' : c.correct ? 'is-correct' : c.wordId === picked ? 'is-wrong' : 'is-dim';
-          return (
-            <li key={c.wordId}>
-              <button type="button" class={`choice ${state}`} onClick={() => pick(c)} disabled={!!picked && !state.startsWith('is-c') && c.wordId !== picked}>
-                {dir === 'fr_ar' ? <Ar text={c.text} size="l" /> : c.text}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      {picked && (
-        <div class={`feedback ${ok ? 'fb-ok' : 'fb-bad'}`} role="status">
-          <p class="fb-title">{ok ? 'Bonne réponse' : 'Pas tout à fait'}</p>
-          <div class="fb-word">
-            <VisualBadge visual={word.visual} size={40} />
-            <Ar text={word.arabicVoweled} size="l" forceVowels />
-          </div>
-          <WordDetails word={word} />
-          <button ref={nextRef} type="button" class="btn btn-primary btn-block" onClick={onNext}>
-            Continuer
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+export type { Word };

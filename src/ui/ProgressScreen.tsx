@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
 import { dueItems } from '../domain/queue';
-import { answerDays, byCategory, history, masteryCounts, streak, topMissedLetters, topMissedWords } from '../domain/stats';
+import { answerDays, byCategory, history, letterMastery, masteryCounts, streak, topMissedLetters, topMissedWords } from '../domain/stats';
 import type { Session } from '../domain/types';
 import { addDays, parseDay } from '../domain/dates';
 import { go } from '../router';
@@ -22,7 +22,9 @@ export function ProgressScreen() {
     repo.getSessions(addDays(today, -29)).then(setSessions);
   }, []);
 
-  const due = useMemo(() => dueItems(words, progress, repo.userId, today).length, [words, progress]);
+  const app = useApp();
+  const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress]);
+  const alphabet = useMemo(() => letterMastery(progress, repo.userId, today, app.lettersSince), [progress]);
   const counts = useMemo(() => masteryCounts(words, progress, repo.userId, today), [words, progress]);
   const cats = useMemo(() => byCategory(words, progress, repo.userId, today), [words, progress]);
   const letters = useMemo(() => topMissedLetters(answers, 5), [answers]);
@@ -69,6 +71,25 @@ export function ProgressScreen() {
             );
           })}
         </ul>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Alphabet</h2>
+        <ul class="legend">
+          {M_KEYS.map((k) => (
+            <li key={k}><span class={`mdot m-${k}`} /> {M_LABELS[k]}</li>
+          ))}
+        </ul>
+        <ul class="alphabet">
+          {alphabet.map(({ letter, m }) => (
+            <li key={letter}>
+              <button type="button" class={`abc m-bg-${m}`} onClick={() => go('/seance', { mode: 'revision', lettre: letter })} aria-label={`${letter} : ${M_LABELS[m]}`}>
+                <bdi class="ar" lang="ar" dir="rtl">{letter}</bdi>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <p class="small muted">Une lettre est acquise en lecture et en écriture. Touche-la pour réviser les mots qui la contiennent.</p>
       </section>
 
       <section class="card">

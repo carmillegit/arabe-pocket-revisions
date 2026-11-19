@@ -1,11 +1,14 @@
 // Statistiques de progression (calculées, jamais stockées).
 import { addDays, dayKey } from './dates';
 import { activeSkills, mastery, type Mastery } from './srs';
-import { progressFor } from './queue';
+import { wordProgress, progressFor } from './queue';
+import { ALPHABET } from './arabic';
+import { letterItemId } from './letters';
+import { LETTER_SKILLS } from './srs';
 import type { Answer, Progress, Session, Word } from './types';
 
 export function wordMastery(w: Word, progress: Map<string, Progress>, userId: string, today: string): Mastery {
-  return mastery(activeSkills(w).map((s) => progressFor(progress, userId, w, s, today).box));
+  return mastery(activeSkills(w).map((s) => wordProgress(progress, userId, w, s, today).box));
 }
 
 export function masteryCounts(words: Word[], progress: Map<string, Progress>, userId: string, today: string) {
@@ -75,4 +78,12 @@ export function history(sessions: Session[], today: string, days = 30) {
     }
   }
   return [...m.entries()].map(([date, v]) => ({ date, ...v }));
+}
+
+/** Maîtrise de chaque lettre (lecture et écriture). */
+export function letterMastery(progress: Map<string, Progress>, userId: string, today: string, since: number) {
+  return ALPHABET.map((l) => ({
+    letter: l,
+    m: mastery(LETTER_SKILLS.map((s) => progressFor(progress, userId, letterItemId(l), s, today, since).box)),
+  }));
 }

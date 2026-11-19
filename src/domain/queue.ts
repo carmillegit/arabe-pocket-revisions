@@ -1,22 +1,41 @@
-// Construction d'une séance : révision globale (mots à échéance) ou entraînement libre.
-import { activeSkills, isDue, newProgress } from './srs';
+// Construction d'une séance : révision globale (éléments à échéance) ou entraînement libre.
+// Un élément est un mot ou une lettre ; chaque élément a une progression par compétence.
+import { dayKey } from './dates';
+import { ALPHABET } from './arabic';
+import { letterItemId, letterOfItem, isLetterItem } from './letters';
+import { activeSkills, isDue, newProgress, LETTER_SKILLS } from './srs';
 import { shuffle, type Rng } from './quiz';
 import type { ExerciseId, Progress, Skill, Word } from './types';
 
 export const SESSION_SIZE = 20;
 export const EXTRA_SIZE = 10;
 
+export type PracticeExercise = Exclude<ExerciseId, 'revision'>;
+
 export interface QueueFilters {
   category?: string;
   letter?: string;
-  /** Identifiants des mots ratés cette semaine. */
+  /** Identifiants des éléments ratés cette semaine. */
   missedIds?: Set<string>;
 }
 
 export interface QueueItem {
-  wordId: string;
+  /** Id du mot, ou "L:<lettre>". */
+  itemId: string;
   skill: Skill;
-  exercise: Exclude<ExerciseId, 'revision'>;
+  exercise: PracticeExercise;
+}
+
+export interface QueueContext {
+  words: Word[];
+  progress: Map<string, Progress>;
+  userId: string;
+  today: string;
+  /** Date d'arrivée des lettres dans l'appli (elles sont « nouvelles » depuis ce jour). */
+  lettersSince: number;
+  /** Lecture sans voyelles débloquée ? */
+  noVowelsUnlocked: boolean;
+  rng?: Rng;
 }
 
 export function filterWords(words: Word[], f: QueueFilters): Word[] {
@@ -28,92 +47,124 @@ export function filterWords(words: Word[], f: QueueFilters): Word[] {
   );
 }
 
+export function filterLetters(f: QueueFilters): string[] {
+  if (f.category) return [];
+  return ALPHABET.filter(
+    (l) => (!f.letter || l === f.letter) && (!f.missedIds || f.missedIds.has(letterItemId(l))),
+  );
+}
+
+function day(t: number): string {
+  return dayKey(t);
+}
+
 /** Progression d'un élément, ou progression « neuve » virtuelle s'il n'a jamais été vu. */
 export function progressFor(
   map: Map<string, Progress>,
   userId: string,
-  word: Word,
+  itemId: string,
   skill: Skill,
   today: string,
+  createdAt: number,
 ): Progress {
-  return (
-    map.get(`${userId}|${word.id}|${skill}`) ??
-    // Un mot jamais vu est à échéance depuis le jour de sa création.
-    { ...newProgress(userId, word.id, skill, today), due: minDay(today, word.createdAt) }
-  );
+  const existing = map.get(`${userId}|${itemId}|${skill}`);
+  if (existing) return existing;
+  // Un élément jamais vu est à échéance depuis le jour de sa création.
+  const created = day(createdAt);
+  return { ...newProgress(userId, itemId, skill, today), due: created < today ? created : today };
 }
 
-function minDay(today: string, createdAt: number): string {
-  const d = new Date(createdAt);
-  const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  return k < today ? k : today;
+export function wordProgress(map: Map<string, Progress>, userId: string, w: Word, skill: Skill, today: string) {
+  return progressFor(map, userId, w.id, skill, today, w.createdAt);
 }
 
-/** Exercice utilisé pour une compétence. Le vocabulaire alterne cartes et QCM dans les deux sens. */
-const VOCAB_ROTATION: QueueItem['exercise'][] = ['cartes', 'qcm_ar_fr', 'qcm_fr_ar'];
+const VOCAB_ROTATION: PracticeExercise[] = ['cartes', 'qcm_ar_fr', 'qcm_fr_ar'];
 
-export function exerciseFor(skill: Skill, index: number): QueueItem['exercise'] {
-  switch (skill) {
-    case 'vocabulaire':
-    default:
-      return VOCAB_ROTATION[index % VOCAB_ROTATION.length];
-  }
+/** Exercice pour un élément et une compétence. `n` fait alterner les variantes. */
+export function exerciseFor(itemId: string, skill: Skill, n: number, noVowelsUnlocked: boolean): PracticeExercise {
+  if (skill === 'ecriture') return 'trace';
+  if (isLetterItem(itemId)) return n % 2 === 0 ? 'lettre' : 'paires';
+  if (skill === 'lecture') return noVowelsUnlocked && n % 2 === 1 ? 'lecture_nv' : 'lecture_v';
+  return VOCAB_ROTATION[n % VOCAB_ROTATION.length];
 }
 
-/** Tous les couples mot × compétence à échéance, les plus en retard d'abord. */
-export function dueItems(
-  words: Word[],
-  progress: Map<string, Progress>,
-  userId: string,
-  today: string,
-  rng: Rng = Math.random,
-): { word: Word; skill: Skill; p: Progress }[] {
-  const out: { word: Word; skill: Skill; p: Progress }[] = [];
-  for (const w of words) {
+interface DueEntry {
+  itemId: string;
+  skill: Skill;
+  p: Progress;
+}
+
+/** Tous les couples élément × compétence à échéance, les plus en retard d'abord. */
+export function dueItems(ctx: QueueContext, filters: QueueFilters = {}): DueEntry[] {
+  const { progress, userId, today } = ctx;
+  const out: DueEntry[] = [];
+  for (const w of filterWords(ctx.words, filters)) {
     for (const skill of activeSkills(w)) {
-      const p = progressFor(progress, userId, w, skill, today);
-      if (isDue(p, today)) out.push({ word: w, skill, p });
+      const p = wordProgress(progress, userId, w, skill, today);
+      if (isDue(p, today)) out.push({ itemId: w.id, skill, p });
+    }
+  }
+  for (const l of filterLetters(filters)) {
+    const id = letterItemId(l);
+    for (const skill of LETTER_SKILLS) {
+      const p = progressFor(progress, userId, id, skill, today, ctx.lettersSince);
+      if (isDue(p, today)) out.push({ itemId: id, skill, p });
     }
   }
   // Mélange puis tri stable par échéance : à égalité, l'ordre reste aléatoire.
-  return shuffle(out, rng).sort((a, b) => (a.p.due < b.p.due ? -1 : a.p.due > b.p.due ? 1 : 0));
+  return shuffle(out, ctx.rng).sort((a, b) => (a.p.due < b.p.due ? -1 : a.p.due > b.p.due ? 1 : 0));
 }
 
 export function buildReviewQueue(
-  words: Word[],
-  progress: Map<string, Progress>,
-  userId: string,
-  today: string,
-  opts: { filters?: QueueFilters; limit?: number; exclude?: Set<string>; rng?: Rng } = {},
+  ctx: QueueContext,
+  opts: { filters?: QueueFilters; limit?: number; exclude?: Set<string> } = {},
 ): QueueItem[] {
-  const rng = opts.rng ?? Math.random;
-  const pool = filterWords(words, opts.filters ?? {});
-  const items = dueItems(pool, progress, userId, today, rng)
-    .filter((x) => !opts.exclude?.has(`${x.word.id}|${x.skill}`))
+  const rng = ctx.rng ?? Math.random;
+  const items = dueItems(ctx, opts.filters)
+    .filter((x) => !opts.exclude?.has(`${x.itemId}|${x.skill}`))
     .slice(0, opts.limit ?? SESSION_SIZE);
-  const offset = Math.floor(rng() * VOCAB_ROTATION.length);
+  const offset = Math.floor(rng() * 6);
   return shuffle(items, rng).map((x, i) => ({
-    wordId: x.word.id,
+    itemId: x.itemId,
     skill: x.skill,
-    exercise: exerciseFor(x.skill, i + offset),
+    exercise: exerciseFor(x.itemId, x.skill, i + offset, ctx.noVowelsUnlocked),
   }));
 }
 
-/** Entraînement libre : mots les moins maîtrisés d'abord, quelle que soit l'échéance. */
+const PRACTICE_SKILL: Record<PracticeExercise, Skill> = {
+  cartes: 'vocabulaire',
+  qcm_ar_fr: 'vocabulaire',
+  qcm_fr_ar: 'vocabulaire',
+  lecture_v: 'lecture',
+  lecture_nv: 'lecture',
+  lettre: 'lecture',
+  paires: 'lecture',
+  trace: 'ecriture',
+};
+
+/**
+ * Entraînement libre : éléments les moins maîtrisés d'abord, quelle que soit l'échéance.
+ * Pour le tracé, `target` choisit les lettres ou les mots « à apprendre à écrire ».
+ */
 export function buildPracticeQueue(
-  words: Word[],
-  progress: Map<string, Progress>,
-  userId: string,
-  exercise: QueueItem['exercise'],
-  opts: { filters?: QueueFilters; limit?: number; rng?: Rng } = {},
+  ctx: QueueContext,
+  exercise: PracticeExercise,
+  opts: { filters?: QueueFilters; limit?: number; target?: 'lettres' | 'mots' } = {},
 ): QueueItem[] {
-  const rng = opts.rng ?? Math.random;
-  const pool = shuffle(filterWords(words, opts.filters ?? {}), rng);
-  const box = (w: Word) => progress.get(`${userId}|${w.id}|vocabulaire`)?.box ?? 1;
-  pool.sort((a, b) => box(a) - box(b));
-  return shuffle(pool.slice(0, opts.limit ?? SESSION_SIZE), rng).map((w) => ({
-    wordId: w.id,
-    skill: 'vocabulaire',
-    exercise,
-  }));
+  const rng = ctx.rng ?? Math.random;
+  const skill = PRACTICE_SKILL[exercise];
+  const f = opts.filters ?? {};
+  const onLetters = exercise === 'lettre' || exercise === 'paires' || (exercise === 'trace' && opts.target !== 'mots');
+  let ids: string[];
+  if (onLetters) ids = filterLetters({ ...f, category: undefined }).map(letterItemId);
+  else {
+    let ws = filterWords(ctx.words, f);
+    if (exercise === 'trace') ws = ws.filter((w) => w.writingEnabled);
+    ids = ws.map((w) => w.id);
+  }
+  const box = (id: string) => ctx.progress.get(`${ctx.userId}|${id}|${skill}`)?.box ?? 1;
+  const pool = shuffle(ids, rng).sort((a, b) => box(a) - box(b));
+  return shuffle(pool.slice(0, opts.limit ?? SESSION_SIZE), rng).map((itemId) => ({ itemId, skill, exercise }));
 }
+
+export { letterOfItem, isLetterItem };

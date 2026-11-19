@@ -17,7 +17,7 @@ export function Home() {
   const [letter, setLetter] = useState('');
   const [missed, setMissed] = useState(false);
 
-  const due = useMemo(() => dueItems(words, progress, repo.userId, today).length, [words, progress, today]);
+  const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress, today]);
   const counts = useMemo(() => masteryCounts(words, progress, repo.userId, today), [words, progress, today]);
   const days = streak(answerDays(answers), today);
   const missedIds = useMemo(() => missedSince(answers, Date.now() - WEEK), [answers]);

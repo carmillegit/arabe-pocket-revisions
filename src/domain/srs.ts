@@ -60,7 +60,10 @@ export function applyAnswer(p: Progress, correct: boolean, now: number): Progres
 }
 
 /** Compétences en service dans cette version de l'application. */
-export const ENABLED_SKILLS: Skill[] = ['vocabulaire'];
+export const ENABLED_SKILLS: Skill[] = ['vocabulaire', 'lecture', 'ecriture'];
+
+/** Les lettres se travaillent en lecture et en écriture. */
+export const LETTER_SKILLS: Skill[] = ['lecture', 'ecriture'];
 
 /** Compétences actives pour un mot : celles en service, l'écriture seulement sur activation. */
 export function activeSkills(word: Word, enabled: Skill[] = ENABLED_SKILLS): Skill[] {
