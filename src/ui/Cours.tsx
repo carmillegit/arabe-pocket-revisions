@@ -88,10 +88,10 @@ function SessionView({ s }: { s: CoursSession }) {
 
       {ids.length > 0 && (
         <div class="cours-actions">
-          <button type="button" class="btn btn-primary" onClick={() => go('/seance', { mode: 'revision', seance: s.id })}>
+          <button type="button" class="btn btn-primary" onClick={() => go('/seance', { mode: 'revision', seance: s.id, retour: `/cours/${s.id}` })}>
             Réviser cette séance
           </button>
-          <button type="button" class="btn btn-secondary" onClick={() => go('/seance', { mode: 'cartes', seance: s.id })}>
+          <button type="button" class="btn btn-secondary" onClick={() => go('/seance', { mode: 'cartes', seance: s.id, retour: `/cours/${s.id}` })}>
             Cartes ({ids.length})
           </button>
         </div>

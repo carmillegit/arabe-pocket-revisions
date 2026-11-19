@@ -63,7 +63,7 @@ export function ProgressScreen() {
             const total = c.nouveau + c.en_cours + c.acquis;
             return (
               <li key={name}>
-                <button type="button" class="cat-bar" onClick={() => go('/seance', { mode: 'revision', cat: name })}>
+                <button type="button" class="cat-bar" onClick={() => go('/seance', { mode: 'revision', cat: name, retour: '/progression' })}>
                   <span class="cat-head">
                     <span>{name}</span>
                     <span class="muted small">{c.acquis} / {total} acquis</span>
@@ -88,7 +88,7 @@ export function ProgressScreen() {
         <ul class="alphabet">
           {alphabet.map(({ letter, m }) => (
             <li key={letter}>
-              <button type="button" class={`abc m-bg-${m}`} onClick={() => go('/seance', { mode: 'revision', lettre: letter })} aria-label={`${letter} : ${M_LABELS[m]}`}>
+              <button type="button" class={`abc m-bg-${m}`} onClick={() => go('/seance', { mode: 'revision', lettre: letter, retour: '/progression' })} aria-label={`${letter} : ${M_LABELS[m]}`}>
                 <bdi class="ar" lang="ar" dir="rtl">{letter}</bdi>
                 <span class="abc-mark" aria-hidden="true">{MASTERY_MARK[m]}</span>
               </button>
@@ -106,7 +106,7 @@ export function ProgressScreen() {
           <ul class="letters">
             {letters.map((l) => (
               <li key={l.letter}>
-                <button type="button" class="letter-chip" onClick={() => go('/seance', { mode: 'revision', lettre: l.letter })} aria-label={`Réviser les mots avec ${l.letter}`}>
+                <button type="button" class="letter-chip" onClick={() => go('/seance', { mode: 'revision', lettre: l.letter, retour: '/progression' })} aria-label={`Réviser les mots avec ${l.letter}`}>
                   <Ar text={l.letter} size="l" />
                   <span class="small muted">{plural(l.misses, 'erreur', 'erreurs')}</span>
                 </button>

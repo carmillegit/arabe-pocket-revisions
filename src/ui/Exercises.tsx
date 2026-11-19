@@ -92,7 +92,7 @@ export function Exercises() {
                     type="button"
                     class="row"
                     disabled={disabled}
-                    onClick={() => go('/seance', { mode: ex.mode, cat: ex.letters ? undefined : cat, ...ex.params })}
+                    onClick={() => go('/seance', { mode: ex.mode, cat: ex.letters ? undefined : cat, ...ex.params, retour: '/exercices' })}
                   >
                     <span class="row-main">
                       <span class="row-title">{ex.title}</span>

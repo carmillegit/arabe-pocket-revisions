@@ -21,6 +21,15 @@ import type { Answer, ExerciseId, LetterPositionStat, Session as SessionT, Word 
 import { applyLetterResults } from '../domain/dictation';
 import { coursById, sessionWordIds } from '../domain/cours';
 
+/** N'accepte qu'un retour vers un écran de l'app (jamais une adresse extérieure). */
+function safeReturn(r: string | null): { path: string; label: string } {
+  if (r && /^\/(cours(\/[\w-]+)?|exercices|progression|mots)$/.test(r)) {
+    const label = r.startsWith('/cours') ? 'Retour au cours' : r === '/exercices' ? 'Retour aux exercices' : r === '/progression' ? 'Retour à la progression' : 'Retour aux mots';
+    return { path: r, label };
+  }
+  return { path: '/', label: 'Retour à l’accueil' };
+}
+
 const sessionIdsFor = (id: string, words: Word[]) => {
   const s = coursById(id);
   return s ? sessionWordIds(s, words) : new Set<string>();
@@ -45,6 +54,9 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   const { words, repo } = app;
   const mode = (MODES.includes(params.get('mode') as Mode) ? params.get('mode') : 'revision') as Mode;
   const target = params.get('cible') === 'mots' ? 'mots' : 'lettres';
+  // Où revenir en quittant : l'écran d'où la séance a été lancée (cours, exercices…), sinon l'accueil.
+  const retour = safeReturn(params.get('retour'));
+  const leave = () => go(retour.path);
   const filters: QueueFilters = useMemo(
     () => ({
       category: params.get('cat') || undefined,
@@ -141,12 +153,12 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
             ? 'Aucun mot de cette sélection n’a encore d’audio.'
           : 'Aucun élément ne correspond à ce choix.';
     return (
-      <Shell onClose={() => go('/')}>
+      <Shell onClose={leave}>
         <div class="end">
           <p class="end-title">Rien à réviser ici</p>
           <p class="muted">{why}</p>
-          <button type="button" class="btn btn-primary btn-block" onClick={() => go('/')}>
-            Retour à l’accueil
+          <button type="button" class="btn btn-primary btn-block" onClick={leave}>
+            {retour.label}
           </button>
         </div>
       </Shell>
@@ -156,7 +168,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   if (done || (!word && !letter)) {
     const more = mode === 'revision' ? makeQueue(EXTRA_SIZE) : [];
     return (
-      <Shell onClose={() => go('/')}>
+      <Shell onClose={leave}>
         {!celebrated && score.total > 0 && (
           <Celebration ok={score.ok} total={score.total} onClose={() => setCelebrated(true)} />
         )}
@@ -181,7 +193,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
               Recommencer
             </button>
           )}
-          <button type="button" class="btn btn-secondary btn-block" onClick={() => go('/')}>
+          <button type="button" class="btn btn-secondary btn-block" onClick={leave}>
             Terminer
           </button>
         </div>
@@ -241,7 +253,7 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
   }
 
   return (
-    <Shell onClose={() => go('/')} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace' || item.exercise === 'trace_memoire' || item.exercise === 'dictee'}>
+    <Shell onClose={leave} progress={(index + 1) / queue.length} counter={`${index + 1} / ${queue.length}`} wide={item.exercise === 'trace' || item.exercise === 'trace_memoire' || item.exercise === 'dictee'}>
       {body}
     </Shell>
   );
