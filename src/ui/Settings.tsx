@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useRef, useState } from 'preact/hooks';
 import { BackupError, parseBackup, summarize, type Backup } from '../data/backup';
 import { useApp } from '../store';
 import { Icon, TopBar, formatDate, plural } from './common';
@@ -33,6 +33,8 @@ export function Settings() {
   const [mode, setMode] = useState<'merge' | 'replace'>('merge');
   const [msg, setMsg] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
   const [newCat, setNewCat] = useState('');
+  const [name, setName] = useState(app.userName);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   async function doExport() {
     const b = await repo.exportAll();
@@ -83,10 +85,10 @@ export function Settings() {
         <button type="button" class="btn btn-primary btn-block" onClick={doExport}>
           <Icon name="download" size={20} /> Exporter une sauvegarde
         </button>
-        <label class="btn btn-secondary btn-block file-btn">
+        <button type="button" class="btn btn-secondary btn-block" onClick={() => fileRef.current?.click()}>
           <Icon name="upload" size={20} /> Importer un fichier
-          <input type="file" accept="application/json,.json" onChange={pickFile} />
-        </label>
+        </button>
+        <input ref={fileRef} class="visually-hidden" type="file" accept="application/json,.json" onChange={pickFile} />
         {s && (
           <div class="import-preview" role="dialog" aria-label="Aperçu de l’import">
             <p>
@@ -110,6 +112,22 @@ export function Settings() {
           </div>
         )}
         {msg && <p class={`msg ${msg.kind === 'ok' ? 'msg-ok' : 'msg-error'}`} role="status">{msg.text}</p>}
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Prénom</h2>
+        <form
+          class="inline-form"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await app.setUserName(name);
+            setMsg({ kind: 'ok', text: 'Prénom enregistré.' });
+          }}
+        >
+          <input type="text" placeholder="Facultatif" value={name} onInput={(e) => setName(e.currentTarget.value)} aria-label="Prénom" autocomplete="given-name" />
+          <button type="submit" class="btn btn-secondary">OK</button>
+        </form>
+        <p class="small muted">Sert seulement à te saluer sur l’accueil. Il reste sur ce téléphone.</p>
       </section>
 
       <section class="card">

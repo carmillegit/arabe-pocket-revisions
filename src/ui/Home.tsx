@@ -36,7 +36,7 @@ export function Home() {
     <main class="screen">
       <header class="hello">
         <Ar text="مَرْحَبًا" size="l" />
-        <p class="muted">Bonjour {app.userName}</p>
+        <p class="muted">{app.userName ? `Bonjour ${app.userName}` : "Bonjour"}</p>
       </header>
 
       {needsBackup && (

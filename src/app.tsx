@@ -1,4 +1,4 @@
-import { useRoute, go } from './router';
+import { useRoute } from './router';
 import { Icon } from './ui/common';
 import { Home } from './ui/Home';
 import { Exercises } from './ui/Exercises';
@@ -43,16 +43,15 @@ export function App() {
       {nav && (
         <nav class="tabbar" aria-label="Navigation principale">
           {TABS.map((t) => (
-            <button
+            <a
               key={t.path}
-              type="button"
+              href={`#${t.path}`}
               class={`tab ${active === t.path ? 'is-active' : ''}`}
               aria-current={active === t.path ? 'page' : undefined}
-              onClick={() => go(t.path)}
             >
               <Icon name={t.icon} />
               <span>{t.label}</span>
-            </button>
+            </a>
           ))}
         </nav>
       )}

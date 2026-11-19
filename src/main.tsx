@@ -11,6 +11,21 @@ navigator.storage?.persist?.().catch(() => {});
 
 registerSW({ immediate: true });
 
+// Phase de test : toute erreur s'affiche en bas de l'écran, pour pouvoir la signaler (capture d'écran).
+function showError(message: string) {
+  let el = document.getElementById('error-banner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'error-banner';
+    el.setAttribute('role', 'alert');
+    el.addEventListener('click', () => el!.remove());
+    document.body.appendChild(el);
+  }
+  el.textContent = `Erreur (fais une capture et envoie-la) : ${message}  — touche pour fermer`;
+}
+window.addEventListener('error', (e) => showError(e.message || String(e.error)));
+window.addEventListener('unhandledrejection', (e) => showError(String(e.reason?.message ?? e.reason)));
+
 render(
   <AppProvider>
     <App />

@@ -24,6 +24,7 @@ export interface AppData {
   firstLaunchAt: number;
   reload: () => Promise<void>;
   setVowelMode: (m: VowelMode) => Promise<void>;
+  setUserName: (n: string) => Promise<void>;
 }
 
 const Ctx = createContext<AppData | null>(null);
@@ -40,7 +41,7 @@ async function firstLaunch(): Promise<number> {
   let first = await repo.getMeta<number>('firstLaunchAt');
   if (!first) {
     first = Date.now();
-    await repo.ensureUser('Camille');
+    await repo.ensureUser('');
     const b = parseBackup(seed, LOCAL_USER_ID);
     // Les mots de départ sont « créés » aujourd'hui : ils sont tous à découvrir.
     b.words = b.words.map((w) => ({ ...w, createdAt: first!, updatedAt: first! }));
@@ -64,11 +65,12 @@ export function AppProvider({ children }: { children: preact.ComponentChildren }
       repo.getMeta<VowelMode>('vowelMode'),
       repo.getMeta<number>('lastExportAt'),
     ]);
+    const userName = (await repo.getMeta<string>('userName')) ?? '';
     words.sort((a, b) => a.french.localeCompare(b.french, 'fr'));
     categories.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
     setData({
       repo,
-      userName: 'Camille',
+      userName,
       words,
       categories,
       progress: new Map(progressList.map((p) => [p.id, p])),
@@ -80,6 +82,10 @@ export function AppProvider({ children }: { children: preact.ComponentChildren }
       reload: load,
       setVowelMode: async (m) => {
         await repo.setMeta('vowelMode', m);
+        await load();
+      },
+      setUserName: async (n) => {
+        await repo.setMeta('userName', n.trim());
         await load();
       },
     });
