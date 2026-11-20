@@ -2,6 +2,13 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Retours du 20/11/2026
+
+- **Catégories de mots** : les séances ne sont plus des catégories (elles restent dans l'onglet Cours). Les mots des cours sont rangés par thème (Personnes, Aliments, Animaux, Nature, Mots de base, Pays). Les catégories « Cours du … » vides sont supprimées ; un mot que l'utilisatrice a rangé ailleurs n'est pas déplacé.
+- **Nom des séances** : « Séance 1 · 07/10 », numérotées dans l'ordre des dates ; le sujet de la séance en sous-titre.
+- **Progression** : la tuile du jour montre les mots révisés aujourd'hui (« 19/20 révisés aujourd'hui », puis « 35 révisés aujourd'hui · objectif atteint ✓ »).
+- **Guide de la bêta** : document modifiable par Camille (Claude Docs), à partager avec la classe.
+
 ## Onglet Cours (relecture des fiches du 19/11/2026)
 
 - Les fiches sont **validées par Camille dans un fichier Word** avant d'entrer dans l'app. Ce fichier n'est pas publié (dépôt public) ; seules les données validées le sont (`scripts/cours_data.py` → `src/content/cours.json`).

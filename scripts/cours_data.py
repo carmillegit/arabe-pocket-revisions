@@ -240,6 +240,17 @@ SESSIONS = [
     },
 ]
 
+# Catégorie par thème des mots nouveaux (les séances restent accessibles dans l'onglet Cours,
+# elles ne servent pas de catégorie : décision du 20/11/2026).
+THEME = {
+    'Personnes': 'أُمّ أَخ مَامَا فَتًى بَابَا حَبِيب أَب أُخْت وَلَد وَزِير أُسْتَاذَة تِلْمِيذَة',
+    'Aliments': 'تُفَّاحَة رُزّ زَيْت بَلَح قَمْح',
+    'Animaux': 'دَجَاج ذَيْل فَرَاشَة',
+    'Nature': 'شَاطِئ وَادِي بَرْد وَرْد شَجَر أَشْجَار حَشِيش عُشّ',
+    'Mots de base': 'اِسْم أَنَا آمِين الآن أَشْيَاء دَفْتَر رَتَّبَ أَنْتَ أَنْتِ سَيَّارَات مِثَال وَثَبَ مُثَلَّث مِحْرَاث دَار زَارَ يَزُورُ وَ بَلَد ثِيَاب فَخِذ زِرّ مَسْجِد كَنِيسَة رَأْس قُمَاش',
+}
+THEME_OF = {unicodedata.normalize('NFC', w): cat for cat, ws in THEME.items() for w in ws.split()}
+
 # Remplacements décidés à la relecture : le cours fait référence.
 REPLACEMENTS = [
     {'id': 'w056', 'from': 'بَرْقُوق', 'arabicVoweled': 'خَوْخ', 'transliteration': 'khawkh', 'french': 'prunes',
@@ -280,7 +291,7 @@ def main():
                     'arabicVoweled': ar,
                     'transliteration': tr,
                     'french': fr,
-                    'category': b['category'],
+                    'category': b['category'] if b['category'] == 'Pays' else THEME_OF[ar],
                     'type': opt.get('type', 'mot'),
                     'visual': {'kind': 'emoji', 'value': opt['emoji']} if opt.get('emoji') else None,
                     'source': 'cours',
@@ -294,7 +305,7 @@ def main():
     out.mkdir(exist_ok=True)
     (out / 'cours.json').write_text(json.dumps({'version': 1, 'sessions': cours}, ensure_ascii=False, indent=1))
     (ROOT / 'src/seed/mots_cours.json').write_text(json.dumps(
-        {'contentVersion': 2, 'replacements': REPLACEMENTS, 'words': words}, ensure_ascii=False, indent=1))
+        {'contentVersion': 3, 'replacements': REPLACEMENTS, 'words': words}, ensure_ascii=False, indent=1))
     print(len(cours), 'séances,', len(words), 'mots nouveaux')
 
 

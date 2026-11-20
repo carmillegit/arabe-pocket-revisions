@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { parseBackup } from '../src/data/backup';
 import { planCourseContent, applyCourseContent, CONTENT_VERSION } from '../src/data/courseContent';
 import { DexieRepository } from '../src/data/dexieRepository';
-import { COURS, sessionWordIds, wordIndex } from '../src/domain/cours';
+import { COURS, sessionLabel, sessionWordIds, wordIndex } from '../src/domain/cours';
 import { audioUrl } from '../src/domain/audio';
 
 const seed = parseBackup(JSON.parse(readFileSync(new URL('../src/seed/mots_depart.json', import.meta.url), 'utf8')), 'u').words;
@@ -16,6 +16,10 @@ const after = () => {
 };
 
 describe('contenu des cours', () => {
+  it('nom des séances : « Séance 1 · 07/10 »', () => {
+    expect(COURS.map(sessionLabel)).toEqual(['Séance 1 · 07/10', 'Séance 2 · 14/10', 'Séance 3 · 04/11', 'Séance 4 · 13/11', 'Séance 5 · 18/11']);
+  });
+
   it('5 séances, dans l’ordre des dates', () => {
     expect(COURS.map((s) => s.date)).toEqual(['2026-10-07', '2026-10-14', '2026-11-04', '2026-11-13', '2026-11-18']);
   });
@@ -77,6 +81,30 @@ describe('application à une installation existante', () => {
     expect(await r.getMeta('contentVersion')).toBe(CONTENT_VERSION);
     expect(await applyCourseContent(r)).toBe(0);
     expect((await r.getWords()).length).toBe(133);
-    expect((await r.getCategories()).map((c) => c.name)).toEqual(expect.arrayContaining(['Pays', 'Cours du 4/11']));
+    const cats = (await r.getCategories()).map((c) => c.name);
+    expect(cats).toEqual(expect.arrayContaining(['Pays', 'Personnes']));
+    expect(cats.some((c) => c.startsWith('Cours du'))).toBe(false);
+  });
+});
+
+describe('passage des catégories par séance aux thèmes (v2 → v3)', () => {
+  const repos: DexieRepository[] = [];
+  afterEach(async () => { await Promise.all(repos.splice(0).map((r) => r.destroy())); });
+
+  it('recatégorise les mots ajoutés en v2 et supprime les catégories « Cours du … » vides', async () => {
+    const r = new DexieRepository('local', 'cours-v2'); repos.push(r);
+    await r.importAll(parseBackup(JSON.parse(readFileSync(new URL('../src/seed/mots_depart.json', import.meta.url), 'utf8')), 'local'), 'replace');
+    // État d'une installation v2 : deux mots du cours rangés par séance, dont un que l'utilisatrice a déplacé.
+    const words = planCourseContent(await r.getWords(), 'local', 1);
+    const v2 = words.map((w) =>
+      w.arabicVoweled === 'بَابَا' ? { ...w, category: 'Cours du 4/11' } : w.arabicVoweled === 'زَيْت' ? { ...w, category: 'Mes favoris' } : w,
+    );
+    await r.saveWords(v2);
+    await r.setMeta('contentVersion', 2);
+    await applyCourseContent(r);
+    const after = await r.getWords();
+    expect(after.find((w) => w.arabicVoweled === 'بَابَا')!.category).toBe('Personnes');
+    expect(after.find((w) => w.arabicVoweled === 'زَيْت')!.category).toBe('Mes favoris');
+    expect((await r.getCategories()).some((c) => c.name.startsWith('Cours du'))).toBe(false);
   });
 });

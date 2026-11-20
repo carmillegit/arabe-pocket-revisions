@@ -53,3 +53,10 @@ export function formatSessionDate(date: string): string {
   const [y, m, d] = date.split('-').map(Number);
   return new Date(y, m - 1, d).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
+
+/** Nom court d'une séance : « Séance 1 · 07/10 » (numérotée dans l'ordre des dates). */
+export function sessionLabel(s: CoursSession): string {
+  const n = [...COURS].sort((a, b) => a.date.localeCompare(b.date)).findIndex((x) => x.id === s.id) + 1;
+  const [, m, d] = s.date.split('-');
+  return `Séance ${n} · ${d}/${m}`;
+}

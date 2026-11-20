@@ -1,5 +1,5 @@
 {
- "contentVersion": 2,
+ "contentVersion": 3,
  "replacements": [
   {
    "id": "w056",
@@ -357,7 +357,7 @@
    "arabicVoweled": "اِسْم",
    "transliteration": "ism",
    "french": "prénom, nom",
-   "category": "Cours du 14/10",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -372,7 +372,7 @@
    "arabicVoweled": "أَنَا",
    "transliteration": "anā",
    "french": "je, moi",
-   "category": "Cours du 14/10",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -387,7 +387,7 @@
    "arabicVoweled": "أُمّ",
    "transliteration": "umm",
    "french": "mère",
-   "category": "Cours du 14/10",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -402,7 +402,7 @@
    "arabicVoweled": "أَخ",
    "transliteration": "akh",
    "french": "frère",
-   "category": "Cours du 14/10",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -417,7 +417,7 @@
    "arabicVoweled": "آمِين",
    "transliteration": "āmīn",
    "french": "amen",
-   "category": "Cours du 14/10",
+   "category": "Mots de base",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -429,7 +429,7 @@
    "arabicVoweled": "الآن",
    "transliteration": "al-ʾān",
    "french": "maintenant",
-   "category": "Cours du 14/10",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -444,7 +444,7 @@
    "arabicVoweled": "مَامَا",
    "transliteration": "māmā",
    "french": "maman",
-   "category": "Cours du 14/10",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -459,7 +459,7 @@
    "arabicVoweled": "أَشْيَاء",
    "transliteration": "ashyāʾ",
    "french": "des choses, des objets",
-   "category": "Cours du 14/10",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -474,7 +474,7 @@
    "arabicVoweled": "فَتًى",
    "transliteration": "fatā",
    "french": "jeune garçon, adolescent",
-   "category": "Cours du 14/10",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -489,7 +489,7 @@
    "arabicVoweled": "شَاطِئ",
    "transliteration": "shāṭiʾ",
    "french": "plage",
-   "category": "Cours du 14/10",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -504,7 +504,7 @@
    "arabicVoweled": "بَابَا",
    "transliteration": "bābā",
    "french": "papa",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -519,7 +519,7 @@
    "arabicVoweled": "حَبِيب",
    "transliteration": "ḥabīb",
    "french": "bien-aimé",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -534,7 +534,7 @@
    "arabicVoweled": "أَب",
    "transliteration": "ab",
    "french": "père",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -549,7 +549,7 @@
    "arabicVoweled": "تُفَّاحَة",
    "transliteration": "tuffāḥa",
    "french": "une pomme",
-   "category": "Cours du 4/11",
+   "category": "Aliments",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -564,7 +564,7 @@
    "arabicVoweled": "دَفْتَر",
    "transliteration": "daftar",
    "french": "cahier",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -579,7 +579,7 @@
    "arabicVoweled": "رَتَّبَ",
    "transliteration": "rattaba",
    "french": "ranger (litt. « il a rangé »)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "verbe",
    "visual": {
     "kind": "emoji",
@@ -594,7 +594,7 @@
    "arabicVoweled": "أُخْت",
    "transliteration": "ukht",
    "french": "sœur",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -609,7 +609,7 @@
    "arabicVoweled": "أَنْتَ",
    "transliteration": "anta",
    "french": "tu (à un garçon)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -624,7 +624,7 @@
    "arabicVoweled": "أَنْتِ",
    "transliteration": "anti",
    "french": "tu (à une fille)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -639,7 +639,7 @@
    "arabicVoweled": "سَيَّارَات",
    "transliteration": "sayyārāt",
    "french": "des voitures",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "pluriel",
    "visual": {
     "kind": "emoji",
@@ -654,7 +654,7 @@
    "arabicVoweled": "مِثَال",
    "transliteration": "mithāl",
    "french": "exemple",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -666,7 +666,7 @@
    "arabicVoweled": "وَثَبَ",
    "transliteration": "wathaba",
    "french": "sauter (litt. « il a sauté »)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "verbe",
    "visual": {
     "kind": "emoji",
@@ -681,7 +681,7 @@
    "arabicVoweled": "مُثَلَّث",
    "transliteration": "muthallath",
    "french": "triangle",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -696,7 +696,7 @@
    "arabicVoweled": "مِحْرَاث",
    "transliteration": "miḥrāth",
    "french": "charrue, soc",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -711,7 +711,7 @@
    "arabicVoweled": "دَار",
    "transliteration": "dār",
    "french": "maison (la maison familiale)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -726,7 +726,7 @@
    "arabicVoweled": "زَارَ",
    "transliteration": "zāra",
    "french": "rendre visite (litt. « il a rendu visite »)",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "verbe",
    "visual": {
     "kind": "emoji",
@@ -741,7 +741,7 @@
    "arabicVoweled": "وَلَد",
    "transliteration": "walad",
    "french": "enfant, garçon",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -756,7 +756,7 @@
    "arabicVoweled": "يَزُورُ",
    "transliteration": "yazūru",
    "french": "il rend visite",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "verbe",
    "visual": null,
    "source": "cours",
@@ -768,7 +768,7 @@
    "arabicVoweled": "وَادِي",
    "transliteration": "wādī",
    "french": "vallée",
-   "category": "Cours du 4/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -783,7 +783,7 @@
    "arabicVoweled": "وَ",
    "transliteration": "wa",
    "french": "et",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -795,7 +795,7 @@
    "arabicVoweled": "وَزِير",
    "transliteration": "wazīr",
    "french": "ministre",
-   "category": "Cours du 4/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -810,7 +810,7 @@
    "arabicVoweled": "رُزّ",
    "transliteration": "ruzz",
    "french": "riz",
-   "category": "Cours du 4/11",
+   "category": "Aliments",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -825,7 +825,7 @@
    "arabicVoweled": "زَيْت",
    "transliteration": "zayt",
    "french": "huile",
-   "category": "Cours du 4/11",
+   "category": "Aliments",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -840,7 +840,7 @@
    "arabicVoweled": "بَلَد",
    "transliteration": "balad",
    "french": "pays",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -855,7 +855,7 @@
    "arabicVoweled": "ثِيَاب",
    "transliteration": "thiyāb",
    "french": "vêtements",
-   "category": "Cours du 4/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -870,7 +870,7 @@
    "arabicVoweled": "بَرْد",
    "transliteration": "bard",
    "french": "froid",
-   "category": "Cours du 4/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -885,7 +885,7 @@
    "arabicVoweled": "دَجَاج",
    "transliteration": "dajāj",
    "french": "des poules (collectif)",
-   "category": "Cours du 13/11",
+   "category": "Animaux",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -900,7 +900,7 @@
    "arabicVoweled": "بَلَح",
    "transliteration": "balaḥ",
    "french": "dattes (fraîches, jaunes)",
-   "category": "Cours du 13/11",
+   "category": "Aliments",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -912,7 +912,7 @@
    "arabicVoweled": "قَمْح",
    "transliteration": "qamḥ",
    "french": "blé",
-   "category": "Cours du 13/11",
+   "category": "Aliments",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -927,7 +927,7 @@
    "arabicVoweled": "وَرْد",
    "transliteration": "ward",
    "french": "des roses (collectif)",
-   "category": "Cours du 13/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -942,7 +942,7 @@
    "arabicVoweled": "ذَيْل",
    "transliteration": "dhayl",
    "french": "queue (d’un animal)",
-   "category": "Cours du 13/11",
+   "category": "Animaux",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -954,7 +954,7 @@
    "arabicVoweled": "أُسْتَاذَة",
    "transliteration": "ustādha",
    "french": "enseignante ; aussi « Maître » pour une avocate",
-   "category": "Cours du 13/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -969,7 +969,7 @@
    "arabicVoweled": "تِلْمِيذَة",
    "transliteration": "tilmīdha",
    "french": "élève, étudiante",
-   "category": "Cours du 13/11",
+   "category": "Personnes",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -984,7 +984,7 @@
    "arabicVoweled": "فَخِذ",
    "transliteration": "fakhidh",
    "french": "cuisse",
-   "category": "Cours du 13/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": null,
    "source": "cours",
@@ -996,7 +996,7 @@
    "arabicVoweled": "شَجَر",
    "transliteration": "shajar",
    "french": "des arbres (collectif)",
-   "category": "Cours du 18/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1011,7 +1011,7 @@
    "arabicVoweled": "أَشْجَار",
    "transliteration": "ashjār",
    "french": "des arbres (pluriel)",
-   "category": "Cours du 18/11",
+   "category": "Nature",
    "type": "pluriel",
    "visual": {
     "kind": "emoji",
@@ -1026,7 +1026,7 @@
    "arabicVoweled": "زِرّ",
    "transliteration": "zirr",
    "french": "bouton (de chemise, de vêtement)",
-   "category": "Cours du 18/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1041,7 +1041,7 @@
    "arabicVoweled": "مَسْجِد",
    "transliteration": "masjid",
    "french": "mosquée",
-   "category": "Cours du 18/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1056,7 +1056,7 @@
    "arabicVoweled": "كَنِيسَة",
    "transliteration": "kanīsa",
    "french": "église",
-   "category": "Cours du 18/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1071,7 +1071,7 @@
    "arabicVoweled": "رَأْس",
    "transliteration": "raʾs",
    "french": "tête",
-   "category": "Cours du 18/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1086,7 +1086,7 @@
    "arabicVoweled": "حَشِيش",
    "transliteration": "ḥashīsh",
    "french": "herbe",
-   "category": "Cours du 18/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1101,7 +1101,7 @@
    "arabicVoweled": "فَرَاشَة",
    "transliteration": "farāsha",
    "french": "papillon",
-   "category": "Cours du 18/11",
+   "category": "Animaux",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1116,7 +1116,7 @@
    "arabicVoweled": "عُشّ",
    "transliteration": "ʿushsh",
    "french": "nid",
-   "category": "Cours du 18/11",
+   "category": "Nature",
    "type": "mot",
    "visual": {
     "kind": "emoji",
@@ -1131,7 +1131,7 @@
    "arabicVoweled": "قُمَاش",
    "transliteration": "qumāsh",
    "french": "tissu",
-   "category": "Cours du 18/11",
+   "category": "Mots de base",
    "type": "mot",
    "visual": {
     "kind": "emoji",

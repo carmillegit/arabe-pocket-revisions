@@ -32,6 +32,9 @@ interface Replacement {
 
 export const CONTENT_VERSION = content.contentVersion;
 
+/** Les séances ne sont plus des catégories (elles sont dans l'onglet Cours). */
+export const OLD_CATEGORY_PREFIX = 'Cours du ';
+
 /** Calcule les mots à enregistrer, sans écrire : testable sans base de données. */
 export function planCourseContent(current: Word[], userId: string, now: number): Word[] {
   const byId = new Map(current.map((w) => [w.id, w]));
@@ -58,7 +61,15 @@ export function planCourseContent(current: Word[], userId: string, now: number):
   }
 
   for (const c of content.words as CourseWord[]) {
-    if (byId.has(c.id)) continue; // déjà ajouté (ou modifié par l'utilisatrice) : on n'y touche pas
+    const had = byId.get(c.id);
+    if (had) {
+      // Déjà ajouté : seule la catégorie « Cours du … » (version 2) passe à sa catégorie par thème.
+      // Une catégorie choisie par l'utilisatrice n'est pas touchée.
+      if (had.category.startsWith(OLD_CATEGORY_PREFIX) && had.category !== c.category) {
+        put({ ...had, category: c.category, updatedAt: now });
+      }
+      continue;
+    }
     const w = createWord(
       {
         arabicVoweled: c.arabicVoweled,
@@ -90,6 +101,10 @@ export async function applyCourseContent(repo: Repository, now = Date.now()): Pr
   if (done >= CONTENT_VERSION) return 0;
   const words = planCourseContent(await repo.getWords(), repo.userId, now);
   if (words.length) await repo.saveWords(words);
+  // Supprime les catégories « Cours du … » devenues vides (une catégorie encore utilisée est gardée).
+  for (const c of await repo.getCategories()) {
+    if (c.name.startsWith(OLD_CATEGORY_PREFIX)) await repo.deleteCategory(c.name).catch(() => {});
+  }
   await repo.setMeta('contentVersion', CONTENT_VERSION);
   return words.length;
 }

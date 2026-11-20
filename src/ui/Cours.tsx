@@ -1,7 +1,7 @@
 // Onglet Cours : une fiche par séance (règles, exemples avec audio, lien vers les mots).
 import { useMemo } from 'preact/hooks';
 import { audioUrl } from '../domain/audio';
-import { COURS, coursById, formatSessionDate, sessionWordIds, wordIndex, type CoursSession } from '../domain/cours';
+import { COURS, coursById, formatSessionDate, sessionLabel, sessionWordIds, wordIndex, type CoursSession } from '../domain/cours';
 import { dayKey } from '../domain/dates';
 import { wordMastery } from '../domain/stats';
 import { go } from '../router';
@@ -41,11 +41,10 @@ export function CoursList() {
             <li key={s.id}>
               <button type="button" class="row" onClick={() => go(`/cours/${s.id}`)}>
                 <span class="row-main">
-                  <span class="row-sub cours-date">{formatSessionDate(s.date)}</span>
-                  <span class="row-title">
-                    <RichText text={s.title} />
+                  <span class="row-title">{sessionLabel(s)}</span>
+                  <span class="row-sub">
+                    <RichText text={s.title} /> · {plural(n, 'mot', 'mots')}
                   </span>
-                  <span class="row-sub">{plural(n, 'mot', 'mots')}</span>
                 </span>
                 <Icon name="back" size={20} />
               </button>
@@ -80,10 +79,11 @@ function SessionView({ s }: { s: CoursSession }) {
     <main class="screen cours">
       <TopBar title="Cours" onBack={() => go('/cours')} />
       <header class="cours-head">
-        <p class="cours-date">{formatSessionDate(s.date)}</p>
-        <h2 class="cours-title">
+        <h2 class="cours-title">{sessionLabel(s)}</h2>
+        <p class="cours-subtitle">
           <RichText text={s.title} />
-        </h2>
+        </p>
+        <p class="cours-date">{formatSessionDate(s.date)}</p>
       </header>
 
       {ids.length > 0 && (

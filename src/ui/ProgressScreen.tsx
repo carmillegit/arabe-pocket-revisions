@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
-import { SESSION_SIZE, dueItems } from '../domain/queue';
+import { SESSION_SIZE } from '../domain/queue';
 import { answerDays, byCategory, history, letterMastery, masteryCounts, streak, topMissedLetters, topMissedWords } from '../domain/stats';
 import type { LetterPositionStat, Session } from '../domain/types';
 import { topMissedLetterPositions } from '../domain/dictation';
@@ -28,7 +28,6 @@ export function ProgressScreen() {
   const missedPositions = useMemo(() => topMissedLetterPositions(letterStats, 5), [letterStats]);
 
   const app = useApp();
-  const due = useMemo(() => dueItems(app.queueContext()).length, [words, progress]);
   const alphabet = useMemo(() => letterMastery(progress, repo.userId, today, app.lettersSince), [progress]);
   const counts = useMemo(() => masteryCounts(words, progress, repo.userId, today), [words, progress]);
   const cats = useMemo(() => byCategory(words, progress, repo.userId, today), [words, progress]);
@@ -37,6 +36,8 @@ export function ProgressScreen() {
   const hist = useMemo(() => history(sessions, today, 30), [sessions]);
   const maxQ = Math.max(1, ...hist.map((h) => h.questions));
   const days = streak(answerDays(answers), today);
+  // Révisés aujourd'hui (objectif : 20), comme le compteur de l'accueil.
+  const seenToday = answers.filter((a) => dayKey(a.at) === today).length;
   const totalQ = hist.reduce((s, h) => s + h.questions, 0);
   const totalOk = hist.reduce((s, h) => s + h.successes, 0);
   const shown = hover !== null ? hist[hover] : null;
@@ -46,7 +47,16 @@ export function ProgressScreen() {
       <TopBar title="Progression" />
 
       <div class="tiles">
-        <div class="tile"><p class="tile-num">{Math.min(due, SESSION_SIZE)}</p><p class="tile-label">à réviser aujourd’hui</p></div>
+        <div class="tile">
+          <p class="tile-num">
+            {seenToday}
+            {seenToday < SESSION_SIZE && <span class="tile-of">/{SESSION_SIZE}</span>}
+          </p>
+          <p class="tile-label">
+            {seenToday > 1 ? 'révisés' : 'révisé'} aujourd’hui
+            {seenToday >= SESSION_SIZE && <span class="tile-done"> · objectif atteint ✓</span>}
+          </p>
+        </div>
         <div class="tile"><p class="tile-num">{days}</p><p class="tile-label">{days > 1 ? 'jours d’affilée' : 'jour d’affilée'}</p></div>
         <div class="tile"><p class="tile-num">{counts.acquis}</p><p class="tile-label">{counts.acquis > 1 ? 'mots acquis' : 'mot acquis'}</p></div>
       </div>

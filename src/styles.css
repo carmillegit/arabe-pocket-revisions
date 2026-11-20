@@ -1158,3 +1158,8 @@ input[type='color'] {
 .vocab-ar { flex: none; line-height: 1.6; }
 .vocab-speak { color: var(--accent); flex: none; }
 .vocab-open { flex: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; border: 0; background: transparent; }
+
+.cours-subtitle { font-size: 17px; font-weight: 600; color: var(--ink-2); }
+
+.tile-of { font-size: 18px; font-weight: 600; color: var(--muted); }
+.tile-done { color: var(--good); font-weight: 650; }
