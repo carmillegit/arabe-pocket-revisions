@@ -179,7 +179,8 @@ export function Trace({
   dictation?: { head: preact.ComponentChildren; afterReveal: () => preact.ComponentChildren };
   onAnswer: (ok: boolean) => void;
 }) {
-  const blind = !!memory || !!dictation;
+  // Le modèle est toujours masqué : on trace de tête, puis on vérifie (décision du 25/11/2026).
+  const blind = true;
   const full = letter && memory ? letterForm(letter, memory) : (letter ?? word!.arabicVoweled);
   const skel = skeleton(full);
   const info = letter ? LETTER_BY_CHAR.get(letter) : undefined;
@@ -238,7 +239,7 @@ export function Trace({
     ctx.textBaseline = 'alphabetic';
     ctx.fillStyle = compare ? cssVar('--accent') : cssVar('--model');
     ctx.fillText(pass === 'forme' ? skel : full, l.x, l.y);
-    if (letter && arrows && pass === 'forme' && !compare) {
+    if (letter && !memory && arrows && compare) {
       const strokesData = STROKES[letter] ?? [];
       const { box } = l;
       const lw = Math.max(2.5, l.size * 0.012);
@@ -246,7 +247,8 @@ export function Trace({
         drawArrow(
           ctx,
           s.map(([u, v]) => ({ x: box.l + u * (box.r - box.l), y: box.t + v * (box.b - box.t) })),
-          i === 0 ? cssVar('--arrow-1') : cssVar('--arrow-2'),
+          // Par-dessus la correction violette, les flèches passent en couleur d'encre pour rester lisibles.
+          compare ? cssVar('--ink') : i === 0 ? cssVar('--arrow-1') : cssVar('--arrow-2'),
           i + 1,
           lw,
         ),
@@ -386,7 +388,7 @@ export function Trace({
           </div>
         ) : letter ? (
           <p class="prompt-label">
-            Trace la lettre <strong>{info?.name}</strong>
+            Trace la lettre <strong>{info?.name}</strong> <span class="translit">({info?.sound})</span>
           </p>
         ) : (
           <div class="trace-word">
@@ -423,7 +425,7 @@ export function Trace({
         <button type="button" class="tool" onClick={clear} disabled={count === 0}>Effacer</button>
         {blind ? (
           <button type="button" class="tool tool-primary" aria-pressed={compare} onClick={() => { setRevealed(true); setCompare(!compare); }} disabled={count === 0}>
-            {compare ? 'Masquer la correction' : revealed ? 'Revoir la correction' : dictation ? 'Vérifier' : 'Révéler'}
+            {compare ? 'Masquer la correction' : revealed ? 'Revoir la correction' : 'Vérifier'}
           </button>
         ) : (
         <button type="button" class="tool" aria-pressed={!modelVisible} onClick={() => { setModelVisible(!modelVisible); setCompare(false); }}>
@@ -435,7 +437,7 @@ export function Trace({
             Comparer
           </button>
         )}
-        {letter && STROKES[letter] && modelVisible && pass === 'forme' && (
+        {letter && !memory && STROKES[letter] && revealed && compare && (
           <button type="button" class="tool" aria-pressed={arrows} onClick={() => setArrows(!arrows)}>
             Sens du tracé
           </button>
@@ -446,8 +448,8 @@ export function Trace({
         revealed && dictation.afterReveal()
       ) : (
       <div class="actions">
-        <button type="button" class="btn btn-bad" onClick={() => answer(false)} disabled={count === 0 || (!!memory && !revealed)}>À refaire</button>
-        <button type="button" class="btn btn-good" onClick={() => answer(true)} disabled={count === 0 || (!!memory && !revealed)}>Réussi</button>
+        <button type="button" class="btn btn-bad" onClick={() => answer(false)} disabled={count === 0 || !revealed}>À refaire</button>
+        <button type="button" class="btn btn-good" onClick={() => answer(true)} disabled={count === 0 || !revealed}>Réussi</button>
       </div>
       )}
     </div>

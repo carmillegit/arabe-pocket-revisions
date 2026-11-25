@@ -31,7 +31,8 @@ export function isDue(p: Progress, today: string): boolean {
 
 /**
  * Applique une réponse.
- * - Erreur : retour en boîte 1 (échéance demain), toujours.
+ * - Erreur : on descend d'UNE boîte (jamais sous la 1), à revoir demain. Avant le 25/11/2026, une erreur
+ *   renvoyait en boîte 1 : après une pause, la moindre erreur effaçait des semaines de progrès.
  * - Réussite à échéance : on monte d'une boîte.
  * - Réussite hors échéance (entraînement libre) : compteur seulement, la boîte ne bouge pas.
  */
@@ -40,7 +41,7 @@ export function applyAnswer(p: Progress, correct: boolean, now: number): Progres
   if (!correct) {
     return {
       ...p,
-      box: 1,
+      box: Math.max(1, p.box - 1),
       due: addDays(today, INTERVALS[0]),
       failures: p.failures + 1,
       lastAnsweredAt: now,

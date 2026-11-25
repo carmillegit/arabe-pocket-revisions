@@ -1,6 +1,15 @@
 {
- "contentVersion": 3,
+ "contentVersion": 4,
  "replacements": [
+  {
+   "id": "c031",
+   "from": "فَتًى",
+   "arabicVoweled": "فَتَى",
+   "transliteration": "fatā",
+   "french": "jeune garçon, adolescent",
+   "pronunciationHint": "",
+   "status": "valide"
+  },
   {
    "id": "w056",
    "from": "بَرْقُوق",
@@ -471,7 +480,7 @@
   },
   {
    "id": "c031",
-   "arabicVoweled": "فَتًى",
+   "arabicVoweled": "فَتَى",
    "transliteration": "fatā",
    "french": "jeune garçon, adolescent",
    "category": "Personnes",
@@ -1136,6 +1145,495 @@
    "visual": {
     "kind": "emoji",
     "value": "🧵"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c077",
+   "arabicVoweled": "صُنْدُوق",
+   "transliteration": "ṣundūq",
+   "french": "coffre, coffret, caisse",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧰"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c078",
+   "arabicVoweled": "حِصَان",
+   "transliteration": "ḥiṣān",
+   "french": "cheval",
+   "category": "Animaux",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐴"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c079",
+   "arabicVoweled": "إِجَّاص",
+   "transliteration": "ijjāṣ",
+   "french": "poires",
+   "category": "Aliments",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍐"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c080",
+   "arabicVoweled": "مِقَصّ",
+   "transliteration": "miqaṣṣ",
+   "french": "ciseaux",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "✂️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c081",
+   "arabicVoweled": "ضَابِط",
+   "transliteration": "ḍābiṭ",
+   "french": "un officier",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👮"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c082",
+   "arabicVoweled": "ضَابِطَة",
+   "transliteration": "ḍābiṭa",
+   "french": "une officière",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👮‍♀️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c083",
+   "arabicVoweled": "أَضْدَاد",
+   "transliteration": "aḍdād",
+   "french": "des contraires",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "↔️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c084",
+   "arabicVoweled": "بَيْض",
+   "transliteration": "bayḍ",
+   "french": "des œufs (collectif)",
+   "category": "Aliments",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🥚"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c085",
+   "arabicVoweled": "بَيْضَة",
+   "transliteration": "bayḍa",
+   "french": "un œuf",
+   "category": "Aliments",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🥚"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c086",
+   "arabicVoweled": "أَرْض",
+   "transliteration": "arḍ",
+   "french": "terre (la Terre, le sol)",
+   "category": "Nature",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🌍"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c087",
+   "arabicVoweled": "طَابَة",
+   "transliteration": "ṭāba",
+   "french": "ballon, balle",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "⚽"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c088",
+   "arabicVoweled": "طَالِب",
+   "transliteration": "ṭālib",
+   "french": "étudiant",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍🎓"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c089",
+   "arabicVoweled": "وَطَن",
+   "transliteration": "waṭan",
+   "french": "la patrie",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c090",
+   "arabicVoweled": "بَطَّة",
+   "transliteration": "baṭṭa",
+   "french": "cane (femelle du canard)",
+   "category": "Animaux",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦆"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c091",
+   "arabicVoweled": "قِطّ",
+   "transliteration": "qiṭṭ",
+   "french": "un chat (mâle)",
+   "category": "Animaux",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐈"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c092",
+   "arabicVoweled": "وِطْوَاط",
+   "transliteration": "wiṭwāṭ",
+   "french": "chauve-souris",
+   "category": "Animaux",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🦇"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c093",
+   "arabicVoweled": "ظَرْف",
+   "transliteration": "ẓarf",
+   "french": "enveloppe ; empêchement",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "✉️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c094",
+   "arabicVoweled": "مُوَظَّف",
+   "transliteration": "muwaẓẓaf",
+   "french": "employé",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍💼"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c095",
+   "arabicVoweled": "مِحْفَظَة",
+   "transliteration": "miḥfaẓa",
+   "french": "porte-monnaie",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "👛"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c096",
+   "arabicVoweled": "مُحَافِظ",
+   "transliteration": "muḥāfiẓ",
+   "french": "conservateur, gouverneur",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": null,
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c097",
+   "arabicVoweled": "مُغْتَاظ",
+   "transliteration": "mughtāẓ",
+   "french": "énervé",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "😠"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c098",
+   "arabicVoweled": "عَشَاء",
+   "transliteration": "ʿashāʾ",
+   "french": "dîner",
+   "category": "Aliments",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🍽️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c099",
+   "arabicVoweled": "ثُعْبَان",
+   "transliteration": "thuʿbān",
+   "french": "serpent",
+   "category": "Animaux",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐍"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c100",
+   "arabicVoweled": "مُعَلِّم",
+   "transliteration": "muʿallim",
+   "french": "instituteur, maître d’école",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍🏫"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c101",
+   "arabicVoweled": "مَزْرَعَة",
+   "transliteration": "mazraʿa",
+   "french": "ferme",
+   "category": "Nature",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🐄"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c102",
+   "arabicVoweled": "مُزَارِع",
+   "transliteration": "muzāriʿ",
+   "french": "un fermier",
+   "category": "Personnes",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧑‍🌾"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c103",
+   "arabicVoweled": "أُصْبُع",
+   "transliteration": "uṣbuʿ",
+   "french": "un doigt",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "☝️"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c104",
+   "arabicVoweled": "غَدَاء",
+   "transliteration": "ghadāʾ",
+   "french": "déjeuner",
+   "category": "Aliments",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🥗"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c105",
+   "arabicVoweled": "نَغْمَة",
+   "transliteration": "naghma",
+   "french": "mélodie, note de musique",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🎵"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c106",
+   "arabicVoweled": "صَغِير",
+   "transliteration": "ṣaghīr",
+   "french": "petit",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🤏"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c107",
+   "arabicVoweled": "إِغْلَاق",
+   "transliteration": "ighlāq",
+   "french": "fermeture",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🔒"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c108",
+   "arabicVoweled": "صَمْغ",
+   "transliteration": "ṣamgh",
+   "french": "colle",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧴"
+   },
+   "source": "cours",
+   "status": "valide",
+   "linkedWordId": null
+  },
+  {
+   "id": "c109",
+   "arabicVoweled": "دِمَاغ",
+   "transliteration": "dimāgh",
+   "french": "cerveau",
+   "category": "Mots de base",
+   "type": "mot",
+   "visual": {
+    "kind": "emoji",
+    "value": "🧠"
    },
    "source": "cours",
    "status": "valide",

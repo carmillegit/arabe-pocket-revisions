@@ -113,7 +113,7 @@ SESSIONS = [
                 ('الآن', 'al-ʾān', 'maintenant', {'emoji': '⏰'}),
                 ('مَامَا', 'māmā', 'maman', {'emoji': '👩‍👧'}),
                 ('أَشْيَاء', 'ashyāʾ', 'des choses, des objets', {'emoji': '📦'}),
-                ('فَتًى', 'fatā', 'jeune garçon, adolescent', {'emoji': '🧒'}),
+                ('فَتَى', 'fatā', 'jeune garçon, adolescent', {'emoji': '🧒'}),
                 ('شَاطِئ', 'shāṭiʾ', 'plage', {'emoji': '🏖️'}),
             ]},
         ],
@@ -238,21 +238,85 @@ SESSIONS = [
         ],
         'homework': 'p. 18 à 24',
     },
+    {
+        'id': 's6',
+        'date': '2026-11-25',
+        'title': 'ص ض ط ظ ع غ',
+        'blocks': [
+            {'type': 'rules', 'title': 'À retenir', 'items': [
+                'La hamza s’écrit sous l’alif (إ) quand elle porte une kasra : إِجَّاص (ijjāṣ, poires), إِغْلَاق (ighlāq, fermeture).',
+                'Le féminin avec la tāʾ marbūṭa : ضَابِط (ḍābiṭ, un officier) → ضَابِطَة (ḍābiṭa, une officière).',
+                'Collectif et unité, comme pour les fruits : بَيْض (bayḍ, des œufs) → بَيْضَة (bayḍa, un œuf).',
+                'طَالِب (ṭālib, étudiant) vient du verbe طَلَبَ (ṭalaba, demander) : « celui qui demande le savoir ».',
+            ]},
+            {'type': 'vocab', 'title': 'Vocabulaire', 'category': 'Cours du 25/11', 'rows': [
+                ('صُنْدُوق', 'ṣundūq', 'coffre, coffret, caisse', {'emoji': '🧰'}),
+                ('حِصَان', 'ḥiṣān', 'cheval', {'emoji': '🐴'}),
+                ('أَصْفَر', 'aṣfar', 'jaune', {}),
+                ('إِجَّاص', 'ijjāṣ', 'poires', {'emoji': '🍐'}),
+                ('مِقَصّ', 'miqaṣṣ', 'ciseaux', {'emoji': '✂️'}),
+                ('ضَابِط', 'ḍābiṭ', 'un officier', {'emoji': '👮'}),
+                ('ضَابِطَة', 'ḍābiṭa', 'une officière', {'emoji': '👮‍♀️'}),
+                ('أَخْضَر', 'akhḍar', 'vert', {}),
+                ('أَضْدَاد', 'aḍdād', 'des contraires', {'emoji': '↔️'}),
+                ('بَيْض', 'bayḍ', 'des œufs (collectif)', {'emoji': '🥚'}),
+                ('بَيْضَة', 'bayḍa', 'un œuf', {'emoji': '🥚'}),
+                ('أَبْيَض', 'abyaḍ', 'blanc', {}),
+                ('أَرْض', 'arḍ', 'terre (la Terre, le sol)', {'emoji': '🌍'}),
+                ('طَابَة', 'ṭāba', 'ballon, balle', {'emoji': '⚽'}),
+                ('طَالِب', 'ṭālib', 'étudiant', {'emoji': '🧑‍🎓'}),
+                ('وَطَن', 'waṭan', 'la patrie', {}),
+                ('بَطَّة', 'baṭṭa', 'cane (femelle du canard)', {'emoji': '🦆'}),
+                ('قِطّ', 'qiṭṭ', 'un chat (mâle)', {'emoji': '🐈'}),
+                ('وِطْوَاط', 'wiṭwāṭ', 'chauve-souris', {'emoji': '🦇'}),
+                ('ظَرْف', 'ẓarf', 'enveloppe ; empêchement', {'emoji': '✉️'}),
+                ('مُوَظَّف', 'muwaẓẓaf', 'employé', {'emoji': '🧑‍💼'}),
+                ('مِحْفَظَة', 'miḥfaẓa', 'porte-monnaie', {'emoji': '👛'}),
+                ('مُحَافِظ', 'muḥāfiẓ', 'conservateur, gouverneur', {}),
+                ('مُغْتَاظ', 'mughtāẓ', 'énervé', {'emoji': '😠'}),
+                ('عَشَاء', 'ʿashāʾ', 'dîner', {'emoji': '🍽️'}),
+                ('ثُعْبَان', 'thuʿbān', 'serpent', {'emoji': '🐍'}),
+                ('مُعَلِّم', 'muʿallim', 'instituteur, maître d’école', {'emoji': '🧑‍🏫'}),
+                ('مَزْرَعَة', 'mazraʿa', 'ferme', {'emoji': '🐄'}),
+                ('مُزَارِع', 'muzāriʿ', 'un fermier', {'emoji': '🧑‍🌾'}),
+                ('أُصْبُع', 'uṣbuʿ', 'un doigt', {'emoji': '☝️'}),
+                ('غَدَاء', 'ghadāʾ', 'déjeuner', {'emoji': '🥗'}),
+                ('نَغْمَة', 'naghma', 'mélodie, note de musique', {'emoji': '🎵'}),
+                ('صَغِير', 'ṣaghīr', 'petit', {'emoji': '🤏'}),
+                ('إِغْلَاق', 'ighlāq', 'fermeture', {'emoji': '🔒'}),
+                ('صَمْغ', 'ṣamgh', 'colle', {'emoji': '🧴'}),
+                ('دِمَاغ', 'dimāgh', 'cerveau', {'emoji': '🧠'}),
+            ]},
+        ],
+        'homework': 'p. 29 et 30',
+    },
 ]
 
 # Catégorie par thème des mots nouveaux (les séances restent accessibles dans l'onglet Cours,
 # elles ne servent pas de catégorie : décision du 20/11/2026).
 THEME = {
-    'Personnes': 'أُمّ أَخ مَامَا فَتًى بَابَا حَبِيب أَب أُخْت وَلَد وَزِير أُسْتَاذَة تِلْمِيذَة',
+    'Personnes': 'أُمّ أَخ مَامَا فَتَى بَابَا حَبِيب أَب أُخْت وَلَد وَزِير أُسْتَاذَة تِلْمِيذَة',
     'Aliments': 'تُفَّاحَة رُزّ زَيْت بَلَح قَمْح',
     'Animaux': 'دَجَاج ذَيْل فَرَاشَة',
     'Nature': 'شَاطِئ وَادِي بَرْد وَرْد شَجَر أَشْجَار حَشِيش عُشّ',
     'Mots de base': 'اِسْم أَنَا آمِين الآن أَشْيَاء دَفْتَر رَتَّبَ أَنْتَ أَنْتِ سَيَّارَات مِثَال وَثَبَ مُثَلَّث مِحْرَاث دَار زَارَ يَزُورُ وَ بَلَد ثِيَاب فَخِذ زِرّ مَسْجِد كَنِيسَة رَأْس قُمَاش',
 }
+THEME_25_11 = {
+    'Personnes': 'ضَابِط ضَابِطَة طَالِب مُوَظَّف مُحَافِظ مُعَلِّم مُزَارِع',
+    'Aliments': 'إِجَّاص بَيْض بَيْضَة عَشَاء غَدَاء',
+    'Animaux': 'حِصَان بَطَّة قِطّ وِطْوَاط ثُعْبَان',
+    'Nature': 'أَرْض مَزْرَعَة',
+    'Mots de base': 'صُنْدُوق مِقَصّ أَضْدَاد طَابَة وَطَن ظَرْف مِحْفَظَة مُغْتَاظ أُصْبُع نَغْمَة صَغِير إِغْلَاق صَمْغ دِمَاغ',
+}
+for _cat, _ws in THEME_25_11.items():
+    THEME[_cat] += ' ' + _ws
+
 THEME_OF = {unicodedata.normalize('NFC', w): cat for cat, ws in THEME.items() for w in ws.split()}
 
 # Remplacements décidés à la relecture : le cours fait référence.
 REPLACEMENTS = [
+    {'id': 'c031', 'from': 'فَتًى', 'arabicVoweled': 'فَتَى', 'transliteration': 'fatā', 'french': 'jeune garçon, adolescent',
+     'pronunciationHint': '', 'status': 'valide'},
     {'id': 'w056', 'from': 'بَرْقُوق', 'arabicVoweled': 'خَوْخ', 'transliteration': 'khawkh', 'french': 'prunes',
      'pronunciationHint': 'kh jota, aw', 'status': 'a_verifier',
      'note': 'Dans beaucoup de pays, خَوْخ désigne plutôt les pêches : à confirmer avec la professeure.'},
@@ -264,9 +328,13 @@ REPLACEMENTS = [
 def main():
     seed = json.loads((ROOT / 'src/seed/mots_depart.json').read_text())
     existing = {plain(w['arabicVoweled']) for w in seed['words']}
+    # Seuls les remplacements de mots de départ (w…) changent la liste « déjà dans l'app ».
+    # Un mot du cours remplacé (c…) garde sa place dans la liste : sinon tous les identifiants suivants
+    # se décaleraient, et la progression enregistrée irait au mauvais mot.
     for r in REPLACEMENTS:
-        existing.discard(plain(r['from']))
-        existing.add(plain(r['arabicVoweled']))
+        if r['id'].startswith('w'):
+            existing.discard(plain(r['from']))
+            existing.add(plain(r['arabicVoweled']))
 
     words, seen, cours = [], set(), []
     n = 0
@@ -301,11 +369,28 @@ def main():
             blocks.append({'type': 'vocab', 'title': b['title'], 'rows': rows})
         cours.append({'id': s['id'], 'date': s['date'], 'title': s['title'], 'blocks': blocks, 'homework': s.get('homework')})
 
+    tanwin = re.compile('[\u064B-\u064D]')
+    for s in cours:
+        for b in s['blocks']:
+            texts = b.get('items', []) + [r['ar'] for r in b.get('rows', [])]
+            bad = [t for t in texts if tanwin.search(t)]
+            if bad:
+                raise SystemExit(f'Tanwīn (double voyelle) pas encore vu en cours : {bad}')
+
+    previous_file = ROOT / 'src/seed/mots_cours.json'
+    if previous_file.exists():
+        before = {w['id']: plain(w['arabicVoweled']) for w in json.loads(previous_file.read_text())['words']}
+        renamed = {plain(r['from']): plain(r['arabicVoweled']) for r in REPLACEMENTS}
+        now = {w['id']: plain(w['arabicVoweled']) for w in words}
+        moved = [i for i, t in before.items() if now.get(i) not in (t, renamed.get(t))]
+        if moved:
+            raise SystemExit(f'Identifiants déplacés (la progression irait au mauvais mot) : {moved[:5]}…')
+
     out = ROOT / 'src/content'
     out.mkdir(exist_ok=True)
     (out / 'cours.json').write_text(json.dumps({'version': 1, 'sessions': cours}, ensure_ascii=False, indent=1))
     (ROOT / 'src/seed/mots_cours.json').write_text(json.dumps(
-        {'contentVersion': 3, 'replacements': REPLACEMENTS, 'words': words}, ensure_ascii=False, indent=1))
+        {'contentVersion': 4, 'replacements': REPLACEMENTS, 'words': words}, ensure_ascii=False, indent=1))
     print(len(cours), 'séances,', len(words), 'mots nouveaux')
 
 

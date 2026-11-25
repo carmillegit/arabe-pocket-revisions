@@ -232,8 +232,8 @@ export function SessionScreen({ params }: { params: URLSearchParams }) {
       body = <Pairs key={key} letter={letter!} onAnswer={onAnswer} onNext={next} />;
       break;
     case 'trace': {
-      const box = progressRef.current.get(`${repo.userId}|${item.itemId}|ecriture`)?.box ?? 1;
-      body = <Trace key={key} word={word} letter={letter} showArrows={box <= 2} onAnswer={(ok) => record(item, ok).then(next)} />;
+      // Sens du tracé masqué par défaut (décision du 25/11/2026) : le bouton « Sens du tracé » l'affiche.
+      body = <Trace key={key} word={word} letter={letter} showArrows={false} onAnswer={(ok) => record(item, ok).then(next)} />;
       break;
     }
     case 'trace_memoire':

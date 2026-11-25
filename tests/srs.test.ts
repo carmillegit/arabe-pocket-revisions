@@ -27,10 +27,22 @@ describe('boîtes et échéances', () => {
     expect(p.successes).toBe(5);
   });
 
-  it('une erreur renvoie en boîte 1, à revoir le lendemain', () => {
+  it('une erreur fait descendre d’une seule boîte, à revoir le lendemain', () => {
     let p = { ...newProgress('u', 'w', 'vocabulaire', '2026-11-19'), box: 4, due: '2026-11-19' };
     p = applyAnswer(p, false, at('2026-11-19'));
-    expect([p.box, p.due, p.failures]).toEqual([1, '2026-11-20', 1]);
+    expect([p.box, p.due, p.failures]).toEqual([3, '2026-11-20', 1]);
+    p = applyAnswer({ ...p, box: 1 }, false, at('2026-11-20'));
+    expect(p.box).toBe(1); // jamais sous la boîte 1
+  });
+
+  it('sauter des jours ne fait rien perdre', () => {
+    let p = newProgress('u', 'w', 'vocabulaire', '2026-11-20');
+    p = applyAnswer(p, true, at('2026-11-20')); // boîte 2, à revoir le 23
+    p = applyAnswer(p, true, at('2026-11-23')); // boîte 3, à revoir le 30
+    // 3 jours de retard, réponse juste : on monte quand même
+    expect(applyAnswer(p, true, at('2026-12-03')).box).toBe(4);
+    // 3 jours de retard, réponse fausse : on perd une boîte, pas tout
+    expect(applyAnswer(p, false, at('2026-12-03')).box).toBe(2);
   });
 
   it('une réussite hors échéance ne fait pas monter (pas deux boîtes le même jour)', () => {
@@ -44,7 +56,7 @@ describe('boîtes et échéances', () => {
   it('une erreur hors échéance fait quand même redescendre', () => {
     let p = { ...newProgress('u', 'w', 'vocabulaire', '2026-11-19'), box: 3, due: '2026-11-25' };
     p = applyAnswer(p, false, at('2026-11-19'));
-    expect(p.box).toBe(1);
+    expect(p.box).toBe(2);
   });
 
   it('une réponse en retard compte à partir du jour de la réponse', () => {
@@ -62,5 +74,13 @@ describe('état de maîtrise', () => {
     expect(mastery([3])).toBe('en_cours');
     expect(mastery([5])).toBe('acquis');
     expect(mastery([5, 2])).toBe('en_cours');
+  });
+});
+
+import { bestStreak } from '../src/domain/stats';
+describe('record de série', () => {
+  it('garde la plus longue série, même cassée', () => {
+    expect(bestStreak(new Set(['2026-11-10', '2026-11-11', '2026-11-12', '2026-11-20', '2026-11-21']))).toBe(3);
+    expect(bestStreak(new Set())).toBe(0);
   });
 });

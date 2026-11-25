@@ -266,7 +266,7 @@
        "fr": "des choses, des objets"
       },
       {
-       "ar": "فَتًى",
+       "ar": "فَتَى",
        "tr": "fatā",
        "fr": "jeune garçon, adolescent"
       },
@@ -875,6 +875,210 @@
     }
    ],
    "homework": "p. 18 à 24"
+  },
+  {
+   "id": "s6",
+   "date": "2026-11-25",
+   "title": "ص ض ط ظ ع غ",
+   "blocks": [
+    {
+     "type": "rules",
+     "title": "À retenir",
+     "items": [
+      "La hamza s’écrit sous l’alif (إ) quand elle porte une kasra : إِجَّاص (ijjāṣ, poires), إِغْلَاق (ighlāq, fermeture).",
+      "Le féminin avec la tāʾ marbūṭa : ضَابِط (ḍābiṭ, un officier) → ضَابِطَة (ḍābiṭa, une officière).",
+      "Collectif et unité, comme pour les fruits : بَيْض (bayḍ, des œufs) → بَيْضَة (bayḍa, un œuf).",
+      "طَالِب (ṭālib, étudiant) vient du verbe طَلَبَ (ṭalaba, demander) : « celui qui demande le savoir »."
+     ]
+    },
+    {
+     "type": "vocab",
+     "title": "Vocabulaire",
+     "rows": [
+      {
+       "ar": "صُنْدُوق",
+       "tr": "ṣundūq",
+       "fr": "coffre, coffret, caisse"
+      },
+      {
+       "ar": "حِصَان",
+       "tr": "ḥiṣān",
+       "fr": "cheval"
+      },
+      {
+       "ar": "أَصْفَر",
+       "tr": "aṣfar",
+       "fr": "jaune"
+      },
+      {
+       "ar": "إِجَّاص",
+       "tr": "ijjāṣ",
+       "fr": "poires"
+      },
+      {
+       "ar": "مِقَصّ",
+       "tr": "miqaṣṣ",
+       "fr": "ciseaux"
+      },
+      {
+       "ar": "ضَابِط",
+       "tr": "ḍābiṭ",
+       "fr": "un officier"
+      },
+      {
+       "ar": "ضَابِطَة",
+       "tr": "ḍābiṭa",
+       "fr": "une officière"
+      },
+      {
+       "ar": "أَخْضَر",
+       "tr": "akhḍar",
+       "fr": "vert"
+      },
+      {
+       "ar": "أَضْدَاد",
+       "tr": "aḍdād",
+       "fr": "des contraires"
+      },
+      {
+       "ar": "بَيْض",
+       "tr": "bayḍ",
+       "fr": "des œufs (collectif)"
+      },
+      {
+       "ar": "بَيْضَة",
+       "tr": "bayḍa",
+       "fr": "un œuf"
+      },
+      {
+       "ar": "أَبْيَض",
+       "tr": "abyaḍ",
+       "fr": "blanc"
+      },
+      {
+       "ar": "أَرْض",
+       "tr": "arḍ",
+       "fr": "terre (la Terre, le sol)"
+      },
+      {
+       "ar": "طَابَة",
+       "tr": "ṭāba",
+       "fr": "ballon, balle"
+      },
+      {
+       "ar": "طَالِب",
+       "tr": "ṭālib",
+       "fr": "étudiant"
+      },
+      {
+       "ar": "وَطَن",
+       "tr": "waṭan",
+       "fr": "la patrie"
+      },
+      {
+       "ar": "بَطَّة",
+       "tr": "baṭṭa",
+       "fr": "cane (femelle du canard)"
+      },
+      {
+       "ar": "قِطّ",
+       "tr": "qiṭṭ",
+       "fr": "un chat (mâle)"
+      },
+      {
+       "ar": "وِطْوَاط",
+       "tr": "wiṭwāṭ",
+       "fr": "chauve-souris"
+      },
+      {
+       "ar": "ظَرْف",
+       "tr": "ẓarf",
+       "fr": "enveloppe ; empêchement"
+      },
+      {
+       "ar": "مُوَظَّف",
+       "tr": "muwaẓẓaf",
+       "fr": "employé"
+      },
+      {
+       "ar": "مِحْفَظَة",
+       "tr": "miḥfaẓa",
+       "fr": "porte-monnaie"
+      },
+      {
+       "ar": "مُحَافِظ",
+       "tr": "muḥāfiẓ",
+       "fr": "conservateur, gouverneur"
+      },
+      {
+       "ar": "مُغْتَاظ",
+       "tr": "mughtāẓ",
+       "fr": "énervé"
+      },
+      {
+       "ar": "عَشَاء",
+       "tr": "ʿashāʾ",
+       "fr": "dîner"
+      },
+      {
+       "ar": "ثُعْبَان",
+       "tr": "thuʿbān",
+       "fr": "serpent"
+      },
+      {
+       "ar": "مُعَلِّم",
+       "tr": "muʿallim",
+       "fr": "instituteur, maître d’école"
+      },
+      {
+       "ar": "مَزْرَعَة",
+       "tr": "mazraʿa",
+       "fr": "ferme"
+      },
+      {
+       "ar": "مُزَارِع",
+       "tr": "muzāriʿ",
+       "fr": "un fermier"
+      },
+      {
+       "ar": "أُصْبُع",
+       "tr": "uṣbuʿ",
+       "fr": "un doigt"
+      },
+      {
+       "ar": "غَدَاء",
+       "tr": "ghadāʾ",
+       "fr": "déjeuner"
+      },
+      {
+       "ar": "نَغْمَة",
+       "tr": "naghma",
+       "fr": "mélodie, note de musique"
+      },
+      {
+       "ar": "صَغِير",
+       "tr": "ṣaghīr",
+       "fr": "petit"
+      },
+      {
+       "ar": "إِغْلَاق",
+       "tr": "ighlāq",
+       "fr": "fermeture"
+      },
+      {
+       "ar": "صَمْغ",
+       "tr": "ṣamgh",
+       "fr": "colle"
+      },
+      {
+       "ar": "دِمَاغ",
+       "tr": "dimāgh",
+       "fr": "cerveau"
+      }
+     ]
+    }
+   ],
+   "homework": "p. 29 et 30"
   }
  ]
 }

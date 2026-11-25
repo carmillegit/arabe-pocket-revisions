@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'preact/hooks';
 import { dayKey } from '../domain/dates';
 import { ACTIVITIES, EXTRA_SIZE, SESSION_SIZE, allowedExercises, buildReviewQueue, dueItems } from '../domain/queue';
-import { answerDays, letterKnownCounts, missedSince, streak, topMissedLetters, wordKnownCounts } from '../domain/stats';
+import { answerDays, bestStreak, letterKnownCounts, missedSince, streak, topMissedLetters, wordKnownCounts } from '../domain/stats';
 import { go } from '../router';
 import { useApp } from '../store';
 import { Ar, Icon, plural } from './common';
@@ -42,6 +42,7 @@ export function Home() {
   const vocab = useMemo(() => wordKnownCounts(words, progress, repo.userId, today), [words, progress, today]);
   const abc = useMemo(() => letterKnownCounts(progress, repo.userId, today, app.lettersSince), [progress, today]);
   const days = streak(answerDays(answers), today);
+  const best = bestStreak(answerDays(answers));
   const missedIds = useMemo(() => missedSince(answers, Date.now() - WEEK), [answers]);
   const hardLetters = useMemo(() => topMissedLetters(answers, 28).map((x) => x.letter), [answers]);
   const allLetters = useMemo(() => {
@@ -193,7 +194,13 @@ export function Home() {
           </span>
           <div>
             <p class="streak-num">{plural(days, 'jour', 'jours')}</p>
-            <p class="muted small">{days > 0 ? 'de révision d’affilée' : 'Révise aujourd’hui pour lancer ta série'}</p>
+            <p class="muted small">
+              {days > 0
+                ? 'de révision d’affilée'
+                : best > 0
+                  ? `Ta série s’est arrêtée (record : ${plural(best, 'jour', 'jours')}). Tes mots appris, eux, sont toujours là.`
+                  : 'Révise aujourd’hui pour lancer ta série'}
+            </p>
           </div>
         </div>
       </section>

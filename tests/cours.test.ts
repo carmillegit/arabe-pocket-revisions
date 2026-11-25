@@ -17,11 +17,15 @@ const after = () => {
 
 describe('contenu des cours', () => {
   it('nom des séances : « Séance 1 · 07/10 »', () => {
-    expect(COURS.map(sessionLabel)).toEqual(['Séance 1 · 07/10', 'Séance 2 · 14/10', 'Séance 3 · 04/11', 'Séance 4 · 13/11', 'Séance 5 · 18/11']);
+    expect(COURS.map(sessionLabel)).toEqual(['Séance 1 · 07/10', 'Séance 2 · 14/10', 'Séance 3 · 04/11', 'Séance 4 · 13/11', 'Séance 5 · 18/11', 'Séance 6 · 25/11']);
   });
 
-  it('5 séances, dans l’ordre des dates', () => {
-    expect(COURS.map((s) => s.date)).toEqual(['2026-10-07', '2026-10-14', '2026-11-04', '2026-11-13', '2026-11-18']);
+  it('6 séances, dans l’ordre des dates', () => {
+    expect(COURS.map((s) => s.date)).toEqual(['2026-10-07', '2026-10-14', '2026-11-04', '2026-11-13', '2026-11-18', '2026-11-25']);
+  });
+
+  it('pas de tanwīn (double voyelle) dans les mots des cours', () => {
+    expect(after().filter((w) => /[\u064B-\u064D]/.test(w.arabicVoweled)).map((w) => w.arabicVoweled)).toEqual([]);
   });
 
   it('remplacements : خَوْخ (à vérifier) et أُسْتَاذ', () => {
@@ -37,9 +41,9 @@ describe('contenu des cours', () => {
     expect(changed.find((w) => w.id === 'w044')).toBeUndefined();
   });
 
-  it('76 mots nouveaux, sans doublon, أَنْتَ et أَنْتِ distincts', () => {
+  it('109 mots nouveaux, sans doublon, أَنْتَ et أَنْتِ distincts', () => {
     const words = after();
-    expect(words.length).toBe(57 + 76);
+    expect(words.length).toBe(57 + 109);
     expect(new Set(words.map((w) => w.arabicVoweled)).size).toBe(words.length);
     expect(words.some((w) => w.arabicVoweled === 'أَنْتِ')).toBe(true);
   });
@@ -77,10 +81,10 @@ describe('application à une installation existante', () => {
   it('s’applique une seule fois et crée les catégories', async () => {
     const r = new DexieRepository('local', 'cours1'); repos.push(r);
     await r.importAll(parseBackup(JSON.parse(readFileSync(new URL('../src/seed/mots_depart.json', import.meta.url), 'utf8')), 'local'), 'replace');
-    expect(await applyCourseContent(r)).toBeGreaterThan(76);
+    expect(await applyCourseContent(r)).toBeGreaterThan(109);
     expect(await r.getMeta('contentVersion')).toBe(CONTENT_VERSION);
     expect(await applyCourseContent(r)).toBe(0);
-    expect((await r.getWords()).length).toBe(133);
+    expect((await r.getWords()).length).toBe(166);
     const cats = (await r.getCategories()).map((c) => c.name);
     expect(cats).toEqual(expect.arrayContaining(['Pays', 'Personnes']));
     expect(cats.some((c) => c.startsWith('Cours du'))).toBe(false);
@@ -106,5 +110,17 @@ describe('passage des catégories par séance aux thèmes (v2 → v3)', () => {
     expect(after.find((w) => w.arabicVoweled === 'بَابَا')!.category).toBe('Personnes');
     expect(after.find((w) => w.arabicVoweled === 'زَيْت')!.category).toBe('Mes favoris');
     expect((await r.getCategories()).some((c) => c.name.startsWith('Cours du'))).toBe(false);
+  });
+});
+
+describe('stabilité des identifiants', () => {
+  it('les mots déjà livrés gardent leur identifiant (sinon la progression irait au mauvais mot)', () => {
+    const ids = Object.fromEntries(after().filter((w) => w.id.startsWith('c')).map((w) => [w.id, w.arabicVoweled]));
+    expect([ids.c001, ids.c031, ids.c032, ids.c076, ids.c077]).toEqual(['الجَزَائِر', 'فَتَى', 'شَاطِئ', 'قُمَاش', 'صُنْدُوق']);
+  });
+  it('فَتًى devient فَتَى sur une installation existante', () => {
+    const v3 = after().map((w) => (w.id === 'c031' ? { ...w, arabicVoweled: 'فَتًى' } : w));
+    const changed = planCourseContent(v3, 'u', 2000);
+    expect(changed.find((w) => w.id === 'c031')!.arabicVoweled).toBe('فَتَى');
   });
 });

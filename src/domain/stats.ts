@@ -38,6 +38,22 @@ export function streak(answerDays: Set<string>, today: string): number {
   return n;
 }
 
+/** Plus longue série de jours consécutifs avec au moins une réponse. */
+export function bestStreak(answerDays: Set<string>): number {
+  let best = 0;
+  for (const d of answerDays) {
+    if (answerDays.has(addDays(d, -1))) continue; // pas le début d'une série
+    let n = 0;
+    let x = d;
+    while (answerDays.has(x)) {
+      n++;
+      x = addDays(x, 1);
+    }
+    best = Math.max(best, n);
+  }
+  return best;
+}
+
 export function answerDays(answers: Answer[]): Set<string> {
   return new Set(answers.map((a) => dayKey(a.at)));
 }

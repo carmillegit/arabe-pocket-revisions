@@ -2,6 +2,14 @@
 
 Complète le cahier des charges V0. Les décisions sont classées de la plus récente à la plus ancienne.
 
+## Retours du 25/11/2026
+
+- **Pas de tanwīn** (doubles voyelles ـً ـٌ ـٍ) tant qu'il n'est pas vu en cours : فَتًى devient فَتَى. Seul « مَرْحَبًا » de l'accueil le garde. Le script des cours refuse désormais tout tanwīn.
+- **Une erreur ne remet plus à zéro** : un mot raté descend d'une boîte (et non plus en boîte 1). Sauter des jours ne fait rien perdre (testé). Quand la série s'arrête, l'accueil rappelle le record et que les mots appris restent.
+- **Tracé sans modèle** : tracer de tête sur la ligne d'écriture, puis « Vérifier » affiche la correction ; on ne peut se noter qu'après. Le sens du tracé s'affiche à la demande, par-dessus la correction.
+- **Séance 6 (25/11)** : ص ض ط ظ ع غ, 33 mots nouveaux avec audio.
+- Garde-fou : un identifiant de mot déjà livré ne peut plus changer (sinon la progression irait au mauvais mot).
+
 ## Retours du 20/11/2026
 
 - **Catégories de mots** : les séances ne sont plus des catégories (elles restent dans l'onglet Cours). Les mots des cours sont rangés par thème (Personnes, Aliments, Animaux, Nature, Mots de base, Pays). Les catégories « Cours du … » vides sont supprimées ; un mot que l'utilisatrice a rangé ailleurs n'est pas déplacé.
